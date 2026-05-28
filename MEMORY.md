@@ -2,22 +2,34 @@
 
 - [User - Влад](user-vlad.md) — lottery systems + PinFlow + hanma.ru, Telegram 409695834
 - [User Language](user-language.md) — пользователь общается на русском языке
+- [Russian-speaking user](user-language.md) — respond in Russian by default
+- [Remote server](remote-server.md) — openclaw@45.146.164.144, 3 projects (incl. 2x2), 2 AI agents
+- [Remote Server Projects](remote-projects.md) — 2x2, 1224, 4x20 на сервере 45.146.164.144, Python/SQLite
+- [Termux /tmp issue](termux-tmp-issue.md) — Bash tool fails because /tmp doesn't exist in Termux
+- [User communication style](user-style.md) — fast typos in Russian, casual tone, mobile keyboard
+- [Session continuity](session-continuity.md) — user resumes from crashed sessions, forwards other AIs' responses
+- [Multiple AI agents](user-multi-ai.md) — consults other AIs when one can't solve a problem
+- [SSH quoting workaround](ssh-quoting-workaround.md) — nested quotes break over SSH; write script locally, SCP, then run
 - [PinFlow Project](pinflow-project.md) — Pinterest automator Android app reviewed and fixed
 - [SSH Server Disk Cleanup](disk-cleanup-server.md) — Server 45.146.164.144 cleanup + automated timer
 - [Dashboard 4x20 Restored](dashboard-4x20-restored.md) — восстановлен дашборд 4x20 на порту 8080 (2026-04-16)
 - [Hanma.ru Favicon Setup](favicon-hanma-ru.md) — создан HTML-код для фавиконов hanma.ru (2026-04-17)
 - [2x2 Project](project-2x2.md) — лотерейный предиктор 2x2: RI v3, диагональные триггеры, AC quality (2026-05-26)
+- [2x2 DB schema](2x2-db-schema.md) — uses draw_number (not draw_id) and predictions_v4 (not predictions)
+- [2x2 AC quality stats](2x2-ac-quality-stats.md) — DEPLOYED 2026-05-27, DB migration for reason/beam still TODO
 - [2x2 Hourly Analysis](project/2x2-hourly-analysis.md) — лучшие часы для прогнозов: 10-15 (49%), худшие: 08,13 (42%) (2026-05-29)
 - [2x2 Hourly Timing Analyzer](project/2x2-hourly-timing-analyzer.md) — HourlyTimingAnalyzer: сигнал PLAY/WAIT, баннер на дашборде, порт 5000
 - [1224 Project](project-1224.md) — лотерея "Всё или ничего" (12 из 24), анти-кандидаты, двойная матрица, feedback loop (2026-05-21)
 - [Rarity Index Algorithm](rarity-index-algorithm.md) — distribution overlay метод из видео Pikurika, универсальный для любой лотереи
-- [Remote Server Projects](remote-projects.md) — 2x2, 1224, 4x20 на сервере 45.146.164.144, Python/SQLite
 - [Local Dev Environment](local-dev-environment.md) — установленные инструменты: ffmpeg, yt-dlp, Python 3.11, Node.js 22, whisper 20250625
 - [2x2 Trigger Enhancement](project/2x2-trigger-enhancement.md) — диагональные триггеры: дизайн + реализация (2026-05-24)
 - [2x2 Diagonal Triggers Done](project/diagonal-triggers-done.md) — диагональные триггеры + dashboard визуализация завершены
 - [AC Quality Per-Analyzer](project/ac-quality-per-analyzer.md) — AC quality table с TB/Tr/DT/Mo бейджами (2026-05-26)
 - [Dashboard Docs Pending](project/2x2-dashboard-docs-pending.md) — документация 2x2 устарела после переработки /trigger
 - [Концептуал Media Kit](project/konzeptual-media-kit.md) — статический HTML медиакит издательства «Концептуал»
+- [Multi-template pattern](multi-template-pattern.md) — dashboard_2x2.py has separate HTML templates per route, identify the right one before editing
+- [Yandex Disk screenshots](yandex-disk-screenshots.md) — can't view image links; ask user to copy-paste text
+- [Second OpenClaude Instance](second-openclaude-instance.md) — экземпляр в C:\Windows\System32\.openclaude\, работал с сервером 45.146.164.144, без памяти
 - [Analyze before changing](analyze-before-changing.md) — изучи существующий код перед изменениями, не расширяй scope
 - [Exact scope](feedback/exact-scope.md) — отвечать ровно на то, что спросили
 - [Research on server](feedback/research-on-server.md) — production код на сервере — авторитетный источник
@@ -29,4 +41,3 @@
 - [AC color semantics](feedback/ac-color-semantics.md) — зелёный=AC сработал, без цвета=нет AC, красный=провал
 - [Server hygiene](feedback/server-hygiene.md) — чистить мусор AI-инструментов и /tmp/ на сервере
 - [Offer docs after features](feedback/offer-docs-after-features.md) — после UI-изменений предлагать обновить документацию
-- [Second OpenClaude Instance](second-openclaude-instance.md) — экземпляр в C:\Windows\System32\.openclaude\, работал с сервером 45.146.164.144, без памяти
