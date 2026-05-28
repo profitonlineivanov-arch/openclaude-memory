@@ -1,0 +1,32 @@
+# Memory Index
+
+- [User - Влад](user-vlad.md) — lottery systems + PinFlow + hanma.ru, Telegram 409695834
+- [User Language](user-language.md) — пользователь общается на русском языке
+- [PinFlow Project](pinflow-project.md) — Pinterest automator Android app reviewed and fixed
+- [SSH Server Disk Cleanup](disk-cleanup-server.md) — Server 45.146.164.144 cleanup + automated timer
+- [Dashboard 4x20 Restored](dashboard-4x20-restored.md) — восстановлен дашборд 4x20 на порту 8080 (2026-04-16)
+- [Hanma.ru Favicon Setup](favicon-hanma-ru.md) — создан HTML-код для фавиконов hanma.ru (2026-04-17)
+- [2x2 Project](project-2x2.md) — лотерейный предиктор 2x2: RI v3, диагональные триггеры, AC quality (2026-05-26)
+- [2x2 Hourly Analysis](project/2x2-hourly-analysis.md) — лучшие часы для прогнозов: 10-15 (49%), худшие: 08,13 (42%) (2026-05-29)
+- [2x2 Hourly Timing Analyzer](project/2x2-hourly-timing-analyzer.md) — HourlyTimingAnalyzer: сигнал PLAY/WAIT, баннер на дашборде, порт 5000
+- [1224 Project](project-1224.md) — лотерея "Всё или ничего" (12 из 24), анти-кандидаты, двойная матрица, feedback loop (2026-05-21)
+- [Rarity Index Algorithm](rarity-index-algorithm.md) — distribution overlay метод из видео Pikurika, универсальный для любой лотереи
+- [Remote Server Projects](remote-projects.md) — 2x2, 1224, 4x20 на сервере 45.146.164.144, Python/SQLite
+- [Local Dev Environment](local-dev-environment.md) — установленные инструменты: ffmpeg, yt-dlp, Python 3.11, Node.js 22, whisper 20250625
+- [2x2 Trigger Enhancement](project/2x2-trigger-enhancement.md) — диагональные триггеры: дизайн + реализация (2026-05-24)
+- [2x2 Diagonal Triggers Done](project/diagonal-triggers-done.md) — диагональные триггеры + dashboard визуализация завершены
+- [AC Quality Per-Analyzer](project/ac-quality-per-analyzer.md) — AC quality table с TB/Tr/DT/Mo бейджами (2026-05-26)
+- [Dashboard Docs Pending](project/2x2-dashboard-docs-pending.md) — документация 2x2 устарела после переработки /trigger
+- [Концептуал Media Kit](project/konzeptual-media-kit.md) — статический HTML медиакит издательства «Концептуал»
+- [Analyze before changing](analyze-before-changing.md) — изучи существующий код перед изменениями, не расширяй scope
+- [Exact scope](feedback/exact-scope.md) — отвечать ровно на то, что спросили
+- [Research on server](feedback/research-on-server.md) — production код на сервере — авторитетный источник
+- [Detailed explanations](feedback/detailed-explanations.md) — конкретные примеры с числами при выборе вариантов
+- [Separate venvs](feedback/separate-venvs.md) — каждый проект = свой venv, не делить
+- [Diagonal shift direction](feedback/diagonal-shift-direction.md) — левый триггер = -1, правый = +1
+- [Diagonal triggers vs beams](feedback/diagonal-triggers-vs-beams.md) — диагональные триггеры и лучи — разные анализаторы
+- [AC quality real data](feedback/ac-quality-not-postfactum.md) — показывать реальные AC из anti_candidates_history
+- [AC color semantics](feedback/ac-color-semantics.md) — зелёный=AC сработал, без цвета=нет AC, красный=провал
+- [Server hygiene](feedback/server-hygiene.md) — чистить мусор AI-инструментов и /tmp/ на сервере
+- [Offer docs after features](feedback/offer-docs-after-features.md) — после UI-изменений предлагать обновить документацию
+- [Second OpenClaude Instance](second-openclaude-instance.md) — экземпляр в C:\Windows\System32\.openclaude\, работал с сервером 45.146.164.144, без памяти
