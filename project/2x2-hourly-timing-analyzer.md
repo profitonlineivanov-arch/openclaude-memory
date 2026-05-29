@@ -23,5 +23,9 @@ type: project
 
 **Порт дашборда**: 5000 (не 8080!)
 
+**Документация:**
+- `SPEC_hourly_timing_analyzer.md` — полная спецификация на сервере
+- `README.md` — обновлён (v7.2 changelog, таблица анализаторов, API endpoints, раздел Hourly Timing)
+
 **Why:** Пользователь хочет видеть когда лучше входить в игру визуально на дашборде.
 **How to apply:** При изменениях в 2x2 учитывать что timing analyzer — отдельный модуль, не produces anti-candidates.

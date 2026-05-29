@@ -4,15 +4,16 @@ description: Detailed architecture of 2x2 lottery predictor - analyzers, selecto
 type: project
 ---
 
-## 2x2 Lottery Predictor — Architecture (v7)
+## 2x2 Lottery Predictor — Architecture (v8)
 
-### Analyzers (6 modules)
+### Analyzers (7 modules)
 1. **triple_beam_analyzer.py** — Triple Beam retro method: 3 beams (V, DL, DR) per position, block matching (set_size=4) + sum percentile filtering (10th/90th). Returns AC by reason (pattern + sum).
 2. **rarity_index.py** — RI v3 field-aware: two independent fields (Field1: A1/B1 = min/max of positions 1,2; Field2: A2/B2 = min/max of positions 3,4). Symmetric codes: 0 (frequent), ±1 (mid), ±2 (rare). RI = max(RI_field1, RI_field2), range 0-2.
 3. **trigger_analyzer.py** — Trigger patterns: 3-number patterns from surrounding positions, AC = number that followed in history.
 4. **diagonal_trigger_analyzer.py** — Diagonal triggers: 8 triggers (2 per position: right +1 shift, left -1 shift). Traces diagonal paths through consecutive draws. Rare but high-precision AC.
 5. **morse_analyzer.py** — Disabled.
 6. **temperature_features.py** + **temperature_utils.py** — Rolling hit rate, trend, volatility, z-score per number.
+7. **hourly_timing_analyzer.py** — Timing signal: не produces anti-candidates, а выдаёт PLAY/WAIT по hit_rate в зависимости от часа и дня недели. Таблица `hourly_timing_stats`, rolling windows 7/30/90/all-time. Интегрирован в driver и dashboard (баннер + подсветка строк).
 
 ### Selector (horizontal_selector_v4.py)
 - Weighting: base (temperature) × (1 + trend + volatility + z-score + RI bonus)
@@ -26,7 +27,8 @@ Pipeline: Feedback → Trigger lifecycle → Prize update → Reverse forecast �
 ### Dashboard (dashboard_2x2.py)
 - Flask on port 5000, login: admin/2x2lottery
 - Pages: `/` (predictions), `/beams` (beam settings), `/trigger` (combined AC visualization), `/morse`
-- API: `/api/predictions`, `/api/stats`, `/api/config`, `/api/beam_settings`, `/api/beams_analysis`, `/api/beams_history`
+- Timing: баннер PLAY/WAIT (зелёный/жёлтый) + подсветка благоприятных тиражей зелёной рамкой
+- API: `/api/predictions`, `/api/stats`, `/api/config`, `/api/beam_settings`, `/api/beams_analysis`, `/api/beams_history`, `/api/timing_signal`, `/api/favorable_draws`
 
 ### Config (config_v5.yaml)
 - analysis_depth: 24806, triple_beam_retro: enabled, set_size: 4, sum_percentile: 10
