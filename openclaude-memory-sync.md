@@ -9,17 +9,20 @@ type: reference
 Путь: /data/data/com.termux/files/home/.openclaude/projects/-data-data-com-termux-files-home/memory/
 
 Настройка выполнена 2026-05-29:
-- git init сделан
-- remote: origin -> https://github.com/profitonlineivanov-arch/openclaude-memory.git
-- ветка: main
+- git init, ветка: main
+- Remote: git@github.com:profitonlineivanov-arch/openclaude-memory.git (SSH)
 - sync.sh доступен для автосинхронизации
 
 SSH ключ:
 - Termux: ~/.ssh/id_ed25519 (ed25519, comment: openclaude@termux)
 - Публичный ключ: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKD1r3vMmew/nWdx1Nr0VcmCCYN4zZxc3hjpW/8og41w openclaude@termux
-- Статус (2026-05-29): SSH ключ добавлен в GitHub, push работает
-- Remote: git@github.com:profitonlineivanov-arch/openclaude-memory.git (SSH)
+- Статус: SSH добавлен в GitHub, push работает
 
-Автосинхронизация:
-- При старте сессии: cd <memory-path> && git pull --rebase origin main
-- При завершении сессии: cd <memory-path> && bash sync.sh
+Алиасы в ~/.bashrc:
+- `mpull` — git pull --rebase origin main
+- `mpush` — bash sync.sh push
+- `msync` — bash sync.sh (полная синхронизация)
+
+Hooks в settings.json (автоматически):
+- SessionStart → git pull --rebase origin main
+- SessionEnd → bash sync.sh
