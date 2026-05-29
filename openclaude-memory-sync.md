@@ -17,8 +17,8 @@ type: reference
 SSH ключ:
 - Termux: ~/.ssh/id_ed25519 (ed25519, comment: openclaude@termux)
 - Публичный ключ: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKD1r3vMmew/nWdx1Nr0VcmCCYN4zZxc3hjpW/8og41w openclaude@termux
-- Статус (2026-05-29): ключ НЕ добавлен в GitHub — нужен https://github.com/settings/keys
-- После добавления: `git remote set-url origin git@github.com:profitonlineivanov-arch/openclaude-memory.git` для SSH push
+- Статус (2026-05-29): SSH ключ добавлен в GitHub, push работает
+- Remote: git@github.com:profitonlineivanov-arch/openclaude-memory.git (SSH)
 
 Автосинхронизация:
 - При старте сессии: cd <memory-path> && git pull --rebase origin main
