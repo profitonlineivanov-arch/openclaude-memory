@@ -49,3 +49,4 @@
 - [Draw interval polling](feedback/draw-interval-polling.md) — draws каждые ~15мин, polling не чаще 5мин (300с)
 - [2x2 Dashboard Mobile Fix](project/2x2-dashboard-mobile-fix.md) — viewport + media queries для мобильных (2026-05-31)
 - [2x2 Favorable Periods](project/2x2-favorable-periods-task.md) — блочная подсветка благоприятных периодов с бейджами времени, 2 фазы (2026-05-31)
+- [Auto memory sync](feedback/auto-memory-sync.md) — память должна синхронизироваться автоматически через хуки SessionStart/SessionEnd
