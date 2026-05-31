@@ -16,7 +16,7 @@
 - [Hanma.ru Favicon Setup](favicon-hanma-ru.md) — создан HTML-код для фавиконов hanma.ru (2026-04-17)
 - [2x2 Project](project-2x2.md) — лотерейный предиктор 2x2: RI v3, диагональные триггеры, AC quality (2026-05-26)
 - [2x2 DB schema](2x2-db-schema.md) — DB at database/lottery.db (not root!), draw_number, predictions_v4, created_at (not timestamp)
-- [2x2 AC quality stats](2x2-ac-quality-stats.md) — DEPLOYED 2026-05-27, DB migration for reason/beam still TODO
+- [2x2 AC quality stats](2x2-ac-quality-stats.md) — DEPLOYED 2026-05-27, 3 bugs fixed 2026-05-31, AC limit raised to 500
 - [2x2 Hourly Analysis](project/2x2-hourly-analysis.md) — лучшие часы для прогнозов: 10-15 (49%), худшие: 08,13 (42%) (2026-05-29)
 - [2x2 Hourly Timing Analyzer](project/2x2-hourly-timing-analyzer.md) — HourlyTimingAnalyzer: PLAY/WAIT + feedback loop, auto-threshold, порт 5000
 - [1224 Project](project-1224.md) — лотерея "Всё или ничего" (12 из 24), анти-кандидаты, двойная матрица, feedback loop (2026-05-21)
@@ -54,3 +54,5 @@
 - [Timing Feedback Mechanism](project/timing-feedback-mechanism.md) — feedback-цикл PLAY/WAIT accuracy + адаптивный порог (2026-05-31)
 - [Short-term variance](feedback/short-term-variance.md) — не интерпретировать 3-4 пропуска как сбой, лотерея случайна, нужна 90d статистика
 - [Triple Beam Settings Fixes](project/2x2-triple-beam-settings-fixes.md) — sum_percentile=0 теперь отключает фильтр сумм + HTML min="0" (2026-05-31)
+- [Field name sync](feedback/field-name-sync.md) — frontend/backend API field names must match exactly; verify after adding new fields
+- [JS falsy zero defaults](feedback/js-falsy-zero-defaults.md) — `param || default` fails for 0/"" in JS, use explicit undefined check
