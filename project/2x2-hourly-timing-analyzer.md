@@ -10,7 +10,7 @@ type: project
 
 **Файлы**:
 - `/root/projects/2x2/hourly_timing_analyzer.py` — основной модуль
-- `dashboard_2x2.py` — баннер + подсветка строк (API: /api/timing_signal, /api/favorable_draws)
+- `dashboard_2x2.py` — баннер + подсветка строк (API: /api/timing_signal, /api/favorable_draws, /api/favorable_periods)
 - `driver_v5.py` — вызов update_stats() после каждого цикла
 - `config_v5.yaml` — секция hourly_timing (порог 0.47)
 
@@ -26,6 +26,8 @@ type: project
 **Документация:**
 - `SPEC_hourly_timing_analyzer.md` — полная спецификация на сервере
 - `README.md` — обновлён (v7.2 changelog, таблица анализаторов, API endpoints, раздел Hourly Timing)
+
+**Метод get_favorable_periods()** — расширенная версия get_favorable_draws(), возвращает list of dicts с {draw_number, hour, dow, dow_name, hit_rate}. Используется для блочной подсветки на дашборде.
 
 **Why:** Пользователь хочет видеть когда лучше входить в игру визуально на дашборде.
 **How to apply:** При изменениях в 2x2 учитывать что timing analyzer — отдельный модуль, не produces anti-candidates.

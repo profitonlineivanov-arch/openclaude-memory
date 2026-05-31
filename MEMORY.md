@@ -3,7 +3,7 @@
 - [User - Влад](user-vlad.md) — lottery systems + PinFlow + hanma.ru, Telegram 409695834
 - [User Language](user-language.md) — пользователь общается на русском языке
 - [Russian-speaking user](user-language.md) — respond in Russian by default
-- [Remote server](remote-server.md) — openclaw@45.146.164.144, 3 projects (incl. 2x2), 2 AI agents
+- [Remote server](remote-server.md) — root@45.146.164.144 (не openclaw@!), 3 projects, passwordless SSH
 - [Remote Server Projects](remote-projects.md) — 2x2, 1224, 4x20 на сервере 45.146.164.144, Python/SQLite
 - [Termux /tmp issue](termux-tmp-issue.md) — Bash tool fails because /tmp doesn't exist in Termux
 - [User communication style](user-style.md) — fast typos in Russian, casual tone, mobile keyboard
@@ -41,3 +41,11 @@
 - [AC color semantics](feedback/ac-color-semantics.md) — зелёный=AC сработал, без цвета=нет AC, красный=провал
 - [Server hygiene](feedback/server-hygiene.md) — чистить мусор AI-инструментов и /tmp/ на сервере
 - [Offer docs after features](feedback/offer-docs-after-features.md) — после UI-изменений предлагать обновить документацию
+- [Long-running SSH processes](feedback/long-running-ssh-processes.md) — nohup + python3 -u для длительных скриптов на сервере, иначе SSH рвётся
+- [2x2 Selector Attempts](project/2x2-selector-attempts.md) — упрощённая sim невалидна, реальный пайплайн (Triple Beam+Selector) запущен 2026-05-29
+- [2x2 Endurance Test](project/2x2-endurance-test-results.md) — 20 draws × 500 attempts: 1=100%, 2=100%, 3=75%, 4=5%
+- [Iteration Tuner](project/iteration-profile-concept.md) — система оптимизации числа итераций Селектора (profile + feedback)
+- [Real pipeline for simulations](feedback/real-pipeline-for-simulations.md) — нельзя заменять реальный Селектор随机ным выбором, нужен полный пайплайн
+- [Draw interval polling](feedback/draw-interval-polling.md) — draws каждые ~15мин, polling не чаще 5мин (300с)
+- [2x2 Dashboard Mobile Fix](project/2x2-dashboard-mobile-fix.md) — viewport + media queries для мобильных (2026-05-31)
+- [2x2 Favorable Periods](project/2x2-favorable-periods-task.md) — блочная подсветка благоприятных периодов с бейджами времени, 2 фазы (2026-05-31)

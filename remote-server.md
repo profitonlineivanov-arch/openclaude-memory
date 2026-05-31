@@ -1,12 +1,25 @@
 ---
-name: Remote server with projects and AI agents
-description: User has a remote server (45.146.164.144) with 3 projects and 2 AI agents
+name: Remote server connection
+description: SSH access to 45.146.164.144 — use root@ (not openclaw@), non-interactive only
 type: project
 ---
 
-User has a remote server (45.146.164.144, hostname `egippjjodq`) accessible via `ssh openclaw@45.146.164.144` or `ssh root@45.146.164.144` — root login confirmed working as of 2026-05-27. **Known issue:** home directory `/home/openclaw` does not exist, which causes "Could not chdir to home directory" and drops the connection quickly (broken pipe). Use non-interactive mode only: `ssh openclaw@... "command"`. Interactive shell drops within seconds. When searching for projects on the server, avoid `find /` entirely — even with `-not -path '/sys/*' -not -path '/proc/*'`, it floods with permission denied errors and kernel slab entries that the user can't copy on mobile. Instead, search specific directories: `find /home /root /opt /var/www /srv -maxdepth 3 -type d -name X 2>/dev/null`. Interactive SSH sessions drop within seconds (broken pipe, missing home dir) — non-interactive mode only: `ssh openclaw@... "command"`. The server runs Ubuntu 24.04.4 LTS (kernel 6.8.0-106-generic), disk usage ~86.3% of 13.49GB — near full. System restart required (flagged as of 2026-05-27). The server hosts three projects and two AI agents. Known project on the server: **2x2** — as of 2026-05-26, another AI agent made changes to it, documented in the project's own documentation and comments. Confirmed paths (2026-05-27): `/root/projects/2x2` (project), `/root/venvs/2x2` (Python venv).
+Server 45.146.164.144 (hostname `egippjjodq`). **Always connect as `root@`**, not `openclaw@`:
+- `ssh root@45.146.164.144` — passwordless via ED25519 key (set up 2026-05-27)
+- `openclaw@` user has no home dir (`/home/openclaw` missing) — causes "Could not chdir" and broken pipe
+- Non-interactive mode only: `ssh root@... "command"` — interactive shells drop within seconds
 
-**SSH key setup (2026-05-27, DONE):** ED25519 key pair generated in Termux at `~/.ssh/id_ed25519`. Public key added to `/root/.ssh/authorized_keys` on server. Passwordless SSH works: `ssh root@45.146.164.144` connects from Bash tool. **Lesson:** long single-line commands with special chars break on mobile keyboard — best workaround: `cat > /tmp/k` (paste, Ctrl+D), then `cat /tmp/k >> target`, then `rm /tmp/k` — three short commands that don't break.
+**Projects on server:**
+- `/root/projects/2x2` (lottery predictor, v8)
+- `/root/projects/1224` (12 из 24 lottery)
+- `/root/projects/4x20` (4x20 lottery dashboard, port 8080)
+- Python venvs: `/root/venvs/2x2/`, etc.
 
-**Why:** User is managing multiple projects and AI agents on a remote VPS. The separate SSH Client app works but OpenClaude session needs independent access for automation.
-**How to apply:** When working with this user, be aware of their remote infrastructure. Server access is needed for project management tasks. The `claude` wrapper script at `/data/data/com.termux/files/usr/bin/claude` uses `proot` to invoke `openclaude` with bind mounts, and configures an OpenAI-compatible API through Ollama (`localhost:11434/v1`) as the backend — so the actual LLM may not be Claude but a model served via Ollama.
+**SSH key:** ED25519 in Termux `~/.ssh/id_ed25519`, public key in `/root/.ssh/authorized_keys` on server.
+
+**Known issues:**
+- Disk ~86.3% of 13.49GB — near full (flagged 2026-05-27)
+- Ubuntu 24.04.4 LTS, kernel 6.8.0-106-generic
+- Search specific dirs only: `find /home /root /opt /var/www /srv -maxdepth 3` (never `find /`)
+
+**How to apply:** Always `ssh root@...` for commands. For long scripts: write locally, SCP, then `nohup python3 -u` in background. Check progress with `ps aux | grep` + `tail` on output file.
