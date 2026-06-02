@@ -10,13 +10,14 @@
 - [Session continuity](session-continuity.md) — user resumes from crashed sessions, forwards other AIs' responses
 - [Multiple AI agents](user-multi-ai.md) — consults other AIs when one can't solve a problem
 - [SSH quoting workaround](ssh-quoting-workaround.md) — nested quotes break over SSH; write script locally, SCP, then run
-- [PinFlow Project](pinflow-project.md) — Pinterest automator Android app reviewed and fixed
+- [PinFlow Project](pinflow-project.md) — Android Pinterest automator, GitHub repo profitonlineivanov-arch/pinflow, ~/pinflow/
 - [SSH Server Disk Cleanup](disk-cleanup-server.md) — Server 45.146.164.144 cleanup + automated timer
 - [Dashboard 4x20 Restored](dashboard-4x20-restored.md) — восстановлен дашборд 4x20 на порту 8080 (2026-04-16)
 - [Hanma.ru Favicon Setup](favicon-hanma-ru.md) — создан HTML-код для фавиконов hanma.ru (2026-04-17)
 - [2x2 Project](project-2x2.md) — лотерейный предиктор 2x2: RI v3, диагональные триггеры, AC quality (2026-05-26)
 - [2x2 DB schema](2x2-db-schema.md) — DB at database/lottery.db (not root!), draw_number, predictions_v4, created_at (not timestamp)
-- [2x2 AC quality stats](2x2-ac-quality-stats.md) — DEPLOYED 2026-05-27, 3 bugs fixed 2026-05-31, AC limit raised to 500
+- [2x2 AC quality stats](2x2-ac-quality-stats.md) — on BOTH /trigger and /beams, error rate by analyzer/position, Chart.js (CORRECTED 2026-06-01)
+- [2x2 Dashboard Reorganization](project/2x2-dashboard-reorganization.md) — /beams restyled + AC stats 50/100/500, AC stays on /trigger (2026-06-01 CORRECTED)
 - [2x2 Hourly Analysis](project/2x2-hourly-analysis.md) — лучшие часы для прогнозов: 10-15 (49%), худшие: 08,13 (42%) (2026-05-29)
 - [2x2 Hourly Timing Analyzer](project/2x2-hourly-timing-analyzer.md) — HourlyTimingAnalyzer: PLAY/WAIT + feedback loop, auto-threshold, порт 5000
 - [1224 Project](project-1224.md) — лотерея "Всё или ничего" (12 из 24), анти-кандидаты, двойная матрица, feedback loop (2026-05-21)
@@ -24,7 +25,7 @@
 - [Local Dev Environment](local-dev-environment.md) — установленные инструменты: ffmpeg, yt-dlp, Python 3.11, Node.js 22, whisper 20250625
 - [2x2 Trigger Enhancement](project/2x2-trigger-enhancement.md) — диагональные триггеры: дизайн + реализация (2026-05-24)
 - [2x2 Diagonal Triggers Done](project/diagonal-triggers-done.md) — диагональные триггеры + dashboard визуализация завершены
-- [AC Quality Per-Analyzer](project/ac-quality-per-analyzer.md) — AC quality table с TB/Tr/DT/Mo бейджами (2026-05-26)
+- [AC Quality Per-Analyzer](project/ac-quality-per-analyzer.md) — AC quality table с TB/Tr/DT/Mo бейджами на ОБЕИХ страницах (2026-05-26, CORRECTED 2026-06-01)
 - [Dashboard Docs Pending](project/2x2-dashboard-docs-pending.md) — документация 2x2 устарела после переработки /trigger
 - [Концептуал Media Kit](project/konzeptual-media-kit.md) — статический HTML медиакит издательства «Концептуал»
 - [Multi-template pattern](multi-template-pattern.md) — dashboard_2x2.py has separate HTML templates per route, identify the right one before editing
