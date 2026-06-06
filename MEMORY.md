@@ -62,3 +62,4 @@
 - [Verify after parallel edits](feedback/verify-after-parallel-edits.md) — после параллельных правок обязательна верификация subagent-ом перед коммитом
 - [Verifier fails in Termux](feedback/verifier-fails-termux.md) — verification subagent падает в Termux, делать ручную проверку через Grep/Grep
 - [gh device flow in Termux](feedback/gh-device-flow-termux.md) — gh auth login запускает device flow в Termux, код нужно передать пользователю
+- [MCP Servers Catalog](mcp-servers-catalog.md) — 5 MCP-серверов: Perplexity, Playwright, Firecrawl, Glif, Chrome DevTools с командами и API-ключами
