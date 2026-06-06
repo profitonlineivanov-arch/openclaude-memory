@@ -64,4 +64,6 @@
 - [gh device flow in Termux](feedback/gh-device-flow-termux.md) — gh auth login запускает device flow в Termux, код нужно передать пользователю
 - [MCP Servers Catalog](mcp-servers-catalog.md) — 8 плагинов/MCP-серверов: Playwright, Chrome DevTools, Context7, Firecrawl, Security Guidance, Code Review, TS LSP, Frontend Design
 - [Claude Code Plugins](plugins-installed.md) — 8 плагинов установлено (2026-06-06)
-- [Graphify Tool](graphify-tool.md) — safishamsi/graphify, граф знаний для кодовой базы, несовместим с Termux (C-расширения без ARM64 wheel'ов)
+- [Graphify Tool](graphify-tool.md) — safishamsi/graphify, граф знаний, 4 попытки установки на Termux провалились из-за сети (2026-06-06)
+- [OpenClaude Provider Architecture](openclaude-provider-architecture.md) — OpenAI-совместимый формат через .openclaude-profile.json, любой провайдер напрямую
+- [NVIDIA NIM Setup](nvidia-nim-setup.md) — NVIDIA NIM ПОДКЛЮЧЁН (2026-06-06): Nemotron 550B, OpenAI-совместимый, 40 req/min бесплатно
