@@ -21,7 +21,7 @@ PinFlow — Android Pinterest automator (Kotlin, Room DB, WorkManager, OkHttp3, 
 - **Actions page 404**: репозиторий приватный — нужно быть залогиненым в GitHub в браузере, иначе Actions не виден.
 - **proot-distro + Ubuntu** установлены в Termux, но Android SDK tools (sdkmanager, AAPT2) — бинарники x86_64, а proot на телефоне работает в aarch64. Сборка через proot тоже невозможна.
 - **Удалённый сервер** 45.146.164.144 недоступен (SSH timeout, 2026-06-02) — не вариант для сборки.
-- **Нет gh CLI** на телефоне, API-токен не настроен.
+- **gh CLI v2.93.0** установлен (pkg install gh 2026-06-06), но не аутентифицирован — нет GitHub API-токена. SSH key работает для git-операций.
 - **AIDE (Android IDE)** — вариант для сборки APK прямо на телефоне через GUI (не опробован).
 
 ## Статус
@@ -91,3 +91,10 @@ PinFlow — Android Pinterest automator (Kotlin, Room DB, WorkManager, OkHttp3, 
 - Теперь после убийства приложения Android-ом настройки и автоматизация восстанавливаются без ручного вмешательства
 
 **Статус:** ed2f258 запушен в master, GitHub Actions авто-запустит сборку (триггер: push).
+
+2026-06-06 (сессия 5, вечер): Пользователь снова не может собрать проект на GitHub.
+
+**Диагностика:**
+- Verification subagent (Explore) проверил ВСЕ Activity на соответствие findViewById → layout XML ID, все layout-файлы, string/drawable/mipmap ресурсы, дубликаты ID, классы в AndroidManifest — **0 несоответствий, проект чист.**
+- Пользователь утверждает что в прошлой сессии был доступ к Actions — проверка логов сессии 9a66c2f8 показала что диагностика билда делалась локально (сравнение ID в коде vs layout XML), БЕЗ GitHub API-доступа. GitHub Actions логи никогда не просматривались.
+- gh auth login --web запущен — device flow код D8B1-C347 (2026-06-06 13:15 UTC). Пользователь авторизовал gh в браузере (сказал «готово»). Ждёт проверки статуса билда через gh run list.

@@ -15,6 +15,8 @@ type: reference
 | ffmpeg | установлен | — |
 | yt-dlp | установлен | — |
 | git | установлен | SSH key auth к GitHub |
+| gh CLI | установлен | v2.93.0 (pkg), не аутентифицирован — нет GitHub токена |
+| OpenClaude | установлен | @gitlawb/openclaude 0.17.1 (npm global, обновлён 2026-06-06), обновлять через `npm install -g @gitlawb/openclaude@latest` |
 | proot-distro | установлен | Ubuntu 24.04, JDK 17 внутри. НЕ подходит для сборки Android (aarch64, SDK tools = x86_64) |
 
 **ANDROID_HOME**: `$HOME/android-sdk`
@@ -23,3 +25,4 @@ type: reference
 **Важно:** AAPT2 из Android SDK не работает в Termux (glibc vs Bionic). Сборка Android-проектов невозможна нативно — использовать GitHub Actions, AIDE, или proot Ubuntu.
 
 **How to apply:** JDK + Android SDK установлены, но бесполезны для сборки. proot Ubuntu — запасной вариант. GitHub Actions — основной способ.
+

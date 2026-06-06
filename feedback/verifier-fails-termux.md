@@ -4,8 +4,8 @@ description: Verification subagents fail in Termux due to path issues — manual
 type: feedback
 ---
 
-Verification subagents (`subagent_type="verification"`) могут падать в Termux с "file does not exist" ошибками из-за проблем с рабочим каталогом (cwd). В таком случае нужно делать ручную верификацию — Grep для проверки дубликатов свойств/ID, проверка соответствия имён методов между файлами.
+Verification subagents С ТИПОМ `subagent_type="verification"` падают в Termux с "file does not exist" ошибками. Подтип `Explore` при этом работает нормально и завершает задачи успешно.
 
-**Why:** В сессии 2026-06-05 verification agent трижды упал с `Read` failed: "file does not exist" при чтении PostSettingsActivity.kt из cwd /data/data/com.termux/files/home/pinflow — хотя файл точно существует и читается через Read/Grep из родительского процесса.
+**Why:** В сессии 2026-06-05 verification agent трижды упал с `Read` failed: "file does not exist" при чтении PostSettingsActivity.kt. 2026-06-06: Explore agent успешно проверил весь проект PinFlow (45 tool calls: Grep, Read, Glob) — нашёл 0 проблем, завершился без ошибок. Значит проблема специфична для подтипа `verification`, не для всех subagent-ов.
 
-**How to apply:** Если verification agent падает с path errors — не перезапускать, а провести ручную проверку: (1) Grep на дубликаты lateinit var / findViewById, (2) Grep на дубликаты android:id в XML, (3) сверка вызовов методов между DAO и их использованием в Activities/Automator. После ручной верификации коммитить и пушить.
+**How to apply:** Для верификации в Termux использовать Explore subagent вместо verification. Если Explore тоже падает — ручная проверка: (1) Grep на дубликаты lateinit var / findViewById, (2) Grep на дубликаты android:id в XML, (3) сверка вызовов методов между DAO и их использованием в Activities/Automator.

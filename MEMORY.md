@@ -61,3 +61,4 @@
 - [Accessible app logs](accessible-app-logs.md) — Android логи всегда в Downloads + clipboard, не только во internal storage
 - [Verify after parallel edits](feedback/verify-after-parallel-edits.md) — после параллельных правок обязательна верификация subagent-ом перед коммитом
 - [Verifier fails in Termux](feedback/verifier-fails-termux.md) — verification subagent падает в Termux, делать ручную проверку через Grep/Grep
+- [gh device flow in Termux](feedback/gh-device-flow-termux.md) — gh auth login запускает device flow в Termux, код нужно передать пользователю
