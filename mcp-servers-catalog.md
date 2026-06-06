@@ -1,51 +1,66 @@
 ---
-name: MCP Servers Catalog
-description: 5 MCP-серверов для OpenClaude: Perplexity, Playwright, Firecrawl, Glif, Chrome DevTools — команды, env-переменные, API-ключи
+name: Plugins & MCP Servers Catalog
+description: 8 плагинов/MCP-серверов установлено: Playwright, Chrome DevTools, Context7, Firecrawl, Security Guidance, Code Review, TypeScript LSP, Frontend Design
 type: reference
 ---
 
-Рассмотренные MCP-серверы (2026-06-06):
+## Установленные плагины (2026-06-06)
 
-**1. Perplexity MCP** — живой поиск через Perplexity API
-- Пакет: `@perplexity-ai/mcp-server`
-- Команда: `npx -y @perplexity-ai/mcp-server`
-- Env: `PERPLEXITY_API_KEY` (обязательно)
-- Документация: https://docs.perplexity.ai/docs/getting-started/integrations/mcp-server
-- **Статус:** не добавлен — нет API-ключа
+Всего 8. Установка через `openclaude plugin install <name>@claude-plugins-official`.
 
-**2. Playwright MCP** — управление браузером, автоматизация, UI-тесты
+### MCP-серверы (в `.mcp.json`)
+
+**1. Playwright** — управление браузером, автоматизация, скриншоты
 - Пакет: `@playwright/mcp@latest`
-- Команда: `npx @playwright/mcp@latest`
-- Env: не требуется (есть опциональные `PLAYWRIGHT_MCP_*`)
-- GitHub: https://github.com/microsoft/playwright-mcp
-- Ключевые флаги: `--browser`, `--headless`, `--isolated`, `--extension`, `--caps`
-- **Статус:** добавлен в `.mcp.json` (и уже был в плагинах)
+- Статус: ✔ активен
 
-**3. Firecrawl MCP** — веб-скрейпинг и краулинг целых сайтов
-- Пакет: `firecrawl-mcp`
-- Команда: `npx -y firecrawl-mcp`
-- Env: `FIRECRAWL_API_KEY` (обязательно для cloud)
-- GitHub: https://github.com/firecrawl/firecrawl-mcp-server
-- **Статус:** не добавлен — нет API-ключа
-
-**4. Glif MCP** — AI-воркфлоу (изображения, видео) через glif.app
-- Пакет: `@glifxyz/glif-mcp-server@latest`
-- Команда: `npx -y @glifxyz/glif-mcp-server@latest`
-- Env: `GLIF_API_TOKEN` (обязательно)
-- GitHub: https://github.com/glifxyz/glif-mcp-server
-- **Статус:** пропущен — репозиторий заархивирован (read-only с 26 мая 2026)
-
-**5. Chrome DevTools MCP** — отладка Chrome, анализ сети, инспектирование DOM
+**2. Chrome DevTools** — отладка Chrome, анализ сети, DOM
 - Пакет: `chrome-devtools-mcp@latest`
-- Команда: `npx -y chrome-devtools-mcp@latest`
-- Env: не требуется
-- Ключевые флаги: `--headless`, `--slim`, `--browser-url`, `--isolated`, `--channel`
-- GitHub: https://github.com/ChromeDevTools/chrome-devtools-mcp
-- **Статус:** добавлен в `.mcp.json` (headless режим)
+- Флаги: `--headless`
+- Статус: ✔ активен
+
+### MCP-серверы (через плагины)
+
+**3. Context7** — живая документация библиотек (версионная, в контексте)
+- Установлен: `context7@claude-plugins-official`
+- Статус: ✔ активен
+
+**4. Firecrawl** — веб-скрейпинг и краулинг
+- Установлен: `firecrawl@claude-plugins-official` (v1.0.8)
+- Требует `FIRECRAWL_API_KEY` для cloud
+- Статус: ✔ активен
+
+### Хуки
+
+**5. Security Guidance** — проверка изменений на уязвимости (XSS, инъекции) перед применением
+- Установлен: `security-guidance@claude-plugins-official`
+- Статус: ✔ активен
+
+### Агенты
+
+**6. Code Review** — мульти-агентное ревью PR с confidence-based scoring
+- Установлен: `code-review@claude-plugins-official`
+- Статус: ✔ активен
+
+**7. Frontend Design** — улучшение UI, генерация production-grade интерфейсов
+- Установлен: `frontend-design@claude-plugins-official`
+- Статус: ✔ активен
+
+### LSP
+
+**8. TypeScript LSP** — IntelliSense для TypeScript/JavaScript
+- Установлен: `typescript-lsp@claude-plugins-official` (v1.0.0)
+- Статус: ✔ активен
+
+## Не установлены (из рассмотренных)
+
+- **Perplexity MCP** — нет API-ключа
+- **Glif MCP** — репозиторий заархивирован
+- **Ralph Loop** — избыточен (уже есть /loop + Agent tool)
+- **Figma** — только если проект использует Figma
+- **Linear** — только если используется Linear для задач
 
 ## Конфигурация `.mcp.json`
-
-Файл создан: `/data/data/com.termux/files/home/.mcp.json`
 
 ```json
 {
@@ -62,8 +77,9 @@ type: reference
 }
 ```
 
-## Окружение Termux
-- Node.js v24.15.0, npx 11.15.0 — доступны
-- `.mcp.json` создан в `/data/data/com.termux/files/home/`
-- **Ограничение:** Playwright и Chrome DevTools требуют браузер (Chromium). В Termux на Android запуск Chromium может не работать. При следующем запуске OpenClaude MCP-серверы попытаются стартовать — возможны ошибки.
-- Формат `.mcp.json` для OpenClaude: `{"mcpServers": {"name": {"command": "...", "args": [...], "env": {...}}}}}
+## Установка плагинов
+
+Команда CLI: `openclaude plugin install <name>@<marketplace>`
+Список: `openclaude plugin list`
+
+Можно устанавливать несколько параллельно (независимые процессы).
