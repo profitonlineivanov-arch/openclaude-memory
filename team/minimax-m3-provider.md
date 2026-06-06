@@ -1,11 +1,16 @@
 ---
 name: MiniMax M3 provider
-description: MiniMax M3 — встроенная модель, 3 дня бесплатно, но НЕ доступна через NVIDIA NIM
+description: MiniMax M3 в бесплатном тестировании 3 дня, подключение через /provider add minimax с API ключом
 type: reference
 ---
 
-**MiniMax M3** (`minimaxai/minimax-m2.7`) — модель MiniMax, доступна для бесплатного тестирования на 3 дня (появилась 2026-06-06).
+**MiniMax M3** (`minimaxai/minimax-m2.7`) — доступен для бесплатного тестирования на 3 дня (появилась 2026-06-06).
 
-**Проблема:** Активный провайдер — NVIDIA NIM. MiniMax M3 — это **отдельный провайдер**, его нужно активировать через `/provider`. Нельзя просто выбрать модель `minimaxai/minimax-m2.7` пока активен NVIDIA NIM.
+**Как подключить:**
+1. Нужен API ключ MiniMax (получить на minimax.chat)
+2. Выполнить `/provider add minimax` — запускает device flow в Termux (нужно передать пользователю код)
+3. Endpoint: `https://api.minimax.chat/v1`
 
-**Статус (2026-06-06):** Пользователь пытался подключить, но MiniMax M3 не появляется в списке моделей NVIDIA NIM. Нужен переключение провайдера.
+**Подтверждено (2026-06-06):** MiniMax API работает — curl на `https://api.minimax.chat/v1/models` возвращает ошибку авторизации (нужен ключ), значит endpoint правильный.
+
+**Проблема (2026-06-06):** Пользователь смотрит YouTube видео где сказано "просто выбрать модель". Встроенные провайдеры OpenClaude: `anthropic, openai, gemini, github, bedrock, vertex, ollama` — MiniMax среди них НЕТ. Нужен API ключ. `/provider add minimax` запускает device flow, но дальше не работает. Пользователь не может найти где взять ключ.
