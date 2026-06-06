@@ -23,6 +23,7 @@
 - [1224 Project](project-1224.md) — лотерея "Всё или ничего" (12 из 24), анти-кандидаты, двойная матрица, feedback loop (2026-05-21)
 - [Rarity Index Algorithm](rarity-index-algorithm.md) — distribution overlay метод из видео Pikurika, универсальный для любой лотереи
 - [Local Dev Environment](local-dev-environment.md) — установленные инструменты: ffmpeg, yt-dlp, Python 3.11, Node.js 22, whisper 20250625
+- [Termux Dev Environment](termux-dev-environment.md) — JDK 17, Android SDK API 34, proot-distro Ubuntu в Termux на Android
 - [2x2 Trigger Enhancement](project/2x2-trigger-enhancement.md) — диагональные триггеры: дизайн + реализация (2026-05-24)
 - [2x2 Diagonal Triggers Done](project/diagonal-triggers-done.md) — диагональные триггеры + dashboard визуализация завершены
 - [AC Quality Per-Analyzer](project/ac-quality-per-analyzer.md) — AC quality table с TB/Tr/DT/Mo бейджами на ОБЕИХ страницах (2026-05-26, CORRECTED 2026-06-01)
@@ -57,3 +58,6 @@
 - [Triple Beam Settings Fixes](project/2x2-triple-beam-settings-fixes.md) — sum_percentile=0 теперь отключает фильтр сумм + HTML min="0" (2026-05-31)
 - [Field name sync](feedback/field-name-sync.md) — frontend/backend API field names must match exactly; verify after adding new fields
 - [JS falsy zero defaults](feedback/js-falsy-zero-defaults.md) — `param || default` fails for 0/"" in JS, use explicit undefined check
+- [Accessible app logs](accessible-app-logs.md) — Android логи всегда в Downloads + clipboard, не только во internal storage
+- [Verify after parallel edits](feedback/verify-after-parallel-edits.md) — после параллельных правок обязательна верификация subagent-ом перед коммитом
+- [Verifier fails in Termux](feedback/verifier-fails-termux.md) — verification subagent падает в Termux, делать ручную проверку через Grep/Grep

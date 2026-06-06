@@ -1,6 +1,6 @@
 - [AC quality stats progress](2x2-ac-stats-progress.md) — deployed, DB migration for reason/beam pending
 - [Multi-template pattern](multi-template-pattern.md) — each route has its own HTML template; identify before editing
-- [Gitlawb Opengateway provider](provider-setup.md) — active AI provider for this project
+- [DeepSeek provider](provider-setup.md) — active AI provider for this project
 - [Remote server ref](remote-server-ref.md) — SSH to 45.146.164.144, lottery projects
 - [2x2 Architecture](2x2-architecture.md) — detailed architecture: 6 analyzers (incl. diagonal triggers), selector, driver, dashboard
 - [2x2 GitHub repo](2x2-github.md) — profitonlineivanov-arch/2x2.git, branch V8
