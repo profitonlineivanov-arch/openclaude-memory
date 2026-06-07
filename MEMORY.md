@@ -71,3 +71,4 @@
 - [PinFlow 5 fixes done](pinflow-5-fixes-done.md) — 5 багов исправлено, APK собран, готов к пушу на GitHub (2026-06-07)
 - [Heavy pip install in Termux](feedback/termux-heavy-pip-install.md) — --user + --timeout 300 --retries 10 + background для крупных Python-пакетов
 - [.openclaude.json missing](feedback/dot-openclaude-json-missing.md) — /provider зависает на 30с с "Topsy-turvying" = .openclaude.json удалён, восстановить из backups/
+- [Hugging Face Provider](project/huggingface-provider-task.md) — подключить HF Inference API как провайдер (2026-06-07)

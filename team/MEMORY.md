@@ -6,3 +6,4 @@
 - [2x2 Architecture](2x2-architecture.md) — detailed architecture: 6 analyzers (incl. diagonal triggers), selector, driver, dashboard
 - [2x2 GitHub repo](2x2-github.md) — profitonlineivanov-arch/2x2.git, branch V8
 - [OpenClaude Memory Sync](openclaude-memory-sync.md) — GitHub sync: profitonlineivanov-arch/openclaude-memory
+- [Hugging Face Provider](huggingface-provider-setup.md) — HF Inference API: 10 моделей включая DeepSeek V4 862B, Mistral Medium 3.5, Gemma 4 (2026-06-07)
