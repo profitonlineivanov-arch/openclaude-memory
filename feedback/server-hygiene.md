@@ -18,6 +18,18 @@ type: feedback
 - Старые `/root/*.log` (fill_forecasts.log, gpt2giga.log и т.д.) — удалять
 
 **Активные vs неактивные логи:**
-- Cron-логи (parser_v6.log, parser.log, data_integrity.log) — **обрезать** (truncate -s 0), не удалять (процесс пишет в файл по дескриптору)
+- Cron-логи (parser_v6.log, parser.log, data integrity.log) — **обрезать** (truncate -s 0), не удалять (процесс пишет в файл по дескриптору)
 - Неактивные логи — **удалять** целиком
 - Определить активные: `crontab -l` и `ps aux | grep parser`
+
+## ЗАПРЕЩЕНО удалять без проверки процессов (проверено 2026-06-07)
+
+- **`/opt/google/chrome/` (397 МБ)** — ИСПОЛЬЗУЕТСЯ парсерами 2x2, 1224, 4x20 через selenium. Все три парсера в cron: `cd /root/projects/X && venv/X/bin/python parser_v7.py` — стартуют каждые 15 мин и дёргают ChromeDriverManager. Без `/opt/google/chrome` selenium-парсеры упадут мгновенно. Проверять `ps aux | grep -E 'chrome|chromedriver'` и `grep -l selenium /root/projects/*/parser*.py` перед удалением.
+- **`/usr/bin/chromedriver`** — первичный путь в `parser_v6.py` (2x2), fallback на ChromeDriverManager. Не удалять.
+- **`/root/snap/` (40 МБ) — `snapd` РАБОТАЕТ** (PID 3172794, started Apr 23). Также `cupsd` (принт-сервер) и `cups-browsed` от snap/cups. Удаление `/root/snap` убьёт snapd и сломает snap-управляемые пакеты. `snapd` — точно нельзя. `cups` — можно, если принтер не используется, но рискованно.
+
+**Перед удалением чего-либо в /opt, /usr/bin, /root, /etc/systemd:**
+1. `ps aux | grep <name>` — есть ли активные процессы
+2. `grep -rl '<name>' /root/projects/*/parser*.py` — используется ли парсерами
+3. `crontab -l | grep <name>` — стартует ли по расписанию
+4. Только после всех трёх проверок — удалять.

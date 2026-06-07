@@ -1,16 +1,18 @@
 ---
-name: MiniMax M3 provider
-description: MiniMax M3 в бесплатном тестировании 3 дня, подключение через /provider add minimax с API ключом
+name: MiniMax M3 via Gitlawb Opengateway
+description: MiniMax M3 is served via Gitlawb Opengateway provider under identifier minimax/minimax-m3 — no separate setup needed (2026-06-07)
 type: reference
 ---
 
-**MiniMax M3** (`minimaxai/minimax-m2.7`) — доступен для бесплатного тестирования на 3 дня (появилась 2026-06-06).
+**MiniMax M3** (`minimax/minimax-m3`) — теперь доступен через провайдер Gitlawb Opengateway. Подтверждено 2026-06-07.
 
-**Как подключить:**
-1. Нужен API ключ MiniMax (получить на minimax.chat)
-2. Выполнить `/provider add minimax` — запускает device flow в Termux (нужно передать пользователю код)
-3. Endpoint: `https://api.minimax.chat/v1`
+**Как использовать:**
+1. Переключиться на провайдер: `/provider` → выбрать Gitlawb Opengateway
+2. Установить модель: `/model minimax/minimax-m3`
+3. Никаких API ключей или device flow не требуется — всё уже настроено в `.openclaude-profile.json`
 
-**Подтверждено (2026-06-06):** MiniMax API работает — curl на `https://api.minimax.chat/v1/models` возвращает ошибку авторизации (нужен ключ), значит endpoint правильный.
+**История:**
+- 2026-06-06: Пытались подключить напрямую через `/provider add minimax` — не работало (device flow в Termux, пользователь не мог найти ключ). Считали что нужен отдельный провайдер MiniMax.
+- 2026-06-07: Оказалось, что модель `minimax/minimax-m3` уже доступна через Gitlawb Opengateway. `/provider` + `/model minimax/minimax-m3` достаточно. Endpoint `https://api.minimax.chat/v1` не используется.
 
-**Проблема (2026-06-06):** Пользователь смотрит YouTube видео где сказано "просто выбрать модель". Встроенные провайдеры OpenClaude: `anthropic, openai, gemini, github, bedrock, vertex, ollama` — MiniMax среди них НЕТ. Нужен API ключ. `/provider add minimax` запускает device flow, но дальше не работает. Пользователь не может найти где взять ключ.
+**Имя модели в системе:** `mimo-v2.5-pro` (отображаемое в OpenClaude) = `minimax/minimax-m3` (полный идентификатор) = MiniMax M3.

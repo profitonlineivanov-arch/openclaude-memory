@@ -16,6 +16,7 @@ type: reference
 | yt-dlp | установлен | — |
 | git | установлен | SSH key auth к GitHub |
 | gh CLI | установлен | v2.93.0 (pkg), не аутентифицирован — нет GitHub токена |
+| adb | НЕ установлен | `adb: command not found` (2026-06-07). `pm install` тоже не работает (exit 255, нет прав). Для установки APK использовать `termux-open <.apk>` |
 | OpenClaude | установлен | @gitlawb/openclaude 0.17.1 (npm global, обновлён 2026-06-06), обновлять через `npm install -g @gitlawb/openclaude@latest` |
 | proot-distro | установлен | Ubuntu 24.04, JDK 17 внутри. НЕ подходит для сборки Android (aarch64, SDK tools = x86_64) |
 

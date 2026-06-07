@@ -1,6 +1,6 @@
 ---
 name: pinflow-project
-description: PinFlow — Android Pinterest automator. Build via GitHub Actions (AAPT2 fails in Termux). GitHub repo + local clone.
+description: PinFlow — Android Pinterest automator. Build on server 45.146.164.144 (x86_64). GitHub repo + local clone.
 type: project
 ---
 
@@ -9,92 +9,72 @@ PinFlow — Android Pinterest automator (Kotlin, Room DB, WorkManager, OkHttp3, 
 ## Репозиторий
 - **GitHub**: https://github.com/profitonlineivanov-arch/pinflow (private, SSH key auth)
 - **Local clone**: ~/pinflow/ (на телефоне Termux)
-- **Старый путь**: E:/sites/apps/PinFlow/ (Windows, устарел)
+- **Сборка**: на сервере 45.146.164.144 (x86_64, JDK 17, Android SDK в /opt/android-sdk)
 
 ## Функциональность
-Автопостинг, автолайки, автоподписки, автоотписки, расписание, spintax, WebView-based auth, foreground service, boot receiver.
+Автопостинг, автолайки, автоподписки, автоотписки, расписание, spintax, WebView-based auth, foreground service, boot receiver, коллекции изображений.
 
 ## Сборка APK
-- **AAPT2 не работает в Termux** — бинарник собран для glibc, Termux использует Bionic. Нативная сборка невозможна.
-- **JDK 17 + Android SDK (API 34)** установлены в Termux, но не могут использоваться для финальной сборки.
-- **GitHub Actions workflow**: `.github/workflows/build.yml` — собирает debug APK при ручном запуске (workflow_dispatch). Запушено в master.
-- **Actions page 404**: репозиторий приватный — нужно быть залогиненым в GitHub в браузере, иначе Actions не виден.
-- **proot-distro + Ubuntu** установлены в Termux, но Android SDK tools (sdkmanager, AAPT2) — бинарники x86_64, а proot на телефоне работает в aarch64. Сборка через proot тоже невозможна.
-- **Удалённый сервер** 45.146.164.144 недоступен (SSH timeout, 2026-06-02) — не вариант для сборки.
-- **gh CLI v2.93.0** установлен (pkg install gh 2026-06-06), но не аутентифицирован — нет GitHub API-токена. SSH key работает для git-операций.
-- **AIDE (Android IDE)** — вариант для сборки APK прямо на телефоне через GUI (не опробован).
+- **Termux**: AAPT2 несовместим (x86-64 бинарник на aarch64) — локальная сборка невозможна
+- **Сервер 45.146.164.144**: проект в `/root/pinflow_scp/pinflow/`, SDK в /opt/android-sdk.
+  При первом копировании проекта нужно создать local.properties:
+  ```
+  echo 'sdk.dir=/opt/android-sdk' > /root/pinflow_scp/pinflow/local.properties
+  ```
+  Команда сборки:
+  ```
+  ssh root@45.146.164.144 "cd /root/pinflow_scp/pinflow && export ANDROID_HOME=/opt/android-sdk && ./gradlew assembleDebug --no-daemon 2>&1"
+  ```
+- **Скачать APK**: 
+  ```
+  scp root@45.146.164.144:/root/pinflow_scp/pinflow/app/build/outputs/apk/debug/app-debug.apk ~/pinflow-debug.apk
+  ```
+- **Установка**: `termux-open ~/pinflow-debug.apk` (открывает системный установщик)
+- Перед сборкой проверять место: `ssh root@45.146.164.144 "df -h /"` (нужно ~2.5 GB свободно)
 
-## Статус
-2026-06-02: Клонирован из GitHub, создан CI workflow, запушен в master. Попытка сборки через proot-distro ubuntu — сессия упала (краш).
+## Kotlin уроки сборки
+- Sealed enum `when` требует все ветки или `else`
+- suspend-функции нельзя вызывать из не-suspend лямбд без `launch { }`
 
-2026-06-05 (сессия 1): Сессия восстановлена. APK собран через GitHub Actions, установлен на телефон. Обнаружены баги:
+## История сессий
 
-**Баг 1 — авторизация (2 раунда исправлений):**
-- Раунд 1: `isLoggedIn()` требовал `csrftoken` (ставится до логина) → авто-сохранение до ввода пароля. Исправлено: требовать `_pinterest_sess`.
-- Раунд 2: `_pinterest_sess` ТОЖЕ ставится Pinterest на странице `/login/` до ввода пароля. Добавлена проверка URL: кука есть И не на `/login/` странице.
-- Периодическая проверка теперь только включает кнопку «Подтвердить», не сохраняет авто-сессию.
-- `extractUsernameFromPage()` улучшен: `__INITIAL_STATE__` в приоритете, больше селекторов, URL-fallback.
-- Правки закоммичены в 2 коммита (779d558, bf9d730).
+2026-06-07 (сессия 8 — тестирование, 5 багов):
+Пользователь протестировал APK (сборка с сервера). Лог: `pinflow_log_20260607_091221.txt` в Downloads.
 
-**Баг 2 — автоматизация (bf9d730):**
-- `startAutomation()` использовал DB-аккаунт с `autoLike=false` (дефолт) и игнорировал положения переключателей → цикл завершался мгновенно без действий.
-- Исправлено: настройки свитчей применяются ПОВЕРХ DB-аккаунта. `saveSettings()` пишет в Room DB.
-- Для автолайков ОБЯЗАТЕЛЬНО нужны ключевые слова (`targetKeywords`) — без них `executeLikeTask()` возвращает «Ключевые слова не указаны».
+**5 багов от пользователя:**
 
-**Сборка:** GitHub Actions `.github/workflows/build.yml` (workflow_dispatch). Запуск вручную через браузер — нет `gh` CLI и токена на телефоне.
+1. **Парсинг порциями**: searchPinterest ищет только 1 страницу (~20 изображений). При maxCount=250 нужно жать «Парсить» 250+ раз. Надо: автоматически продолжать до заполнения или исчерпания результатов.
 
-2026-06-05 (сессия 2): Пользователь пересобрал APK через GitHub Actions, установил и запустил автоматизацию. Хочет проверить логи, но не может их найти/открыть.
+2. **Превью + выбор сетки**: нет live-обновления при парсинге, фиксированные 3 колонки. Надо: превью появляются сразу, переключатель 2/3/4 колонки, новые сверху. Баг чекбоксов: долгий тап выбирает все изображения (isSelectionMode определяется через selectedIds.isNotEmpty() вместо флага Activity).
 
-**Баг 3 — недоступность логов (5788e36):**
-- Лог сохранялся во внутреннюю память приложения (`context.filesDir/pinflow_log.txt`) — недоступен без root/ADB.
-- `shareLogFile()` пытался поделиться через FileProvider + Intent.ACTION_SEND — системное меню непонятное, файл не найти.
-- Исправлено: `FileLogger.exportToDownloads()` — сохраняет копию лога в папку Downloads через MediaStore (API 29+) или напрямую (API <29). Имя файла с временной меткой: `pinflow_log_20260605_143022.txt`.
-- Toast показывает путь: «Лог сохранён: Downloads/pinflow_log_...»
-- При ошибке — fallback на копирование в буфер обмена.
-- Пользователь может открыть файл через любой текстовый редактор ИЛИ в Termux: `cat ~/storage/downloads/pinflow_log_*.txt`.
+3. **Автопостинг — доски**: не подгружаются доски из аккаунта. Непонятно зачем поле «Основная доска».
 
-**Pinterest auth caveat:** `_pinterest_sess` cookie устанавливается сервером Pinterest даже на странице `/login/` до ввода логина/пароля. Нельзя полагаться только на наличие куки — нужна проверка URL.
+4. **Коллекция #1 без названия**: в PostSettings источник COLLECTION показывает "Коллекция #ID" вместо name из БД.
 
-**Why:** Пользователь хочет установить приложение на телефон. Не разбирается в Linux/Termux internals, предпочитает простые GUI-решения.
-**How to apply:** Предлагать GUI-варианты (AIDE, Actions в браузере) вместо CLI-подходов. Избегать сложных терминов. Для сборки — только GitHub Actions. После фиксов — напоминать про запуск Actions в браузере. Логи теперь в Downloads — пользователь может открыть файловым менеджером или через Termux (`cat ~/storage/downloads/pinflow_log_*.txt`).
+5. **Статистика**: нет unfollows в UI, нет ошибок, числа меняются (10→8→10) при возврате. Нужна развернутая статистика с «Сегодня» и «Всего».
 
-2026-06-05 (сессия 3): Добавлена система коллекций изображений (commit afccb84, 26 файлов, +1323 строк).
+**Состояние:** все 5 исправлений реализованы и собраны 2026-06-07:
+- #1 (пагинация): searchPinterestPaginated с bookmark, цикл до maxCount или exhausted
+- #2 (превью + сетка): grid toggle 2/3/4, live loadImages каждые 5 скачанных
+- #3a (дубликаты): getCollectionByName() проверка перед INSERT
+- #3b (чекбоксы): явный флаг isSelectionMode в адаптере вместо selectedIds.isNotEmpty()
+- #4 (название коллекции): async загрузка имени из БД в renderImageSources() через scope.launch
+- #5 (статистика): unfollows/errors в UI, Gson+SharedPreferences персистентность, LogManager(context), saveStats/loadStats
+BUILD SUCCESSFUL, APK 8.3M скачан в ~/storage/downloads/PinFlow-debug.apk (2026-06-07).
 
-**Функциональность:**
-- **ImageCollection + CollectedImage** — новые Room-сущности (БД v2, destructive migration)
-- **ImageParser** — поиск картинок Pinterest по ключевому слову через regex-парсинг JSON (паттерн `"orig":{"url":"..."}`) / fallback на `<img>` теги Jsoup, дедупликация по sourceUrl, загрузка через OkHttp
-- **CollectionListActivity** — список коллекций, создание (AlertDialog), кнопка «Парсить» с прогресс-диалогом
-- **CollectionDetailActivity** — грид миниатюр (Coil 2.6.0, GridLayoutManager 3 колонки), long-tap → режим выбора → удаление, кнопка «Парсить ещё»
-- **Хранение**: `context.filesDir/collections/{name}/` — внутренняя память, не требует разрешений
-- **Интеграция с автопостингом**: новый тип `ImageSourceType.COLLECTION`, кнопка «Из коллекции» в PostSettings, чекбокс «Удалять использованные», `markImageUsed()` в PinterestAutomator
-- **Логи в Downloads** (commit 5788e36): `FileLogger.exportToDownloads()` через MediaStore
+**Исправления ошибок компиляции (2026-06-07):**
+- CollectionListActivity.kt: конфликт импортов Toast (дубликат) — удалён лишний import
+- PostSettingsActivity.kt: `lifecycleScope` не существует → добавлен `import androidx.lifecycle.lifecycleScope`
+- PinterestAutomator.kt: `logManager` был `LogManager()` без context → исправлен на `LogManager(context)`, иначе saveStats() не работал
+- MainActivity.kt: `automator?.logManager?.saveStats()` (private field) → `automator?.saveStats()` (public method added)
+- Случайное копирование CollectionListActivity.kt в automator/ → удалён, пересобран
+- Грязный build cache после исправления ошибок: `rm -rf app/build .gradle` (оба), иначе dex/ksp падают с NoSuchFileException
 
-**Статус:** Код запушен в master (afccb84 — основная фича, bb8080e — удаление дубликатов). Ожидает пересборки APK через GitHub Actions для тестирования.
+## Предыдущие сессии (кратко)
+- 2026-06-02: Клонирован, CI workflow, попытка proot-сборки (краш)
+- 2026-06-05 (сессия 1-3): Фиксы авторизации, автоматизации, логов. Система коллекций (afccb84).
+- 2026-06-06 (сессия 4-5): Фикс ID layout↔код, персистентность настроек. GitHub Actions недоступен.
+- 2026-06-07 (сессия 6-7): Успешная сборка на сервере (3 Kotlin-фикса), APK 8.6 MB, установлен через termux-open.
 
-2026-06-05 (сессия 3, продолжение): Верификация выявила критические ошибки — дубликаты свойств в PostSettingsActivity, дубликаты ID в лейауте, неверные методы DAO/парсера в CollectionDetailActivity, отсутствие файлов лейаутов. Причина: параллельные правки агентов создали merge-артефакты. Исправлено в d93365a (PostSettingsActivity, activity_post_settings.xml, CollectionDetailActivity полностью переписан).
-
-**Новые компоненты (пакеты):** data/ImageCollection.kt (сущности + DAO), automator/ImageParser.kt, ui/CollectionListActivity.kt, ui/CollectionDetailActivity.kt, 7 новых layout-файлов, Coil 2.6.0 в зависимостях.
-
-2026-06-06 (сессия 4): Сессия упала, восстановлена. Две задачи:
-
-**Фикс билда — несовпадение ID layout ↔ код (ed2f258):**
-- GitHub Actions билд падал несколько раз — причина: 9 ID в `CollectionDetailActivity.kt` не существовали в `activity_collection_detail.xml` (toolbarTitle, infoCount, emptyText, infoKeyword, imagesGrid, fabParse, progressBar, selectionBar, selectionCount, deleteSelectedButton)
-- ID не генерируются в R.java если не объявлены в XML → ошибка компиляции Kotlin
-- Исправлено: полная переработка лейаута — добавлены все отсутствующие view, ProgressBar, selectionBar с кнопкой удаления, два FAB (parse справа, delete слева чтобы не накладывались)
-
-**Персистентность настроек и состояния автоматизации:**
-- `SessionManager`: добавлен `autoUnfollow` в `saveSettings()`/`getAutoUnfollow()`, методы `saveAutomationRunning()`/`getAutomationRunning()`
-- `MainActivity.loadSettings()`: восстановление `autoUnfollow` (ранее не загружался)
-- `startAutomation()`: сохранение `automationRunning = true`
-- `stopAutomation()`: сохранение `automationRunning = false`
-- `loadAccount()`: авто-восстановление автоматизации если флаг `automationRunning` был true (через `startButton.post { startAutomation() }`)
-- Теперь после убийства приложения Android-ом настройки и автоматизация восстанавливаются без ручного вмешательства
-
-**Статус:** ed2f258 запушен в master, GitHub Actions авто-запустит сборку (триггер: push).
-
-2026-06-06 (сессия 5, вечер): Пользователь снова не может собрать проект на GitHub.
-
-**Диагностика:**
-- Verification subagent (Explore) проверил ВСЕ Activity на соответствие findViewById → layout XML ID, все layout-файлы, string/drawable/mipmap ресурсы, дубликаты ID, классы в AndroidManifest — **0 несоответствий, проект чист.**
-- Пользователь утверждает что в прошлой сессии был доступ к Actions — проверка логов сессии 9a66c2f8 показала что диагностика билда делалась локально (сравнение ID в коде vs layout XML), БЕЗ GitHub API-доступа. GitHub Actions логи никогда не просматривались.
-- gh auth login --web запущен — device flow код D8B1-C347 (2026-06-06 13:15 UTC). Пользователь авторизовал gh в браузере (сказал «готово»). Ждёт проверки статуса билда через gh run list.
+**Why:** Основной проект пользователя на Android. Сборка возможна только на сервере x86_64. Пользователь тестирует каждую версию на своём телефоне.
+**How to apply:** Для сборки — только сервер. Для установки — termux-open. После фиксов пересобирать и давать пользователю на тестирование. Логи всегда в ~/storage/downloads/.

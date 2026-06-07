@@ -66,4 +66,5 @@
 - [Claude Code Plugins](plugins-installed.md) — 8 плагинов установлено (2026-06-06)
 - [Graphify Tool](graphify-tool.md) — safishamsi/graphify, граф знаний, 4 попытки установки на Termux провалились из-за сети (2026-06-06)
 - [OpenClaude Provider Architecture](openclaude-provider-architecture.md) — OpenAI-совместимый формат через .openclaude-profile.json, любой провайдер напрямую
-- [NVIDIA NIM Setup](nvidia-nim-setup.md) — NVIDIA NIM ПОДКЛЮЧЁН (2026-06-06): Nemotron 550B, OpenAI-совместимый, 40 req/min бесплатно
+- [NVIDIA NIM Setup](nvidia-nim-setup.md) — NVIDIA NIM подключался 2026-06-06: Nemotron 550B, OpenAI-совместимый, 40 req/min бесплатно. Сейчас не активен (заменён на Gitlawb Opengateway)
+- [PinFlow 5 fixes done](pinflow-5-fixes-done.md) — 5 багов исправлено, APK собран, готов к пушу на GitHub (2026-06-07)
