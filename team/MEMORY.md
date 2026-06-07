@@ -1,7 +1,7 @@
 - [AC quality stats progress](2x2-ac-stats-progress.md) — deployed, DB migration for reason/beam pending
 - [Multi-template pattern](multi-template-pattern.md) — each route has its own HTML template; identify before editing
 - [MiniMax M3 provider](minimax-m3-provider.md) — доступна через Gitlawb Opengateway, identifier `minimax/minimax-m3` (2026-06-07)
-- [Active provider](provider-setup.md) — Gitlawb Opengateway (mimo-v2.5-pro / minimax/minimax-m3), с 2026-06-07
+- [Active providers](provider-setup.md) — DeepSeek, Gitlawb Opengateway, NVIDIA NIM, Bluesminds (2026-06-07)
 - [Remote server ref](remote-server-ref.md) — SSH to 45.146.164.144, lottery projects
 - [2x2 Architecture](2x2-architecture.md) — detailed architecture: 6 analyzers (incl. diagonal triggers), selector, driver, dashboard
 - [2x2 GitHub repo](2x2-github.md) — profitonlineivanov-arch/2x2.git, branch V8

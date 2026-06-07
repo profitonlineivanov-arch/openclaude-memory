@@ -1,15 +1,15 @@
 ---
 name: NVIDIA NIM Setup
-description: NVIDIA NIM — ИСТОРИЧЕСКАЯ запись. Подключался 2026-06-06, заменён на Gitlawb Opengateway. Текущий провайдер: Bluesminds.
+description: NVIDIA NIM — активный провайдер. Подключался 2026-06-06 (nemotron-3-ultra) и 2026-06-07 (llama-3.1-nemotron-70b-instruct).
 type: reference
 ---
 
 **NVIDIA NIM** — облачный сервис с бесплатным тарифом (40 запросов/мин). OpenAI-совместимый API.
 
 **Endpoint:** `https://integrate.api.nvidia.com/v1`
-**Статус (2026-06-07):** НЕ АКТИВЕН. Был активен 2026-06-06, затем заменён. Текущий провайдер: Bluesminds (`qwen/qwen3.5-397b-a17b`), см. `bluesminds-setup.md`.
+**Статус (2026-06-07):** АКТИВЕН. Использован повторно 2026-06-07 с моделью `nvidia/llama-3.1-nemotron-70b-instruct`. Ранее (2026-06-06) использовался `nvidia/nemotron-3-ultra-550b-a55b`.
 
-**Модель, которая использовалась:** `nvidia/nemotron-3-ultra-550b-a55b` (550B параметров, 55B активных)
+**Доступные модели (2026-06-07):** `/model` показал `nvidia/llama-3.1-nemotron-70b-instruct` как доступную.
 
 **Бесплатные модели (2026-06-06):**
 

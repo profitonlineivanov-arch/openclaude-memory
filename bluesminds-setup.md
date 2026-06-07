@@ -7,7 +7,7 @@ type: reference
 **Bluesminds** — облачный AI-провайдер с trial-моделями. OpenAI-совместимый API.
 
 **Endpoint:** `https://api.bluesminds.com/v1`
-**Статус (2026-06-07):** ПОДКЛЮЧЁН. Профиль обновлён в `.openclaude/.openclaude-profile.json`. Требуется рестарт OpenClaude для применения.
+**Статус (2026-06-07):** ПОДКЛЮЧЁН. Добавлен в `.openclaude.json` как provider_b1d2e3f4a5b6 (provider: "openai"). Требуется рестарт OpenClaude для появления в `/provider`.
 
 **Активная модель:** `qwen/qwen3.5-397b-a17b` (397B параметров, 17B активных)
 
