@@ -1,15 +1,15 @@
 ---
 name: NVIDIA NIM Setup
-description: NVIDIA NIM ПОДКЛЮЧЁН 2026-06-06 — Nemotron 3 Ultra 550B, OpenAI-совместимый, 40 req/min бесплатно
+description: NVIDIA NIM — ИСТОРИЧЕСКАЯ запись. Подключался 2026-06-06, заменён на Gitlawb Opengateway. Текущий провайдер: Bluesminds.
 type: reference
 ---
 
 **NVIDIA NIM** — облачный сервис с бесплатным тарифом (40 запросов/мин). OpenAI-совместимый API.
 
 **Endpoint:** `https://integrate.api.nvidia.com/v1`
-**Статус (2026-06-06):** ПОДКЛЮЧЁН. Профиль обновлён в `.openclaude/.openclaude-profile.json`. Требуется рестарт OpenClaude для применения.
+**Статус (2026-06-07):** НЕ АКТИВЕН. Был активен 2026-06-06, затем заменён. Текущий провайдер: Bluesminds (`qwen/qwen3.5-397b-a17b`), см. `bluesminds-setup.md`.
 
-**Активная модель:** `nvidia/nemotron-3-ultra-550b-a55b` (550B параметров, 55B активных)
+**Модель, которая использовалась:** `nvidia/nemotron-3-ultra-550b-a55b` (550B параметров, 55B активных)
 
 **Бесплатные модели (2026-06-06):**
 
@@ -20,14 +20,6 @@ type: reference
 | Kimi K2.5 | — | 262,144 | 8,192 |
 | Minimax M2.7 | — | 196,608 | 8,192 |
 | GLM 5.1 | — | 202,752 | 8,192 |
-
-**Подключение к OpenClaude (прямое, без LiteLLM):**
-OpenClaude использует OpenAI-совместимый формат, поэтому достаточно заменить значения в `.openclaude/.openclaude-profile.json`:
-- `OPENAI_BASE_URL` → `https://integrate.api.nvidia.com/v1`
-- `OPENAI_API_KEY` → `nvapi-...`
-- `OPENAI_MODEL` → `nvidia/nemotron-3-ultra-550b-a55b`
-
-И обновить `"model"` в `settings.json`.
 
 **Документация NVIDIA:** https://docs.nvidia.com/nim/large-language-models/latest/ai-assistant-integrations/claude-code.html
 **Каталог моделей:** https://build.nvidia.com/models

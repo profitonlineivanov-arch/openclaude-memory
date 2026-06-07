@@ -1,6 +1,6 @@
 ---
 name: OpenClaude Provider Architecture
-description: OpenClaude использует OpenAI-совместимый формат API (не Anthropic), конфигурация в .openclaude/.openclaude-profile.json
+description: OpenClaude использует OpenAI-совместимый формат API (не Anthropic), конфигурация в .openclaude/.openclaude-profile.json. Текущий провайдер: Bluesminds (2026-06-07).
 type: reference
 ---
 
@@ -11,14 +11,16 @@ OpenClaude использует **OpenAI-совместимый формат API
 - `OPENAI_API_KEY` — API ключ
 - `OPENAI_MODEL` — имя модели
 
-**Текущий провайдер (2026-06-06):** NVIDIA NIM
-- Base URL: `https://integrate.api.nvidia.com/v1`
-- Model: `nvidia/nemotron-3-ultra-550b-a55b`
-- Free tier: 40 req/min
+**Текущий провайдер (2026-06-07):** Bluesminds
+- Base URL: `https://api.bluesminds.com/v1`
+- Model: `qwen/qwen3.5-397b-a17b`
+- Trial/free tier
 
-**Предыдущий провайдер:** DeepSeek (`https://api.deepseek.com/v1`, `deepseek-v4-pro`).
+**История провайдеров:**
+1. DeepSeek (`https://api.deepseek.com/v1`, `deepseek-v4-pro`) — до 2026-06-07
+2. NVIDIA NIM (`https://integrate.api.nvidia.com/v1`, `nvidia/nemotron-3-ultra-550b-a55b`) — 2026-06-06
+3. Gitlawb Opengateway (`mimo-v2.5-pro` / `minimax/minimax-m3`) — 2026-06-07
 
 **Следствия:**
-- NVIDIA NIM подключается напрямую (тоже OpenAI-совместимый) без LiteLLM
 - Любой OpenAI-совместимый API (Groq, Together, local LLM) должен работать аналогично
 - Не нужно устанавливать `ANTHROPIC_BASE_URL` — используется `OPENAI_BASE_URL`

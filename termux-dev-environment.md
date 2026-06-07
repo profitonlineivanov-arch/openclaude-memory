@@ -19,6 +19,8 @@ type: reference
 | adb | НЕ установлен | `adb: command not found` (2026-06-07). `pm install` тоже не работает (exit 255, нет прав). Для установки APK использовать `termux-open <.apk>` |
 | OpenClaude | установлен | @gitlawb/openclaude 0.17.1 (npm global, обновлён 2026-06-06), обновлять через `npm install -g @gitlawb/openclaude@latest` |
 | proot-distro | установлен | Ubuntu 24.04, JDK 17 внутри. НЕ подходит для сборки Android (aarch64, SDK tools = x86_64) |
+| flang | установлен | 21.1.8 (LLVM Fortran), через apt. Нужен для сборки scipy и других Fortran-зависимых пакетов |
+| tree-sitter | установлен | 0.26.9 (Termux pkg). Нужен для сборки tree-sitter Python-парсеров (parser.h C-заголовки). Также `tree-sitter` 0.25.2 через pip. |
 
 **ANDROID_HOME**: `$HOME/android-sdk`
 **JAVA_HOME**: `/data/data/com.termux/files/usr/lib/jvm/java-17-openjdk`

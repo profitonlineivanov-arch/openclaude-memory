@@ -23,7 +23,7 @@
 - [1224 Project](project-1224.md) — лотерея "Всё или ничего" (12 из 24), анти-кандидаты, двойная матрица, feedback loop (2026-05-21)
 - [Rarity Index Algorithm](rarity-index-algorithm.md) — distribution overlay метод из видео Pikurika, универсальный для любой лотереи
 - [Local Dev Environment](local-dev-environment.md) — установленные инструменты: ffmpeg, yt-dlp, Python 3.11, Node.js 22, whisper 20250625
-- [Termux Dev Environment](termux-dev-environment.md) — JDK 17, Android SDK API 34, proot-distro Ubuntu в Termux на Android
+- [Termux Dev Environment](termux-dev-environment.md) — JDK 17, Android SDK, flang, tree-sitter, proot-distro Ubuntu в Termux на Android
 - [2x2 Trigger Enhancement](project/2x2-trigger-enhancement.md) — диагональные триггеры: дизайн + реализация (2026-05-24)
 - [2x2 Diagonal Triggers Done](project/diagonal-triggers-done.md) — диагональные триггеры + dashboard визуализация завершены
 - [AC Quality Per-Analyzer](project/ac-quality-per-analyzer.md) — AC quality table с TB/Tr/DT/Mo бейджами на ОБЕИХ страницах (2026-05-26, CORRECTED 2026-06-01)
@@ -64,8 +64,9 @@
 - [gh device flow in Termux](feedback/gh-device-flow-termux.md) — gh auth login запускает device flow в Termux, код нужно передать пользователю
 - [MCP Servers Catalog](mcp-servers-catalog.md) — 8 плагинов/MCP-серверов: Playwright, Chrome DevTools, Context7, Firecrawl, Security Guidance, Code Review, TS LSP, Frontend Design
 - [Claude Code Plugins](plugins-installed.md) — 8 плагинов установлено (2026-06-06)
-- [Graphify Tool](graphify-tool.md) — safishamsi/graphify, несовместим с Termux: scipy требует gfortran (2026-06-07)
+- [Graphify Tool](graphify-tool.md) — safishamsi/graphify: УСТАНОВЛЕН v0.8.33, 11/25 tree-sitter парсеров (2026-06-07)
+- [Bluesminds Provider](bluesminds-setup.md) — api.bluesminds.com: Qwen 3.5 397B активна, trial-модели, OpenAI-совместимый (2026-06-07)
 - [OpenClaude Provider Architecture](openclaude-provider-architecture.md) — OpenAI-совместимый формат через .openclaude-profile.json, любой провайдер напрямую
-- [NVIDIA NIM Setup](nvidia-nim-setup.md) — NVIDIA NIM подключался 2026-06-06: Nemotron 550B, OpenAI-совместимый, 40 req/min бесплатно. Сейчас не активен (заменён на Gitlawb Opengateway)
+- [NVIDIA NIM Setup](nvidia-nim-setup.md) — ИСТОРИЧЕСКАЯ: подключался 2026-06-06, не активен. Текущий: Bluesminds (bluesminds-setup.md)
 - [PinFlow 5 fixes done](pinflow-5-fixes-done.md) — 5 багов исправлено, APK собран, готов к пушу на GitHub (2026-06-07)
 - [Heavy pip install in Termux](feedback/termux-heavy-pip-install.md) — --user + --timeout 300 --retries 10 + background для крупных Python-пакетов

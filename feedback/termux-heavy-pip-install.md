@@ -1,6 +1,6 @@
 ---
 name: Heavy pip install in Termux
-description: How to install large Python packages (tree-sitter, scipy, etc) on Termux — use --user + extended timeout + background, but Fortran deps still block
+description: How to install large Python packages on Termux — use --user + extended timeout + background; for Fortran deps (scipy), install flang from Termux repo first
 type: feedback
 ---
 
@@ -9,9 +9,14 @@ type: feedback
 
 **Why:** Мобильная сеть в Termux нестабильна — pip таймаутится при скачивании с PyPI, а не в самой компиляции. `--user` нужен чтобы пакет не конфликтовал с системным site-packages Termux. Фоновый режим обязателен — обычные pip-установки тяжёлых пакетов занимают 10-30+ мин, что превышает 2-минутный лимит Bash tool.
 
-**ВАЖНОЕ ОГРАНИЧЕНИЕ:** Эти флаги решают только сетевую проблему. Если пакет зависит от **scipy** (или другого Fortran-зависимого пакета), установка ВСЁ РАВНО упадёт — Termux не имеет gfortran/flang, а wheel'ов под `aarch64-linux-android` + свежий Python нет. Установка тяжёлых научных пакетов в Termux практически невозможна — лучше ставить на сервер 45.146.164.144 (Ubuntu x86_64) или через proot-distro Ubuntu.
+**ВАЖНОЕ ОГРАНИЧЕНИЕ (обновлено 2026-06-07):** Если пакет зависит от **scipy** (или другого Fortran-зависимого пакета), нужно ПРЕДВАРИТЕЛЬНО установить Fortran-компилятор: `apt install flang` (flang есть в репо Termux). Без flang scipy упадёт с `metadata-generation-failed`. До 2026-06-07 считалось, что Fortran-зависимости — непреодолимый блокер в Termux, но `apt-cache search flang` показал, что flang доступен.
 
 **How to apply:**
-- Пакеты **без** Fortran-зависимостей (graphifyy без scipy, pandas, numpy крупных ML-библиотек): `--user --timeout 300 --retries 10` + background — работает
-- Пакеты **с** scipy/numpy крупными wheel-зависимостями: сразу предложить установку на сервер 45.146.164.144 или в proot-distro Ubuntu, не тратить время на повторы в Termux
-- Проверить наличие gfortran: `which gfortran` — если "no", отказаться сразу
+- Пакеты **без** Fortran-зависимостей: `--user --timeout 300 --retries 10` + background — работает
+- Пакеты **с** scipy/numpy/Fortran-зависимостями: сначала `apt install flang`, затем `pip install --user --timeout 300 --retries 10 <pkg>` в фоне
+- Проверить наличие flang: `apt-cache search flang` — если есть в репо, установить; если нет, предложить proot-distro Ubuntu
+
+**Tree-sitter C-заголовки (обновлено 2026-06-07):** Если при установке Python-пакетов tree-sitter-* (cpp, java, etc.) возникает `fatal error: 'tree_sitter/parser.h' file not found`:
+1. Установить системный tree-sitter: `apt install tree-sitter` (даёт `tree_sitter/api.h`)
+2. Создать compat-заголовок: `cp /data/data/com.termux/files/usr/include/tree_sitter/api.h /data/data/com.termux/files/usr/include/tree_sitter/parser.h`
+3. **Ограничение:** Старые tree-sitter парсеры (<0.22 API) используют устаревшие макросы (`TSLexer`, `START_LEXER`, etc.), которых нет в api.h 0.26 — такие парсеры не соберутся даже с compat-заголовком. Нужен реген грамматик мейнтейнерами.

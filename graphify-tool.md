@@ -1,6 +1,6 @@
 ---
 name: Graphify Knowledge Graph Tool
-description: safishamsi/graphify (PyPI: graphifyy) — knowledge graph builder for codebases, 60K+ stars, incompatible with Termux (scipy needs Fortran compiler)
+description: safishamsi/graphify (PyPI: graphifyy) — knowledge graph builder, УСТАНОВЛЕН v0.8.33, работает (2026-06-07)
 type: reference
 ---
 
@@ -12,13 +12,12 @@ type: reference
 - PR dashboard, call-flow диаграммы
 - Совместим с Claude Code, Codex, Cursor и другими AI-ассистентами
 
-**Установка:** `uv tool install graphifyy` или `pipx install graphifyy`, затем `graphify install` для регистрации в AI-ассистенте.
+**Установка:** `pip install graphifyy --user --timeout 300 --retries 10`, затем `graphify install` для регистрации в AI-ассистенте.
 
-**Проблема на Termux:** НЕ только сеть — главный блокер это **отсутствие Fortran-компилятора** (gfortran/flang/ifort). scipy собирается из исходников (нет wheel'ов под aarch64-linux-android + Python 3.13) и требует flang, иначе `metadata-generation-failed`. Попытки 1-4 (2026-06-06) провалились на таймаутах PyPI. Попытка 5 (2026-06-07) с `--user --timeout 300 --retries 10` прошла сеть, но упала на сборке scipy с `metadata-generation-failed: ERROR Running 'flang --help' gave "No such file or directory"`. `gcc` есть, `gfortran` — нет.
+**Termux-совместимость (РЕШЕНА 2026-06-07):**
+- Блокер 1: scipy → нужен Fortran. `apt install flang` (flang, mlir, libandroid-complex-math, libandroid-complex-math-static; 1241 MB).
+- Блокер 2: tree-sitter парсеры → `apt install tree-sitter` даёт `api.h`, создан compat `parser.h`.
+- Итог: graphifyy 0.8.33 УСТАНОВЛЕН. 11 tree-sitter парсеров работают (bash, c, c-sharp, fortran, go, javascript, lua, objc, powershell, python, swift). 14 парсеров НЕ собрались (cpp, elixir, groovy, java, json, julia, kotlin, php, ruby, rust, scala, typescript, verilog, zig) — старый API tree-sitter <0.22, нужен реген грамматик мейнтейнерами.
+- Команда: `python3 -m graphify` (не `graphify`, т.к. ~/.local/bin не в PATH).
 
-**Пути решения:**
-1. **proot-distro Ubuntu** в Termux — там есть готовые scipy wheel'ы (`apt install python3-scipy`)
-2. **Установить на сервер 45.146.164.144** (Ubuntu x86_64) — самый надёжный путь, wheel'ы скачиваются мгновенно
-3. Попробовать `apt install gfortran` в Termux (может не быть в репо)
-
-**Дата проверки:** 2026-06-07 (5 попыток, последняя провалилась на scipy Fortran)
+**Статус:** 2026-06-07 — установлен и работает.
