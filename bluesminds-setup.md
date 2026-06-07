@@ -1,13 +1,15 @@
 ---
 name: Bluesminds Provider Setup
-description: Bluesminds ПОДКЛЮЧЁН 2026-06-07 — Qwen 3.5 397B, OpenAI-совместимый, trial-модели
+description: Bluesminds ПОДКЛЮЧЁН 2026-06-07 — Qwen 3.5 397B, OpenAI-совместимый, trial-модели. API проверен curl-ом — работает.
 type: reference
 ---
 
 **Bluesminds** — облачный AI-провайдер с trial-моделями. OpenAI-совместимый API.
 
 **Endpoint:** `https://api.bluesminds.com/v1`
-**Статус (2026-06-07):** ПОДКЛЮЧЁН. Добавлен в `.openclaude.json` как provider_b1d2e3f4a5b6 (provider: "openai"). Требуется рестарт OpenClaude для появления в `/provider`.
+**Статус (2026-06-07):** ПОДКЛЮЧЁН. API проверен прямым curl — отвечает, ключ валидный. Провайдер в `.openclaude.json` как `provider_b1d2e3f4a5b6` (provider: "openai"). Требуется рестарт OpenClaude после восстановления `.openclaude.json` для появления в `/provider`.
+
+**Важно:** Bluesminds появляется в `/provider` только если запись есть в `.openclaude.json`. Если файл удалён — `/provider` зависнет на 30 секунд (см. `feedback/dot-openclaude-json-missing.md`).
 
 **Активная модель:** `qwen/qwen3.5-397b-a17b` (397B параметров, 17B активных)
 
