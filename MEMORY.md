@@ -65,10 +65,10 @@
 - [MCP Servers Catalog](mcp-servers-catalog.md) — 8 плагинов/MCP-серверов: Playwright, Chrome DevTools, Context7, Firecrawl, Security Guidance, Code Review, TS LSP, Frontend Design
 - [Claude Code Plugins](plugins-installed.md) — 8 плагинов установлено (2026-06-06)
 - [Graphify Tool](graphify-tool.md) — safishamsi/graphify: УСТАНОВЛЕН v0.8.33, 11/25 tree-sitter парсеров (2026-06-07)
-- [Bluesminds Provider](bluesminds-setup.md) — api.bluesminds.com: Qwen 3.5 397B активна, trial-модели, OpenAI-совместимый (2026-06-07)
+- [Bluesminds Provider](bluesminds-setup.md) — работает, но нестабильно: таймауты, нужен 30s timeout (2026-06-07)
 - [OpenClaude Provider Architecture](openclaude-provider-architecture.md) — 2-файловая система: .openclaude.json (все) + .openclaude-profile.json (активный), бэкапы (2026-06-07)
-- [NVIDIA NIM Setup](nvidia-nim-setup.md) — АКТИВЕН: llama-3.1-nemotron-70b-instruct (2026-06-07), ранее nemotron-3-ultra (2026-06-06)
+- [NVIDIA NIM Setup](nvidia-nim-setup.md) — РАБОТАЕТ: llama-3.3-nemotron-super-49b-v1; llama-3.1-nemotron-70b требует деплоя (2026-06-07)
 - [PinFlow 5 fixes done](pinflow-5-fixes-done.md) — 5 багов исправлено, APK собран, готов к пушу на GitHub (2026-06-07)
 - [Heavy pip install in Termux](feedback/termux-heavy-pip-install.md) — --user + --timeout 300 --retries 10 + background для крупных Python-пакетов
 - [.openclaude.json missing](feedback/dot-openclaude-json-missing.md) — /provider зависает на 30с с "Topsy-turvying" = .openclaude.json удалён, восстановить из backups/
-- [Hugging Face Provider](project/huggingface-provider-task.md) — подключить HF Inference API как провайдер (2026-06-07)
+- [Hugging Face Provider](project/huggingface-provider-task.md) — УДАЛЁН: DNS + биллинг $0.10/мес (2026-06-07)

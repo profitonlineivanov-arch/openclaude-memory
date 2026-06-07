@@ -39,14 +39,16 @@ OpenClaude использует **OpenAI-совместимый формат API
 
 ## Активные провайдеры (2026-06-07):
 
-1. **DeepSeek** — `deepseek-v4-pro`, endpoint `https://api.deepseek.com/v1`
+1. **DeepSeek** — `deepseek-v4-pro`, endpoint `https://api.deepseek.com/v1` (основной)
 2. **Gitlawb Opengateway** — `mimo-v2.5-pro` / `minimax/minimax-m3`
-3. **NVIDIA NIM** — `nvidia/llama-3.1-nemotron-70b-instruct`, endpoint `https://integrate.api.nvidia.com/v1`
-4. **Bluesminds** — `qwen/qwen3.5-397b-a17b`, endpoint `https://api.bluesminds.com/v1`
+3. **NVIDIA NIM** — `nvidia/llama-3.3-nemotron-super-49b-v1`, endpoint `https://integrate.api.nvidia.com/v1`
+4. **Bluesminds** — `qwen/qwen3.5-397b-a17b`, endpoint `https://api.bluesminds.com/v1` (медленный)
+5. **Hugging Face** — СЛОМАН, endpoint `api-inference.huggingface.co` не резолвится
 
-Все четыре провайдера подтверждены рабочими. Переключение через `/provider` и `/model`.
+## Важно: модели привязаны к провайдерам
 
-## Следствия:
-- Любой OpenAI-совместимый API (Groq, Together, local LLM) должен работать аналогично
-- Не нужно устанавливать `ANTHROPIC_BASE_URL` — используется `OPENAI_BASE_URL`
-- Бэкапы `.openclaude.json` создаются автоматически в `.openclaude/backups/` — при проблемах с `/provider` проверять их в первую очередь
+**Симптом:** "API Error" или "model not found" после смены провайдера.
+
+**Причина:** `/model` устанавливает модель глобально. После переключения провайдера через `/provider`, модель от предыдущего провайдера может остаться активной и вызвать ошибку (например, `GPT-5.5 mini` не существует на Bluesminds).
+
+**Исправление:** После смены провайдера проверить модель через `/model` и установить совместимую.

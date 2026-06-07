@@ -1,16 +1,34 @@
 ---
 name: Hugging Face Provider Task
-description: Подключение Hugging Face Inference API как провайдера (2026-06-07)
+description: Подключение Hugging Face Inference API — 3 блокера: DNS, биллинг, мизерный free tier ($0.10/мес). Низкий приоритет (2026-06-07, раунд 4)
 type: project
 ---
 
-Пользователь хочет подключить Hugging Face Inference API как провайдер (по аналогии с NVIDIA NIM и Bluesminds) — 2026-06-07.
+## Задача: подключить Hugging Face Inference API как провайдер
 
-**Формат:** OpenAI-совместимый (`provider: "openai"`)
-**Базовый URL:** `https://api-inference.huggingface.co/v1`
+**Дата:** 2026-06-07
+**Статус:** ЗАБЛОКИРОВАНО — 3 проблемы, низкий приоритет
 
-**Требуется:**
-- API токен HF (https://huggingface.co/settings/tokens, тип "Read" с правами на inference)
-- Выбрать модель (популярные: `meta-llama/Meta-Llama-3.1-70B-Instruct`, `mistralai/Mistral-Large-2407`, `Qwen/Qwen2.5-72B-Instruct`)
+**Проблема 1 — DNS:** Старый serverless endpoint `api-inference.huggingface.co` не резолвится (HTTP 000) — блокировка в России. Нужен VPN.
 
-**How to apply:** При подключении добавить в `.openclaude.json` новый `providerProfiles` entry + обновить `.openclaude-profile.json` для активации.
+**Проблема 2 — Биллинг:** Новый router `router.huggingface.co` работает (DNS ок), токен валидный, но chat completions требуют привязанной карты.
+
+**Проблема 3 — Мизерный free tier:** $0.10/мес кредитов. Хватит на ~10 запросов к маленьким моделям или на 0 запросов к DeepSeek V4 Pro ($1.60/$3.38 за 1M токенов). Самые дешёвые: Qwen3-4B за $0.01/$0.03.
+
+**Что выяснено (раунд 4):**
+- `/v1/models` на router — HTTP 200, валидный токен, полный каталог с ценами
+- `/v1/chat/completions` — "Invalid username or password" (отсутствие биллинга, не формат ключа)
+- `deepseek-ai/DeepSeek-V4-Pro` — inference: "warm" (serverless поддерживается)
+- Free tier: $0.10/мес, PRO: $2.00/мес
+- Ни одной бесплатной модели на router — все требуют биллинг
+
+**Вердикт:** С учётом 3 рабочих провайдеров (DeepSeek, NVIDIA NIM, Bluesminds) — HF не стоит усилий. $0.10/мес — слишком мало для практического использования.
+
+**Решения (если понадобится):**
+- **Вариант A:** VPN для доступа к `api-inference.huggingface.co` (бесплатный serverless)
+- **Вариант B:** Привязать карту — router с $0.10/мес free credits
+- **Вариант C:** Забить (рекомендовано)
+
+**Why:** HF был выбран как дополнительный провайдер с бесплатным доступом к мощным моделям. На практике — слишком много препятствий при мизерной выгоде.
+
+**How to apply:** Не тратить время на HF пока не появится VPN или необходимость в модели, недоступной у других провайдеров.

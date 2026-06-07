@@ -1,13 +1,13 @@
 ---
 name: Bluesminds Provider Setup
-description: Bluesminds ПОДКЛЮЧЁН 2026-06-07 — Qwen 3.5 397B, OpenAI-совместимый, trial-модели. API проверен curl-ом — работает.
+description: Bluesminds ПОДКЛЮЧЁН 2026-06-07 — Qwen 3.5 397B работает, но бывают таймауты (30s+), OpenAI-совместимый.
 type: reference
 ---
 
 **Bluesminds** — облачный AI-провайдер с trial-моделями. OpenAI-совместимый API.
 
 **Endpoint:** `https://api.bluesminds.com/v1`
-**Статус (2026-06-07):** ПОДКЛЮЧЁН. API проверен прямым curl — отвечает, ключ валидный. Провайдер в `.openclaude.json` как `provider_b1d2e3f4a5b6` (provider: "openai"). Требуется рестарт OpenClaude после восстановления `.openclaude.json` для появления в `/provider`.
+**Статус (2026-06-07):** ПОДКЛЮЧЁН, работает. API проверен curl-ом дважды — первый раз таймаут (exit code 28, >15s), второй раз с 30s таймаутом ответил "Hi there!" за 307ms. Провайдер рабочий, но нестабильный — требует увеличенных таймаутов.
 
 **Важно:** Bluesminds появляется в `/provider` только если запись есть в `.openclaude.json`. Если файл удалён — `/provider` зависнет на 30 секунд (см. `feedback/dot-openclaude-json-missing.md`).
 
@@ -17,7 +17,7 @@ type: reference
 
 | Модель | Параметры | Статус |
 |--------|-----------|--------|
-| qwen/qwen3.5-397b-a17b | 397B (17B active) | OK |
+| qwen/qwen3.5-397b-a17b | 397B (17B active) | OK (проверен 2026-06-07 chat completion) |
 | qwen3.6-27b | 27B | OK |
 | z-ai/glm-5.1 | — | OK |
 | gemini-3.1-pro | — | OK |
@@ -31,3 +31,11 @@ type: reference
 - `gpt-4o-mini` — Invalid model name
 
 **API ключ:** `sk-11jvXszGwDVJfKXClM4w2Um89JRecjoM2vAVoaDwMcfJCbFT`
+
+## Важно: не менять модель через /model на несуществующую
+
+**Симптом:** "API Error: Please wait a moment and try again."
+
+**Причина:** `/model` устанавливает модель глобально, но у каждого провайдера свой список моделей. Если после переключения на Bluesminds модель осталась `GPT-5.5 mini` (от другого провайдера) — Bluesminds вернёт ошибку.
+
+**Исправление:** `/model qwen/qwen3.5-397b-a17b` — вернуть правильную модель Bluesminds.
