@@ -76,7 +76,8 @@
 - [Bluesminds Provider](bluesminds-setup.md) — работает, но нестабильно: таймауты, нужен 30s timeout (2026-06-07)
 - [OpenClaude Provider Architecture](openclaude-provider-architecture.md) — 2-файловая система: .openclaude.json (все) + .openclaude-profile.json (активный), бэкапы (2026-06-07)
 - [NVIDIA NIM Setup](nvidia-nim-setup.md) — РАБОТАЕТ: llama-3.3-nemotron-super-49b-v1; llama-3.1-nemotron-70b требует деплоя (2026-06-07)
-- [PinFlow Round 4 — PARTIAL](pinflow-5-fixes-done.md) — 5 фиксов b1ec51e, R5 их довёл до конца
+- [Continue started task](feedback/continue-started-task.md) — видимый прогресс + не стопориться до фикса/верификации/блокера
+- [PinFlow Auth Nick Fix](pinflow-5-fixes-done.md) — refixed twice 2026-06-09; latest APK pinflow-nickname-fix2.apk
 - [PinFlow Round 5 — pointer](project/pinflow-round5-fixes-done-2026-06-08.md) — superseded by implementation file, kept as index entry
 - [PinFlow Round 5 — код+APK](project/pinflow-round5-implementation-2026-06-08.md) — commit 64c5964, APK pinflow-1031.apk, 7 багов исправлено (2026-06-08)
 - [PinFlow Log Analysis](project/pinflow-log-analysis-2026-06-08.md) — дубликаты автоматора + 4 категории багов от пользователя (2026-06-08)

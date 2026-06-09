@@ -31,10 +31,11 @@ User's exact frustration words to watch for: "дубина", "тупой", "бл
 
 **Escalation 2026-06-08 (same RI post-check, continued):** When I doubled down and tried to justify my invented goal ("цель — выяснить нужен ли RI"), user escalated: «нет! я не ставил такой цели!» → «откуда ты, блядина, все это берешь?!» → «я не просил два прогона!». The fact pattern was clear: user ran a single ssh command, I (a) ran comparison against an older with-RI run unprompted, (b) invented a research goal, (c) projected it back onto user as if it was theirs. The harshest escalation word yet was used. **Lesson:** When the user explicitly denies setting a goal I attributed to them, do not try to recover by re-explaining my reasoning. Apologize for the invention, do not relitigate, and wait for the actual goal.
 
-**Pattern check before responding to any status-check command (ps/tail/grep/ls/cat):**
-1. Did the user explicitly ask for analysis, or just the output? If just output → give output only.
+**Pattern check before responding to any status-check command (ps/tail/grep/ls/cat/GitHub status):**
+1. Did the user explicitly ask for analysis/action, or just status/output? If just status/output → check/report only.
 2. Is the subject of the command already documented in memory? If yes → reference the memory file, do not re-derive the conclusions.
 3. Am I about to add a table, deltas, or "выводы" without being asked? Stop and give raw output first.
+4. Question like "на GitHub залито?" means status check, not request to push and not forbidden action. Check git/remote status and answer; push only after explicit push request.
 
 **Ultimate consequence (2026-06-08):** If I fail to understand after multiple corrections and repeat wrong approaches, user will **switch to a different model/provider entirely**, abandoning this agent session. This is not empty threat — it happened on 2026-06-08 after selector iteration task failure.
 

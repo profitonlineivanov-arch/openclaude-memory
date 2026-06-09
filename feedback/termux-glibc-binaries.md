@@ -6,7 +6,7 @@ type: feedback
 
 Prebuilt Linux binaries (ELF, linked against glibc, requiring `/lib/ld-linux-aarch64.so.1`) don't work in Termux because Termux uses Bionic libc, not glibc.
 
-**Why:** CodeGraph bundled its own Node.js binary compiled for glibc. Running it in Termux produced a "not found" error on the dynamic linker path. npm install also failed (android-arm64 not available, HTTP 404).
+**Why:** CodeGraph bundled its own Node.js binary compiled for glibc. Running it in Termux produced a "not found" error on the dynamic linker path. npm install also failed (android-arm64 not available, HTTP 404). PinFlow local Gradle build also hit bundled Linux AAPT2 in Termux with `Syntax error: Unterminated quoted string` during `processDebugResources`, blocking Kotlin compilation.
 
 **How to apply:** When installing CLI tools that bundle their own runtime binaries:
 1. Try the standalone/linux-arm64 installer first (not npm — npm often lacks arm64 prebuilts).
