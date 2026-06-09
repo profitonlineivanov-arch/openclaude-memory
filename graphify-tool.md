@@ -1,23 +1,40 @@
 ---
-name: Graphify Knowledge Graph Tool
-description: safishamsi/graphify (PyPI: graphifyy) — knowledge graph builder, УСТАНОВЛЕН v0.8.33, работает (2026-06-07)
+name: CodeGraph
+description: colbymchenry/codegraph v0.9.9 — semantic code intelligence MCP server, замена Graphify (2026-06-09)
 type: reference
 ---
 
-**Что такое:** Инструмент для построения графа знаний из кодовой базы. Парсит код через tree-sitter (локально, без API), строит граф связей (функции, классы, импорты, комментарии). Выдаёт `graph.html` (визуализация), `GRAPH_REPORT.md`, `graph.json`.
+**Что такое:** Семантический инструмент анализа кода. Парсит через tree-sitter AST → SQLite + FTS5 → MCP-сервер. Заявлено: -58% tool calls, -16% cost, -47% tokens.
 
-**Ключевые возможности:**
-- MCP-сервер для структурированных запросов (`query_graph`, `get_node`, `get_neighbors`, `shortest_path`)
-- Auto-rebuild на git commit
-- PR dashboard, call-flow диаграммы
-- Совместим с Claude Code, Codex, Cursor и другими AI-ассистентами
+**Версия:** v0.9.9 (linux-arm64 bundle), установлен через standalone installer.
 
-**Установка:** `pip install graphifyy --user --timeout 300 --retries 10`, затем `graphify install` для регистрации в AI-ассистенте.
+**Установка:**
+- Путь: `~/.codegraph/versions/v0.9.9/`
+- Symlink: `~/.local/bin/codegraph → ~/.codegraph/versions/v0.9.9/bin/codegraph`
+- PATH: `~/.local/bin` добавлен в `.bashrc`
+- MCP регистрация: `~/.claude.json` (mcpServers.codegraph) + `~/.claude/settings.json` (permissions)
 
-**Termux-совместимость (РЕШЕНА 2026-06-07):**
-- Блокер 1: scipy → нужен Fortran. `apt install flang` (flang, mlir, libandroid-complex-math, libandroid-complex-math-static; 1241 MB).
-- Блокер 2: tree-sitter парсеры → `apt install tree-sitter` даёт `api.h`, создан compat `parser.h`.
-- Итог: graphifyy 0.8.33 УСТАНОВЛЕН. 11 tree-sitter парсеров работают (bash, c, c-sharp, fortran, go, javascript, lua, objc, powershell, python, swift). 14 парсеров НЕ собрались (cpp, elixir, groovy, java, json, julia, kotlin, php, ruby, rust, scala, typescript, verilog, zig) — старый API tree-sitter <0.22, нужен реген грамматик мейнтейнерами.
-- Команда: `python3 -m graphify` (не `graphify`, т.к. ~/.local/bin не в PATH).
+**Termux-фикс:** Shell shim `~/.codegraph/versions/v0.9.9/bin/codegraph` переписан: `exec node --liftoff-only "$DIR/lib/dist/bin/codegraph.js" "$@"` вместо `exec "$DIR/node"` (bundled Node — glibc, не работает в Termux/Bionic). Используется системный Node v24.15.0. Флаг `--liftoff-only` — обход V8 turboshaft WASM OOM (issues #293/#298).
 
-**Статус:** 2026-06-07 — установлен и работает.
+**MCP инструменты (8 штук):**
+- `codegraph_explore` — исследование кодовой базы
+- `codegraph_search` — поиск по AST
+- `codegraph_node` — информация об узле
+- `codegraph_callers` — кто вызывает функцию
+- `codegraph_callees` — что функция вызывает
+- `codegraph_impact` — impact analysis
+- `codegraph_files` — файлы проекта
+- `codegraph_status` — статус индекса
+
+**Проиндексированные проекты:**
+- `~/pinflow/` — 58 файлов, 744 узла, 1522 рёбра (Kotlin/Gradle)
+- 2x2, 1224, 4x20 — только на сервере, локально нечего индексировать
+
+**Команды:**
+- `codegraph init <dir>` — индексация проекта
+- `codegraph serve --mcp` — запуск MCP-сервера
+- `codegraph install -t claude -y --location global` — регистрация в Claude/OpenClaude
+
+**Why:** Graphify не работал (11/25 парсеров, не интегрирован, Kotlin не поддерживался). CodeGraph — нативная MCP интеграция, 20+ языков, авто-sync.
+
+**How to apply:** Индексация по одному проекту (`codegraph init <dir>`). Глобального индекса нет. Локально только PinFlow. MCP-инструменты доступны после перезапуска сессии OpenClaude.

@@ -72,7 +72,7 @@
 - [gh device flow in Termux](feedback/gh-device-flow-termux.md) — gh auth login запускает device flow в Termux, код нужно передать пользователю
 - [MCP Servers Catalog](mcp-servers-catalog.md) — 8 плагинов/MCP-серверов: Playwright, Chrome DevTools, Context7, Firecrawl, Security Guidance, Code Review, TS LSP, Frontend Design
 - [Claude Code Plugins](plugins-installed.md) — 8 плагинов установлено (2026-06-06)
-- [Graphify Tool](graphify-tool.md) — safishamsi/graphify: УСТАНОВЛЕН v0.8.33, 11/25 tree-sitter парсеров (2026-06-07)
+- [CodeGraph](graphify-tool.md) — colbymchenry/codegraph v0.9.9, MCP code intelligence, замена Graphify (2026-06-09)
 - [Bluesminds Provider](bluesminds-setup.md) — работает, но нестабильно: таймауты, нужен 30s timeout (2026-06-07)
 - [OpenClaude Provider Architecture](openclaude-provider-architecture.md) — 2-файловая система: .openclaude.json (все) + .openclaude-profile.json (активный), бэкапы (2026-06-07)
 - [NVIDIA NIM Setup](nvidia-nim-setup.md) — РАБОТАЕТ: llama-3.3-nemotron-super-49b-v1; llama-3.1-nemotron-70b требует деплоя (2026-06-07)
@@ -86,6 +86,7 @@
 - [PinFlow Instant Cycle Bug](project/pinflow-instant-cycle-bug.md) — автоматизация завершает цикл мгновенно (~2с, 0 задач), не в R4/R5 фиксах
 - [PinFlow Server Locations](project/pinflow-server-locations.md) — /root/pinflow (старая) vs /root/pinflow_scp/pinflow (актуальная с APK)
 - [Heavy pip install in Termux](feedback/termux-heavy-pip-install.md) — --user + --timeout 300 --retries 10 + background для крупных Python-пакетов
+- [Termux glibc binaries](feedback/termux-glibc-binaries.md) — ELF glibc binaries fail in Termux (Bionic); patch shims to use system tools
 - [Verify fixes by code](feedback/verify-fixes-by-code-not-commit.md) — не доверять "FIXED" в commit msg, проверять логику кода (PinFlow R2→R4: 4 бага "resolved" persist)
 - [.openclaude.json missing](feedback/dot-openclaude-json-missing.md) — /provider зависает на 30с с "Topsy-turvying" = .openclaude.json удалён, восстановить из backups/
 - [One canonical location](feedback/one-canonical-location.md) — не дублировать APK/файлы в несколько путей молча; одна локация = достаточно (2026-06-08)
@@ -94,4 +95,7 @@
 - [PinFlow — API v5 ≠ cookies](feedback/pinflow-web-endpoints.md) — cookies работают только с web /resource/... + CSRF. API v5/v1 требует OAuth (2026-06-08)
 - [Recorded rules must block](feedback/recorded-rules-must-block.md) — feedback-правила в memory должны реально блокировать поведение, а не лежать пассивно (2026-06-08)
 - [Don't extrapolate sub-tasks from prereqs](feedback/dont-extrapolate-subtasks-from-prereqs.md) — "изучи FOO.py" в prerequisite list ≠ "сделай прогон без FOO"; список файлов — это план, не подзадачи (2026-06-08)
-- [Hugging Face Provider](project/huggingface-provider-task.md) — УДАЛЁН: DNS + биллинг $0.10/мес (2026-06-07)
+- [CodeGraph Analysis](project/codegraph-analysis.md) — v0.9.9 installed, Termux-patched, pinflow indexed, MCP registered (2026-06-09)
+- [RTK Evaluated](rtk-evaluated.md) — rtk-ai/rtk CLI proxy для сжатия shell output, -60-90% токенов, НЕ code intelligence (2026-06-09)
+- [Caveman Evaluated](caveman-evaluated.md) — output compression plugin, -65% output токенов, поддерживает OpenClaude (2026-06-09)
+- [PinFlow Local Workflow](feedback/pinflow-local-workflow.md) — работать локально, сервер только для сборки, GitHub для хранения (2026-06-09)
