@@ -59,6 +59,7 @@ type: reference
 - **Ralph Loop** — избыточен (уже есть /loop + Agent tool)
 - **Figma** — только если проект использует Figma
 - **Linear** — только если используется Linear для задач
+- **Android-specific MCP** — не существует на рынке. Для Android-разработки (PinFlow) достаточно Context7 (доки Android SDK, Kotlin, OkHttp) + Chrome DevTools (отладка WebView). kotlin-language-server возможен, но сложен в Termux.
 
 ## Конфигурация `.mcp.json`
 

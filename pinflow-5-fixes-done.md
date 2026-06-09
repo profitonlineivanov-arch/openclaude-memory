@@ -1,20 +1,31 @@
 ---
-name: PinFlow 5 fixes done
-description: All 5 PinFlow fixes implemented, built, APK ready (2026-06-07)
+name: PinFlow Round 4 — username extraction + ImageParser fixes applied
+description: Username extraction FIXED (3-layer: URL-decode cookies, __PWS_DATA__ JS, HTTP OkHttp). ImageParser nullable chain + escape fixes. Commit b1ec51e, APK pinflow-1030.apk.
 type: project
 ---
 
-Все 5 замечаний исправлены и собраны:
+**Статус (2026-06-08 18:04):** Round 4 и Round 5 объединены в один коммит `64c5964`. APK `pinflow-1031.apk` собран и лежит в `~/storage/downloads/`. Подробности: [Round 5](project/pinflow-round5-fixes-done-2026-06-08.md). **Не протестировано на устройстве.**
 
-1. **Пагинация** — ImageParser.kt: цикл по страницам Pinterest через bookmark, остановка по maxCount или bookmark=null
-2. **Live-превью + сетка** — обновление каждые 5 изображений, кнопка 2/3/4 колонки в тулбаре
-3. **Дубликаты + чекбоксы** — getCollectionByName() в DAO, явный isSelectionMode в адаптере
-4. **Название коллекции** — асинхронная загрузка имени из БД в renderImageSources()
-5. **Статистика** — unfollows/errors в UI, SharedPreferences персистентность, total() с ошибками
+## Причина проблемы
+Username всегда был "PinterestUser" (fallback), потому что:
+1. Кука `_pinterest_sess` — URL-encoded JSON, не plain JSON
+2. `__INITIAL_STATE__.user.me` не существует на современном Pinterest
+3. После логина URL = `pinterest.com/` (homepage), а не профиль
 
-**Why:** Пользователь протестировал APK и выявил баги.
+## Решение (3 слоя, commit `b1ec51e`)
+1. **Cookie extraction** (`extractUsernameFromCookies`): URL-decode `_pinterest_sess`, поиск по 6 JSON полям (canonical_username, username, login_name, full_name, first_name, display_name)
+2. **Page JS parsing** (`extractUsernameFromPage`): добавлен `__PWS_DATA__` deep search + множественные пути
+3. **HTTP fallback** (`extractUsernameViaHttp`): OkHttp запрос homepage с куками, парсинг `__PWS_DATA__` JSON + рекурсивный `findUsernameInJson()`
 
-**How to apply:** APK собран и готов к установке: ~/storage/downloads/PinFlow-debug.apk (8.3 MB)
-Сервер: root@45.146.164.144:/root/pinflow_scp/pinflow/
-GitHub: запушено в profitonlineivanov-arch/pinflow, коммит 7961aeb "Исправление 5 багов после тестирования"
-Статус: APK установлен, пользователь тестирует (2026-06-07)
+## ImageParser.kt fixes (в том же коммите)
+- `"\/"` → `"/"` (illegal Kotlin escape)
+- `url?.replace().replace()` → `url?.replace()?.replace()` (nullable chain)
+- `urls.add(String?)` → `.let { urls.add(it) }` (type mismatch)
+
+## Коммиты
+- `47f3324` — 9 файлов, план 8+ исправлений
+- `280beec` — улучшенный HTML-парсинг following
+- `487714a` — фикс краша RecyclerView
+- `b1ec51e` — username extraction (3-layer) + ImageParser fixes
+
+APK: `pinflow-1030.apk` (8.3 MB) в `~/storage/downloads/`. Старый `pinflow_app-debug_20260608_1300.apk` удалён.

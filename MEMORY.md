@@ -1,5 +1,6 @@
 # Memory Index
 
+- [PinFlow APK Download Path](feedback/pinflow-apk-download-path.md) — use /sdcard/Download/ for APK delivery in Termux
 - [User - Влад](user-vlad.md) — lottery systems + PinFlow + hanma.ru, Telegram 409695834
 - [User Language](user-language.md) — пользователь общается на русском языке
 - [Russian-speaking user](user-language.md) — respond in Russian by default
@@ -52,7 +53,14 @@
 - [2x2 Dashboard Mobile Fix](project/2x2-dashboard-mobile-fix.md) — viewport + media queries для мобильных (2026-05-31)
 - [2x2 Favorable Periods](project/2x2-favorable-periods-task.md) — блочная подсветка благоприятных периодов с бейджами времени, 2 фазы (2026-05-31)
 - [Auto memory sync](feedback/auto-memory-sync.md) — память должна синхронизироваться автоматически через хуки SessionStart/SessionEnd
-- [2x2 Missing Predictions Filled](project/2x2-missing-predictions-filled.md) — заполнены 2 пропуска (#328350, #328379) через fill_missing.py (2026-05-31)
+- [2x2 Missing Predictions Filled](project/2x2-missing-predictions-filled.md) — восстановлены #328765, #328766 через fill_missing.py (2026-06-07)
+- [2x2 Selector Iterations](team/2x2-selector-iterations.md) — статистика: 98.2% = 1 итерация, max=7, бэкенд анализ (2026-06-07)
+- [Selector Iteration RE](project/selector-iteration-reverse-engineering.md) — анализ restarts для 1/2/3/4 совпадений: 2 запуска (с RI и без) на 10k тиражей (2026-06-08)
+- [Selector iteration uses full pipeline](selector-iteration-uses-full-pipeline.md) — анализ итераций требует ПОЛНЫЙ пайплайн Селектора, не упрощенную версию
+- [2x2 Selector Iteration Analysis Complete](team/2x2-selector-iteration-analysis.md) — restarts-based методология, 10k run launched on server 18:28 (2026-06-07)
+- [User communication when misunderstood](feedback/user-frustration-escalation.md) — escalation tier 3 = payment/refund demands; concrete pre-turn ritual for status-check tasks
+- [Don't invent task goals](feedback/dont-invent-task-goals.md) — выполняешь ssh/проверку без явной цели → спросить о цели, не придумывать мотивацию самому (2026-06-08)
+- [Don't reconstruct when denied](feedback/dont-reconstruct-when-denied.md) — пользователь отверг мою цель → «не знаю, скажи прямо», НЕ перечислять догадки (2026-06-08)
 - [Timing Feedback Mechanism](project/timing-feedback-mechanism.md) — feedback-цикл PLAY/WAIT accuracy + адаптивный порог (2026-05-31)
 - [Short-term variance](feedback/short-term-variance.md) — не интерпретировать 3-4 пропуска как сбой, лотерея случайна, нужна 90d статистика
 - [Triple Beam Settings Fixes](project/2x2-triple-beam-settings-fixes.md) — sum_percentile=0 теперь отключает фильтр сумм + HTML min="0" (2026-05-31)
@@ -68,7 +76,22 @@
 - [Bluesminds Provider](bluesminds-setup.md) — работает, но нестабильно: таймауты, нужен 30s timeout (2026-06-07)
 - [OpenClaude Provider Architecture](openclaude-provider-architecture.md) — 2-файловая система: .openclaude.json (все) + .openclaude-profile.json (активный), бэкапы (2026-06-07)
 - [NVIDIA NIM Setup](nvidia-nim-setup.md) — РАБОТАЕТ: llama-3.3-nemotron-super-49b-v1; llama-3.1-nemotron-70b требует деплоя (2026-06-07)
-- [PinFlow 5 fixes done](pinflow-5-fixes-done.md) — 5 багов исправлено, APK собран, готов к пушу на GitHub (2026-06-07)
+- [PinFlow Round 4 — PARTIAL](pinflow-5-fixes-done.md) — 5 фиксов b1ec51e, R5 их довёл до конца
+- [PinFlow Round 5 — pointer](project/pinflow-round5-fixes-done-2026-06-08.md) — superseded by implementation file, kept as index entry
+- [PinFlow Round 5 — код+APK](project/pinflow-round5-implementation-2026-06-08.md) — commit 64c5964, APK pinflow-1031.apk, 7 багов исправлено (2026-06-08)
+- [PinFlow Log Analysis](project/pinflow-log-analysis-2026-06-08.md) — дубликаты автоматора + 4 категории багов от пользователя (2026-06-08)
+- [PinFlow Round 2 Bugs — PARTIALLY FIXED](project/pinflow-round2-bugs.md) — 4 категории исправлены, но тест выявил 3 новых бага (2026-06-08)
+- [PinFlow Round 4 Bugs](project/pinflow-round4-bugs.md) — 4 бага от пользователя: парсинг 6/100, затемнение в коллекции, доски не грузятся, отписка+постинг сломаны (2026-06-08)
+- [PinFlow Round 6](project/pinflow-round6-bugs.md) — FIXES APPLIED: f5fd19e, APK pinflow-r6.apk, 5 bugs fixed (2026-06-08)
+- [PinFlow Instant Cycle Bug](project/pinflow-instant-cycle-bug.md) — автоматизация завершает цикл мгновенно (~2с, 0 задач), не в R4/R5 фиксах
+- [PinFlow Server Locations](project/pinflow-server-locations.md) — /root/pinflow (старая) vs /root/pinflow_scp/pinflow (актуальная с APK)
 - [Heavy pip install in Termux](feedback/termux-heavy-pip-install.md) — --user + --timeout 300 --retries 10 + background для крупных Python-пакетов
+- [Verify fixes by code](feedback/verify-fixes-by-code-not-commit.md) — не доверять "FIXED" в commit msg, проверять логику кода (PinFlow R2→R4: 4 бага "resolved" persist)
 - [.openclaude.json missing](feedback/dot-openclaude-json-missing.md) — /provider зависает на 30с с "Topsy-turvying" = .openclaude.json удалён, восстановить из backups/
+- [One canonical location](feedback/one-canonical-location.md) — не дублировать APK/файлы в несколько путей молча; одна локация = достаточно (2026-06-08)
+- [Kotlin in Python scripts](feedback/kotlin-in-python-scripts.md) — НЕ вставлять Kotlin-код в Python строки — писать в .kt файлы и читать из Python
+- [PinFlow — code edits authorized](feedback/pinflow-refuse-code-modifications.md) — user owns project, code edits + APK builds authorized when user requests
+- [PinFlow — API v5 ≠ cookies](feedback/pinflow-web-endpoints.md) — cookies работают только с web /resource/... + CSRF. API v5/v1 требует OAuth (2026-06-08)
+- [Recorded rules must block](feedback/recorded-rules-must-block.md) — feedback-правила в memory должны реально блокировать поведение, а не лежать пассивно (2026-06-08)
+- [Don't extrapolate sub-tasks from prereqs](feedback/dont-extrapolate-subtasks-from-prereqs.md) — "изучи FOO.py" в prerequisite list ≠ "сделай прогон без FOO"; список файлов — это план, не подзадачи (2026-06-08)
 - [Hugging Face Provider](project/huggingface-provider-task.md) — УДАЛЁН: DNS + биллинг $0.10/мес (2026-06-07)

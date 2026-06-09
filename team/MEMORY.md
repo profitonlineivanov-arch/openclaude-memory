@@ -7,3 +7,4 @@
 - [2x2 GitHub repo](2x2-github.md) — profitonlineivanov-arch/2x2.git, branch V8
 - [OpenClaude Memory Sync](openclaude-memory-sync.md) — GitHub sync: profitonlineivanov-arch/openclaude-memory
 - [Hugging Face Provider](huggingface-provider-setup.md) — УДАЛЁН из конфига: DNS + биллинг $0.10/мес (2026-06-07)
+- [2x2 Selector Iteration Analysis](2x2-selector-iteration-analysis.md) — оба 10k прогона завершены 2026-06-08, RI не даёт преимущества (без RI лучше на 3+ matches)
