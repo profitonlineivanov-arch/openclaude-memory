@@ -1,20 +1,18 @@
 ---
-name: PinFlow Board Loader Status
-description: Загрузка досок ИСПРАВЛЕНА (2026-06-10): Pinterest API требует bookmarks param, commit 71f5784
+name: PinFlow Board Loader — WORKING
+description: Board loader РАБОТАЕТ. Dual-stage: BoardsResource + individual BoardResource/get/, 3 коммита на GitHub (2026-06-10).
 type: project
 ---
 
-Загрузка досок ИСПРАВЛЕНА (2026-06-10).
+**Статус (2026-06-10, 22:07): ЗАВЕРШЕНО И ЗАПУШЕНО + NEW BUG**
 
-**Root cause:** Pinterest API `BoardResource/get/` стал требовать параметр `bookmarks` в options (для пагинации). Без него возвращает 400: `"Required arguments are missing"`. HTML fallback (`__PWS_DATA__` + regex) тоже не находил доски — структура JSON изменилась.
+**Commits на GitHub master:**
+- `9f08262` feat: dual-stage board loading with individual BoardResource fetch
+- `6582e7a` chore: update board selector title ("Выберите доску для автопостинга")
+- `a097047` chore: remove board manual input hint from PostSettings
 
-**Fix:** Добавлена строка `put("bookmarks", "")` в options запроса в `PostSettingsActivity.kt:183`. Commit `71f5784`.
+**Подтверждено пользователем:** последняя редакция результативна. Запушена.
 
-**Why:** API изменился на стороне Pinterest. Старый запрос без `bookmarks` перестал работать. Раньше работало без этого параметра.
+**NEW ISSUE (2026-06-10 22:02):** Автоматизация запускается, "Создание постов..." выводится, но дальше — тишина. Лог обрывается. possible causes: (1) images.isEmpty() → нет лога "Нет изображений", (2) завис на getPostImages() или createPin(), (3) onTaskComplete вызывается после первого поста и прекращает цикл. Нужны логи post-create и больше данных от пользователя.
 
-**How to apply:** При проблемах с загрузкой досок — проверять что API параметры соответствуют текущему Pinterest API (может меняться без уведомления). FileLogger в PostSettingsActivity пишет полные логи в `pinflow_log.txt`.
-
-**Синхронизация и сборка (2026-06-10):**
-- Local → GitHub → Server: commit `71f5784`
-- APK: `/sdcard/Download/pinflow-board-fix.apk` (8.8MB)
-- Старые APK удалены: pinflow-auth-hints.apk, pinflow-sync-auth.apk
+**Why:** Pinterest API требует двухэтапной загрузки: список досок (node_id) + индивидуальный запрос для каждого имени (board_id через Base64 decode).

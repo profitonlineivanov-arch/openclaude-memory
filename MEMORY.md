@@ -7,6 +7,7 @@
 - [Remote server](remote-server.md) — root@45.146.164.144 (не openclaw@!), 3 projects, passwordless SSH
 - [Remote Server Projects](remote-projects.md) — 2x2, 1224, 4x20 на сервере 45.146.164.144, Python/SQLite
 - [Termux /tmp issue](termux-tmp-issue.md) — Bash tool fails because /tmp doesn't exist in Termux
+- [Termux Android build impossible](feedback/termux-android-build-impossible.md) — AAPT2 x86_64 на aarch64, только сервер 45.146.164.144
 - [User communication style](user-style.md) — fast typos in Russian, casual tone, mobile keyboard
 - [Session continuity](session-continuity.md) — user resumes from crashed sessions, forwards other AIs' responses
 - [Multiple AI agents](user-multi-ai.md) — consults other AIs when one can't solve a problem
@@ -100,6 +101,8 @@
 - [RTK Evaluated](rtk-evaluated.md) — rtk-ai/rtk CLI proxy для сжатия shell output, -60-90% токенов, НЕ code intelligence (2026-06-09)
 - [Caveman Evaluated](caveman-evaluated.md) — output compression plugin, -65% output токенов, поддерживает OpenClaude (2026-06-09)
 - [PinFlow Local Workflow](feedback/pinflow-local-workflow.md) — работать локально, сервер только для сборки, GitHub для хранения (2026-06-09)
-- [PinFlow Board Loader Implementation](project/pinflow-board-loader-implementation.md) — Auth + boards WORKING, bookmarks param fix, commit 71f5784 (2026-06-10)
-- [PinFlow Board Loader Status](project/pinflow-board-loader-status.md) — board loading FIXED: Pinterest API requires bookmarks param (2026-06-10)
-- [Pinterest API bookmarks param](feedback/pinterest-api-bookmarks-param.md) — BoardResource API requires 'bookmarks' in options, returns 400 without it
+- [PinFlow Board Loader — WORKING](project/pinflow-board-loader-implementation.md) — dual-stage: BoardsResource + BoardResource/get/, 4 commits (включая detailed logging), GitHub master (2026-06-10)
+- [PinFlow Board Loader Status](project/pinflow-board-loader-status.md) — РАБОТАЕТ, подтверждено пользователем, 3 коммита запушены (2026-06-10)
+- [Pinterest 2-stage board loading](feedback/pinterest-api-bookmarks-param.md) — BoardsResource (список) → BoardResource/get/ с board_id (названия)
+- [Pinterest field_set_key](feedback/pinterest-field-set-key.md) — BoardsResource без field_set_key + BoardResource для имён (2026-06-10)
+- [Pinterest node_id decode](feedback/pinterest-node-id-decode.md) — base64 decode node_id → числовой board_id для BoardResource/get/ (2026-06-10)
