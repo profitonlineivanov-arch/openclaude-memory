@@ -1,25 +1,22 @@
 ---
-name: PinFlow Board Loader Implementation
-description: Загрузка досок Pinterest — фикс CSRF, логирование, APK и GitHub завершены (2026-06-10)
+name: PinFlow Board Loader + Auth Sync
+description: Auth + board loading both working (2026-06-10). Bookmarks param fix in BoardResource API, commit 71f5784
 type: project
 ---
 
-Загрузка досок Pinterest для постинга исправлена и завершена 2026-06-10.
+Auth hints и загрузка досок РАБОТАЮТ (2026-06-10).
 
-**Why:** Пользователь пробовал загрузку досок в PinFlow, но она не работала. Цель — дать выбрать доску аккаунта Pinterest для последующего постинга.
+**Board loading fix:** Pinterest API `BoardResource/get/` требует `bookmarks: ""` в options. Без него — 400 error. Добавлено в `PostSettingsActivity.kt:183`, commit `71f5784`.
 
-**How to apply:** Если пользователь продолжит тестировать этот участок, ориентироваться на этот результат как на последний завершённый раунд: APK `pinflow-boards.apk` собран на сервере, выгружен в `/sdcard/Download/`, изменения запушены на GitHub commit `8bb799f`.
+**Why:** Репозитории разошлись от `7961aeb`. Синхронизация через GitHub завершена (commit `a259302`), затем board fix (`71f5784`).
 
-**Сделано:**
-- Исправлен CSRF regex: было `csrfts3.` → стало `csrftoken=`.
-- Добавлено логирование: username, cookies length, CSRF prefix, API response, HTML response length, `__PWS_DATA__`, regex fallback, counts/errors.
-- Добавлены Toast-сообщения при пустых cookies/username.
-- Исправлены Gradle-настройки: убраны invalid AAPT2 overrides, сборка на сервере снова проходит.
-- Удалены старые fix-скрипты и старый APK-артефакт из репозитория.
+**How to apply:** При изменениях PinFlow — `git fetch origin` + `git merge`. GitHub — source of truth.
 
-**Методы загрузки:**
-1. API: `/resource/BoardResource/get/` + CSRF → `board_id` + `name`.
-2. HTML fallback: `__PWS_DATA__` JSON parsing.
-3. Regex fallback по board links.
+**Методы загрузки досок (PostSettingsActivity.kt:135-306):**
+1. API: `POST /resource/BoardResource/get/` + CSRF + `bookmarks: ""` → `board_id` + `name`
+2. HTML fallback: `__PWS_DATA__` JSON parsing (МОЖЕТ НЕ РАБОТАТЬ — структура изменилась)
+3. Regex fallback по board links
 
-**Статус:** server build `BUILD SUCCESSFUL`; APK лежит в `/sdcard/Download/pinflow-boards.apk`; GitHub `profitonlineivanov-arch/pinflow` обновлён commit `8bb799f`.
+**Known issues:**
+- Dirty build на сервере: `gradlew clean` перед `assembleDebug`
+- HTML fallback (метод 2+3) не находит доски — Pinterest изменил `__PWS_DATA__` JSON

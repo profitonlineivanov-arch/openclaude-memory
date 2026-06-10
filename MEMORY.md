@@ -100,5 +100,6 @@
 - [RTK Evaluated](rtk-evaluated.md) — rtk-ai/rtk CLI proxy для сжатия shell output, -60-90% токенов, НЕ code intelligence (2026-06-09)
 - [Caveman Evaluated](caveman-evaluated.md) — output compression plugin, -65% output токенов, поддерживает OpenClaude (2026-06-09)
 - [PinFlow Local Workflow](feedback/pinflow-local-workflow.md) — работать локально, сервер только для сборки, GitHub для хранения (2026-06-09)
-- [PinFlow Board Loader Implementation](project/pinflow-board-loader-implementation.md) — commit 8bb799f, APK pinflow-boards.apk, API + fallbacks (2026-06-10)
-- [PinFlow Board Loader Status](project/pinflow-board-loader-status.md) — загрузка досок завершена; если не работает, смотреть новые логи
+- [PinFlow Board Loader Implementation](project/pinflow-board-loader-implementation.md) — Auth + boards WORKING, bookmarks param fix, commit 71f5784 (2026-06-10)
+- [PinFlow Board Loader Status](project/pinflow-board-loader-status.md) — board loading FIXED: Pinterest API requires bookmarks param (2026-06-10)
+- [Pinterest API bookmarks param](feedback/pinterest-api-bookmarks-param.md) — BoardResource API requires 'bookmarks' in options, returns 400 without it

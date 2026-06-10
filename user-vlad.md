@@ -8,7 +8,7 @@ type: user
 
 Разрабатывает системы прогнозирования лотерей на основе метода "Три луча" (Triple Beam Analysis) и других анализаторов. Проекты расположены на удалённом сервере 45.146.164.144.
 
-Telegram ID: 409695834
+Telegram ID: 409695834. Интересуются режимом "каменный век", актуализация стиля подтверждена.
 
 Другие проекты:
 - **PinFlow** — Android Pinterest automator (Kotlin, Room DB, WorkManager). GitHub: profitonlineivanov-arch/pinflow (private). Клон: ~/pinflow/

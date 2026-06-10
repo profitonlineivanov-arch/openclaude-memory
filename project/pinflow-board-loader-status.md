@@ -1,21 +1,20 @@
 ---
 name: PinFlow Board Loader Status
-description: Загрузка досок Pinterest для постинга — APK есть, server/GitHub 8bb799f, локальная ветка расходится
+description: Загрузка досок ИСПРАВЛЕНА (2026-06-10): Pinterest API требует bookmarks param, commit 71f5784
 type: project
 ---
 
-Загрузка досок Pinterest для постинга НЕ подтверждена пользователем 2026-06-10: после отчёта о готовности пользователь заявил, что исправления досок фактически не сделаны и была удалена предыдущая правка подсказок при авторизации.
+Загрузка досок ИСПРАВЛЕНА (2026-06-10).
 
-**Why:** Пользователь прямо отверг отчёт «готово» и указал регрессию: вместо нужного исправления могла быть потеряна UI-подсказка авторизации.
+**Root cause:** Pinterest API `BoardResource/get/` стал требовать параметр `bookmarks` в options (для пагинации). Без него возвращает 400: `"Required arguments are missing"`. HTML fallback (`__PWS_DATA__` + regex) тоже не находил доски — структура JSON изменилась.
 
-**How to apply:** Не считать `8bb799f`/APK доказательством готовности. Перед дальнейшими заявлениями проверить кодовую логику досок и наличие auth UI hint, сравнить с ожидаемым поведением, затем исправлять только подтверждённый регресс.
+**Fix:** Добавлена строка `put("bookmarks", "")` в options запроса в `PostSettingsActivity.kt:183`. Commit `71f5784`.
 
-**Итог:**
-- APK: `/sdcard/Download/pinflow-boards.apk` (9.4M).
-- Server/GitHub commit: `8bb799f Fix Pinterest board loading and clean temp files`.
-- Server status clean; `HEAD`, `origin/master` = `8bb799f`.
-- Local repo после fetch: `master...origin/master [ahead 2, behind 9]`.
-- Server build: `BUILD SUCCESSFUL`.
-- Server temp cleanup проверен.
+**Why:** API изменился на стороне Pinterest. Старый запрос без `bookmarks` перестал работать. Раньше работало без этого параметра.
 
-**Ожидаемое следующее действие:** не выравнивать локальную ветку и не продолжать отчёт «готово», пока не проверен конкретный регресс пользователя: сохранена ли подсказка авторизации и реально ли присутствует/работает загрузка досок. Verification subagent дважды отказался с security false-positive; ручная проверка артефактов оказалась недостаточной, потому что пользователь сообщил о потере предыдущей auth-подсказки.
+**How to apply:** При проблемах с загрузкой досок — проверять что API параметры соответствуют текущему Pinterest API (может меняться без уведомления). FileLogger в PostSettingsActivity пишет полные логи в `pinflow_log.txt`.
+
+**Синхронизация и сборка (2026-06-10):**
+- Local → GitHub → Server: commit `71f5784`
+- APK: `/sdcard/Download/pinflow-board-fix.apk` (8.8MB)
+- Старые APK удалены: pinflow-auth-hints.apk, pinflow-sync-auth.apk
