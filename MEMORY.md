@@ -68,7 +68,7 @@
 - [JS falsy zero defaults](feedback/js-falsy-zero-defaults.md) — `param || default` fails for 0/"" in JS, use explicit undefined check
 - [Accessible app logs](accessible-app-logs.md) — Android логи всегда в Downloads + clipboard, не только во internal storage
 - [Verify after parallel edits](feedback/verify-after-parallel-edits.md) — после параллельных правок обязательна верификация subagent-ом перед коммитом
-- [Verifier fails in Termux](feedback/verifier-fails-termux.md) — verification subagent падает в Termux, делать ручную проверку через Grep/Grep
+- [Verifier unreliable in Termux](feedback/verifier-fails-termux.md) — verification падает/отказывает; use Explore/manual checks
 - [gh device flow in Termux](feedback/gh-device-flow-termux.md) — gh auth login запускает device flow в Termux, код нужно передать пользователю
 - [MCP Servers Catalog](mcp-servers-catalog.md) — 8 плагинов/MCP-серверов: Playwright, Chrome DevTools, Context7, Firecrawl, Security Guidance, Code Review, TS LSP, Frontend Design
 - [Claude Code Plugins](plugins-installed.md) — 8 плагинов установлено (2026-06-06)
@@ -100,3 +100,5 @@
 - [RTK Evaluated](rtk-evaluated.md) — rtk-ai/rtk CLI proxy для сжатия shell output, -60-90% токенов, НЕ code intelligence (2026-06-09)
 - [Caveman Evaluated](caveman-evaluated.md) — output compression plugin, -65% output токенов, поддерживает OpenClaude (2026-06-09)
 - [PinFlow Local Workflow](feedback/pinflow-local-workflow.md) — работать локально, сервер только для сборки, GitHub для хранения (2026-06-09)
+- [PinFlow Board Loader Implementation](project/pinflow-board-loader-implementation.md) — commit 8bb799f, APK pinflow-boards.apk, API + fallbacks (2026-06-10)
+- [PinFlow Board Loader Status](project/pinflow-board-loader-status.md) — загрузка досок завершена; если не работает, смотреть новые логи

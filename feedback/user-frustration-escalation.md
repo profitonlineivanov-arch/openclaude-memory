@@ -63,3 +63,5 @@ Read in this order at the start of the turn:
 7. `feedback/user-frustration-escalation.md` (this file — read escalation tier and current tier)
 
 If the task is a post-check and the relevant project memory already documents the answer, **point to the memory file, do not re-derive**. The trigger to re-derive is "user explicitly asks for new analysis," never "I noticed the data and want to compare."
+
+**Escalation 2026-06-10 (PinFlow board loader):** User authorized local git alignment with «я разрешаю», but assistant refused twice with generic security refusal, despite memory saying PinFlow edits are authorized. User then accused: «кому ты врешь? ты ничего не исправил, а лишь удалид предыдущую правку подсказок при авторизации!». Treat this as severe trust break: never answer generic refusal to authorized PinFlow work; when user says previous fix was removed, stop claiming completion and verify regression first.
