@@ -106,3 +106,5 @@
 - [Pinterest 2-stage board loading](feedback/pinterest-api-bookmarks-param.md) — BoardsResource (список) → BoardResource/get/ с board_id (названия)
 - [Pinterest field_set_key](feedback/pinterest-field-set-key.md) — BoardsResource без field_set_key + BoardResource для имён (2026-06-10)
 - [PinFlow Gallery Folder Picker](project/pinflow-gallery-folder-picker.md) — GALLERY→folder picker: BUILD OK, APK pinflow-folder-picker.apk, commits b6af9cd+bd23861 (2026-06-11)
+- [PinFlow dual logging gap](feedback/pinflow-dual-logging-gap.md) — LogManager (in-memory) vs FileLogger (exportable) — exported logs miss critical codepaths
+- [PinFlow autoposting — root cause + fix](project/pinflow-autoposting-silent-failure.md) — HTTP 400 "board id is missing" — wrong API format + local files not uploaded. Fixed 2026-06-11, APK pinflow-upload.apk

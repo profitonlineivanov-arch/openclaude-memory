@@ -11,7 +11,7 @@ type: feedback
 **How to apply:**
 - Для доски: `BASE_URL/resource/UserResource/getBoardsResource/` (web)
 - Для отписки: `BASE_URL/resource/UserFollowResource/delete/` (web) с `Content-Type: application/json` (R6 fix: был `UserResource/delete/` = удаление аккаунта!)
-- Для постинга: `BASE_URL/resource/PinResource/create/` (web) с form-urlencoded (`source_url`, `title`, `description`, `board_id`, `link`)
+- Для постинга: `BASE_URL/resource/PinResource/create/` (web) с form-urlencoded. Тело: `source_url=/<username>/pin-builder/&data={"options":{"board_id":"...","title":"...","description":"...","image_url":"...","link":"..."},"context":{}}`. Изображение сначала загружается multipart на `/upload-image/`, потом image_url передаётся в data.options.
 - Для лайка: `BASE_URL/resource/PinResource/like/` или `PinResource/unlike/`
 - **Все web-эндпоинты требуют CSRF:** `csrftoken=...` из cookies → header `X-CSRFToken: <token>`
 - Параллельно нужен `X-Requested-With: XMLHttpRequest` и `Content-Type: application/x-www-form-urlencoded`

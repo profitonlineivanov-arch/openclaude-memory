@@ -5,6 +5,7 @@ type: project
 ---
 
 **Обнаружено:** 2026-06-08 (лог 2026-06-05), подтверждено 2026-06-11 (лог 2026-06-11 07:39)
+**Статус:** ЧАСТИЧНО ИСПРАВЛЕН (2/3). Баги 1+2 исправлены в b6af9cd + bd23861. Баг 3 (COLLECTION/ImageParser) остаётся.
 
 **Симптом:** После запуска автоматизации цикл завершается за ~2 секунды с 0 выполненными задачами:
 ```
@@ -16,12 +17,14 @@ type: project
 
 **Корневая причина — 3 разных бага:**
 
-### Баг 1: GALLERY source — content:// URI не конвертится в file path — **FIXED 2026-06-11**
+### Баг 1: GALLERY source — content:// URI не конвертится в file path — **FIXED b6af9cd+bd23861 (2026-06-11)**
 - `PostSettingsActivity.addImageFromGallery()` сохраняла `uri.toString()` — `content://media/...`
 - `PinterestAutomator.getPostImages()`: `File(source.value).exists()` → всегда false
 - **Фикс:** заменён на folder picker + копирование content URI в `filesDir/gallery_images/` через ContentResolver
+- **Commit:** b6af9cd (folder picker), bd23861 (missing FileLogger import fix)
+- **APK:** `/sdcard/Download/pinflow-folder-picker.apk`
 
-### Баг 2: ImageDownloader — молча глотает ошибки — **FIXED 2026-06-11**
+### Баг 2: ImageDownloader — молча глотает ошибки — **FIXED b6af9cd (2026-06-11)**
 - `ImageDownloader.downloadImage()` — ни одного лога (строка 51: `catch (e: Exception) { null }`)
 - Любой сбой (HTTP 404, таймаут, disk full) — возвращает null без следа
 - **Фикс:** добавлены логи в ImageDownloader (start, HTTP fail, zero bytes, success, exception)
@@ -37,7 +40,7 @@ type: project
 - ImageParser page=1: 80 URL, exhausted=true, bookmark=null
 - Автоматор: "Task complete: false - Нет изображений"
 
-**Статус:** НЕ ИСПРАВЛЕН — подтверждён в логе 2026-06-11.
+**Статус:** ЧАСТИЧНО ИСПРАВЛЕН — Баг 3 (COLLECTION/ImageParser) подтверждён в логе 2026-06-11.
 
 **Why:** Два независимых лога с разными APK показывают одинаковый симптом. Auth работает, доски грузятся, но изображения не доходят до постинга.
 
