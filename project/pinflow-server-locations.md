@@ -6,7 +6,7 @@ type: project
 
 **Актуальный проект:** `/root/pinflow_scp/` (проверено 2026-06-11)
 - Полная структура проекта на верхнем уровне: `app/`, `build.gradle`, `gradlew`, `settings.gradle`, `local.properties`, `gradle.properties`
-- **НЕ git-репо** — нет `.git/`. Код заливается через SCP отдельных файлов, сборка через `./gradlew assembleDebug` прямо в этом каталоге.
+- **НЕ git-репо** — нет `.git/` (подтверждено 2026-06-11: `fatal: not a git repository`). Код заливается через SCP отдельных файлов, сборка через `./gradlew assembleDebug` прямо в этом каталоге. `git pull` на сервере НЕ работает.
 - Также есть подкаталог `/root/pinflow_scp/pinflow/` — может содержать старую копию, не использовать для сборки.
 
 **SDK:** `/opt/android-sdk/` (НЕ `/root/Android/Sdk/`)

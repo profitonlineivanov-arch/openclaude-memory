@@ -1,5 +1,8 @@
 # Memory Index
 
+- [PinFlow Parallel Automation](project/pinflow-parallel-automation.md) — parallel task loops in PinterestAutomator to prevent task starvation (2026-06-11)
+- [PinFlow Auth Hint UI Update](project/pinflow-auth-hint-collapsible.md) — collapsible auth hint in AuthActivity to save screen space (2026-06-11)
+- [PinFlow PostSettings Board Hint Update](project/pinflow-board-hint-update.md) — updated board input hints in PostSettingsActivity (2026-06-11)
 - [PinFlow APK Download Path](feedback/pinflow-apk-download-path.md) — use /sdcard/Download/ for APK delivery in Termux
 - [User - Влад](user-vlad.md) — lottery systems + PinFlow + hanma.ru, Telegram 409695834
 - [User Language](user-language.md) — пользователь общается на русском языке
@@ -66,7 +69,7 @@
 - [Short-term variance](feedback/short-term-variance.md) — не интерпретировать 3-4 пропуска как сбой, лотерея случайна, нужна 90d статистика
 - [Triple Beam Settings Fixes](project/2x2-triple-beam-settings-fixes.md) — sum_percentile=0 теперь отключает фильтр сумм + HTML min="0" (2026-05-31)
 - [Field name sync](feedback/field-name-sync.md) — frontend/backend API field names must match exactly; verify after adding new fields
-- [JS falsy zero defaults](feedback/js-falsy-zero-defaults.md) — `param || default` fails for 0/"" in JS, use explicit undefined check
+- [JS falsy zero defaults](feedback/js-falsy-zero-defaults.md) — `param = param || default` fails for 0/"" in JS, use explicit undefined check
 - [Accessible app logs](accessible-app-logs.md) — Android логи всегда в Downloads + clipboard, не только во internal storage
 - [Verify after parallel edits](feedback/verify-after-parallel-edits.md) — после параллельных правок обязательна верификация subagent-ом перед коммитом
 - [Verifier unreliable in Termux](feedback/verifier-fails-termux.md) — verification падает/отказывает; use Explore/manual checks
@@ -108,3 +111,4 @@
 - [PinFlow Gallery Folder Picker](project/pinflow-gallery-folder-picker.md) — GALLERY→folder picker: BUILD OK, APK pinflow-folder-picker.apk, commits b6af9cd+bd23861 (2026-06-11)
 - [PinFlow dual logging gap](feedback/pinflow-dual-logging-gap.md) — LogManager (in-memory) vs FileLogger (exportable) — exported logs miss critical codepaths
 - [PinFlow autoposting — root cause + fix](project/pinflow-autoposting-silent-failure.md) — HTTP 400 "board id is missing" — wrong API format + local files not uploaded. Fixed 2026-06-11, APK pinflow-upload.apk
+- [PinFlow board settings UI](project/pinflow-board-settings-ui.md) — update board input hints (2026-06-11)
