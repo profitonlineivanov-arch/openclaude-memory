@@ -85,8 +85,8 @@
 - [PinFlow Round 2 Bugs — PARTIALLY FIXED](project/pinflow-round2-bugs.md) — 4 категории исправлены, но тест выявил 3 новых бага (2026-06-08)
 - [PinFlow Round 4 Bugs](project/pinflow-round4-bugs.md) — 4 бага от пользователя: парсинг 6/100, затемнение в коллекции, доски не грузятся, отписка+постинг сломаны (2026-06-08)
 - [PinFlow Round 6](project/pinflow-round6-bugs.md) — FIXES APPLIED: f5fd19e, APK pinflow-r6.apk, 5 bugs fixed (2026-06-08)
-- [PinFlow Instant Cycle Bug](project/pinflow-instant-cycle-bug.md) — автоматизация завершает цикл мгновенно (~2с, 0 задач), не в R4/R5 фиксах
-- [PinFlow Server Locations](project/pinflow-server-locations.md) — /root/pinflow (старая) vs /root/pinflow_scp/pinflow (актуальная с APK)
+- [PinFlow Instant Cycle Bug](project/pinflow-instant-cycle-bug.md) — автоматизация ~2c, GALLERY content:// + ImageDownloader silent fail, не исправлен
+- [PinFlow Server Locations](project/pinflow-server-locations.md) — проект /root/pinflow_scp/, SDK /opt/android-sdk/, local.properties=sdk.dir=/opt/android-sdk (2026-06-11)
 - [Heavy pip install in Termux](feedback/termux-heavy-pip-install.md) — --user + --timeout 300 --retries 10 + background для крупных Python-пакетов
 - [Termux glibc binaries](feedback/termux-glibc-binaries.md) — ELF glibc binaries fail in Termux (Bionic); patch shims to use system tools
 - [Verify fixes by code](feedback/verify-fixes-by-code-not-commit.md) — не доверять "FIXED" в commit msg, проверять логику кода (PinFlow R2→R4: 4 бага "resolved" persist)
@@ -100,9 +100,9 @@
 - [CodeGraph Analysis](project/codegraph-analysis.md) — v0.9.9 installed, Termux-patched, pinflow indexed, MCP registered (2026-06-09)
 - [RTK Evaluated](rtk-evaluated.md) — rtk-ai/rtk CLI proxy для сжатия shell output, -60-90% токенов, НЕ code intelligence (2026-06-09)
 - [Caveman Evaluated](caveman-evaluated.md) — output compression plugin, -65% output токенов, поддерживает OpenClaude (2026-06-09)
-- [PinFlow Local Workflow](feedback/pinflow-local-workflow.md) — работать локально, сервер только для сборки, GitHub для хранения (2026-06-09)
+- [PinFlow Local Workflow](feedback/pinflow-local-workflow.md) — перед сборкой сверять local↔server (gradle.properties, local.properties, imports) (2026-06-11)
 - [PinFlow Board Loader — WORKING](project/pinflow-board-loader-implementation.md) — dual-stage: BoardsResource + BoardResource/get/, 4 commits (включая detailed logging), GitHub master (2026-06-10)
 - [PinFlow Board Loader Status](project/pinflow-board-loader-status.md) — РАБОТАЕТ, подтверждено пользователем, 3 коммита запушены (2026-06-10)
 - [Pinterest 2-stage board loading](feedback/pinterest-api-bookmarks-param.md) — BoardsResource (список) → BoardResource/get/ с board_id (названия)
 - [Pinterest field_set_key](feedback/pinterest-field-set-key.md) — BoardsResource без field_set_key + BoardResource для имён (2026-06-10)
-- [Pinterest node_id decode](feedback/pinterest-node-id-decode.md) — base64 decode node_id → числовой board_id для BoardResource/get/ (2026-06-10)
+- [PinFlow Gallery Folder Picker](project/pinflow-gallery-folder-picker.md) — GALLERY→folder picker: BUILD OK, APK pinflow-folder-picker.apk, commits b6af9cd+bd23861 (2026-06-11)

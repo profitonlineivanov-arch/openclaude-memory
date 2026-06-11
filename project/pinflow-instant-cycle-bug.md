@@ -1,10 +1,10 @@
 ---
 name: PinFlow Instant Cycle Bug
-description: Автоматизация завершает цикл мгновенно (~2с, 0 задач) — найдено в логе 2026-06-05, не в списке R4/R5 фиксов
+description: Автоматизация завершает цикл мгновенно (~2с, 0 задач) — подтверждено в 2 логах + root cause
 type: project
 ---
 
-**Обнаружено:** 2026-06-08, анализ лога `pinflow_log.txt` (сессия 2026-06-05 13:39–13:41)
+**Обнаружено:** 2026-06-08 (лог 2026-06-05), подтверждено 2026-06-11 (лог 2026-06-11 07:39)
 
 **Симптом:** После запуска автоматизации цикл завершается за ~2 секунды с 0 выполненными задачами:
 ```
@@ -14,13 +14,31 @@ type: project
 13:41:40.612  Цикл завершён
 ```
 
-**Возможные причины:**
-- Задачи не настроены (пустой список задач)
-- Парсер досок/пинов возвращает пустой список
-- Автоматизация не находит действий для выполнения
+**Корневая причина — 3 разных бага:**
 
-**Статус:** НЕ ИСПРАВЛЕН — не входит в R4/R5 фиксы (commit 64c5964). Нужен свежий лог с pinflow-1031.apk для проверки.
+### Баг 1: GALLERY source — content:// URI не конвертится в file path — **FIXED 2026-06-11**
+- `PostSettingsActivity.addImageFromGallery()` сохраняла `uri.toString()` — `content://media/...`
+- `PinterestAutomator.getPostImages()`: `File(source.value).exists()` → всегда false
+- **Фикс:** заменён на folder picker + копирование content URI в `filesDir/gallery_images/` через ContentResolver
 
-**Why:** Пользователь выгрузил лог — это первый сигнал о проблеме. До R5 фиксов username был "PinterestUser" (fallback), что могло влиять на загрузку досок/пинов.
+### Баг 2: ImageDownloader — молча глотает ошибки — **FIXED 2026-06-11**
+- `ImageDownloader.downloadImage()` — ни одного лога (строка 51: `catch (e: Exception) { null }`)
+- Любой сбой (HTTP 404, таймаут, disk full) — возвращает null без следа
+- **Фикс:** добавлены логи в ImageDownloader (start, HTTP fail, zero bytes, success, exception)
 
-**How to apply:** При анализе свежего лога с pinflow-1031.apk — проверить, воспроизводится ли instant cycle. Если да — копать в `PinterestAutomator.kt` (логика выбора задач).
+### Баг 3: COLLECTION — ImageParser не всегда скачивает — **НЕ ИСПРАВЛЕН**
+- `ImageParser` находит URL (regex), но не видно логов вызова `downloadImage`
+- В логе 2026-06-11: 80 URL найдены, 0 скачаны, `exhausted=true`, `nextBookmark=null`
+- bookmarks могут быть null с первой страницы — парсер считает источник исчерпанным
+
+**Лог 2026-06-11:**
+- Auth работает (Soulexpert), CSRF токен есть
+- Загружено 47 досок
+- ImageParser page=1: 80 URL, exhausted=true, bookmark=null
+- Автоматор: "Task complete: false - Нет изображений"
+
+**Статус:** НЕ ИСПРАВЛЕН — подтверждён в логе 2026-06-11.
+
+**Why:** Два независимых лога с разными APK показывают одинаковый симптом. Auth работает, доски грузятся, но изображения не доходят до постинга.
+
+**How to apply:** При фиксах — менять в 3 местах: (1) PostSettingsActivity — GALLERY URI→file, (2) ImageDownloader — добавить логи, (3) ImageParser — проверить bookmark логику. И удалить URL source из enum.
