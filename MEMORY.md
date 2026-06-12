@@ -111,4 +111,8 @@
 - [PinFlow Gallery Folder Picker](project/pinflow-gallery-folder-picker.md) — GALLERY→folder picker: BUILD OK, APK pinflow-folder-picker.apk, commits b6af9cd+bd23861 (2026-06-11)
 - [PinFlow dual logging gap](feedback/pinflow-dual-logging-gap.md) — LogManager (in-memory) vs FileLogger (exportable) — exported logs miss critical codepaths
 - [PinFlow autoposting — root cause + fix](project/pinflow-autoposting-silent-failure.md) — HTTP 400 "board id is missing" — wrong API format + local files not uploaded. Fixed 2026-06-11, APK pinflow-upload.apk
-- [PinFlow board settings UI](project/pinflow-board-settings-ui.md) — update board input hints (2026-06-11)
+- [PinFlow Board Settings UI](project/pinflow-board-settings-ui.md) — update board input hints (2026-06-11)
+- [Pinterest createPin two-stage](feedback/pinterest-create-pin-two-stage.md) — upload multipart → PinResource/create/ with source_url+data
+- [Pinterest internal resource API pattern](feedback/pinterest-internal-resource-api-pattern.md) — all /resource/ endpoints need POST+source_url+data, not GET query params
+- [PinFlow Unfollow Zero](project/pinflow-unfollow-zero.md) — FollowingResource returns HTML not JSON; need WebView or real API endpoint (2026-06-12)
+- [Stale gradle intermediates](feedback/gradle-stale-intermediates.md) — interrupted builds → NoSuchFileException; fix: clean + assembleDebug (2026-06-12)
