@@ -1,8 +1,4 @@
 {
-  "env": {
-    "TMPDIR": "/data/data/com.termux/files/home/tmp",
-    "CLAUDE_CODE_TMPDIR": "/data/data/com.termux/files/home/tmp"
-  },
   "model": "mimo-v2.5-pro",
   "hooks": {
     "SessionStart": [
