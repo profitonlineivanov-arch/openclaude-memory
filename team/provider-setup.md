@@ -13,6 +13,8 @@ description: AI провайдеры на 2026-06-08: Gitlawb Opengateway (те�
 
 **Важно:** У каждого провайдера СВОЙ список моделей. `/model` устанавливает модель глобально — после смены провайдера модель от предыдущего может вызвать API-ошибку.
 
+**New device bootstrap:** Начинать с DeepSeek — дешевле всех, стабильный, `deepseek-v4-pro`. Достаточно одного провайдера для старта.
+
 **How to switch:**
 - `/provider` — cycle through configured providers
 - `/model <id>` — switch model within current provider (осторожно: не ставить модель от другого провайдера)
