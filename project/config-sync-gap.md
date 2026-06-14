@@ -1,6 +1,6 @@
 ---
-name: Config sync not implemented
-description: User wants settings/providers/plugins/skills/MCP to sync across devices — currently only memory/ syncs via GitHub
+name: Config sync RESOLVED
+description: configs synced via sync.sh + configs/ in memory repo (settings.local.json excluded — contains API keys)
 type: project
 ---
 
@@ -14,10 +14,12 @@ type: project
 
 **Что работает:** memory/ (hooks SessionStart/SessionEnd через sync.sh).
 
-**Решено — вариант 3 (2026-06-14):**
-- `configs/` в memory repo: `.openclaude.json`, `.openclaude-profile.json`, `settings.json`, `settings.local.json` — git-tracked
+**РЕШЕНО (2026-06-14):**
+- `configs/` в memory repo: `.openclaude.json`, `.openclaude-profile.json`, `settings.json` — git-tracked
+- `settings.local.json` исключён из репо (содержит API-ключи в curl-командах permissions, GitHub push protection блокирует)
 - `sync.sh` расширен: pull/push/sync с copy_configs_to_oc + copy_configs_from_oc
-- Хуки в settings.json: SessionStart = `git pull --rebase`, SessionEnd = `bash sync.sh`
+- Хуки в settings.json: SessionStart = `sync.sh pull` (git pull + copy_configs_to_oc), SessionEnd = `sync.sh` (full sync)
+- История репо переписана для удаления секретов (force push)
 
 **Why:** Пользователь работает на desktop + mobile (Termux), хочет единое окружение.
 **How to apply:** Работает. Конфиги синхронизируются автоматически при старте/конце сессии.
