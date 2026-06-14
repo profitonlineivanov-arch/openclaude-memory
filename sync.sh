@@ -11,6 +11,7 @@ copy_configs_to_oc() {
     [ -f "$CONFIGS/settings.json" ] && cp "$CONFIGS/settings.json" "$OC_DIR/settings.json"
     [ -f "$CONFIGS/settings.local.json" ] && cp "$CONFIGS/settings.local.json" "$OC_DIR/settings.local.json"
     [ -f "$CONFIGS/.openclaude-profile.json" ] && cp "$CONFIGS/.openclaude-profile.json" "$OC_DIR/.openclaude-profile.json"
+    [ -f "$CONFIGS/memory-sync.sh" ] && cp "$CONFIGS/memory-sync.sh" "$OC_DIR/memory-sync.sh" && chmod +x "$OC_DIR/memory-sync.sh"
 }
 
 copy_configs_from_oc() {

@@ -10,7 +10,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "cd /data/data/com.termux/files/home/.openclaude/projects/-data-data-com-termux-files-home/memory && bash sync.sh pull 2>/dev/null",
+            "command": "bash ~/.openclaude/memory-sync.sh pull 2>/dev/null",
             "statusMessage": "Syncing memory..."
           }
         ]
@@ -21,7 +21,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "cd /data/data/com.termux/files/home/.openclaude/projects/-data-data-com-termux-files-home/memory && bash sync.sh 2>/dev/null",
+            "command": "bash ~/.openclaude/memory-sync.sh 2>/dev/null",
             "statusMessage": "Saving memory..."
           }
         ]
