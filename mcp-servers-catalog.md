@@ -1,69 +1,28 @@
 ---
 name: Plugins & MCP Servers Catalog
-description: 9 плагинов + 3 MCP-сервера: Playwright, Chrome DevTools, Context7, Firecrawl, Security Guidance, Code Review, TypeScript LSP, Frontend Design, Caveman, CodeGraph
+description: 8 плагинов + 3 MCP-сервера (Playwright, Chrome DevTools, caveman-shrink). Провайдеры ВОССТАНОВЛЕНЫ из configs/. CodeGraph — Termux only.
 type: reference
 ---
 
-## Установленные плагины (2026-06-06, Caveman 2026-06-09)
+## Текущее состояние (2026-06-14)
 
-Всего 9.
+### Плагины (8)
+1. **context7@claude-plugins-official** — документация библиотек
+2. **firecrawl@claude-plugins-official** — веб-скрейпинг (v1.0.9)
+3. **security-guidance@claude-plugins-official** — проверка уязвимостей (v2.0.6)
+4. **code-review@claude-plugins-official** — мульти-агентное ревью PR
+5. **typescript-lsp@claude-plugins-official** — IntelliSense TS/JS (v1.0.0)
+6. **frontend-design@claude-plugins-official** — улучшение UI
+7. **playwright@claude-plugins-official** — управление браузером (установлен 2026-06-14)
+8. **caveman@caveman** — output compression (25d22f8)
 
-### MCP-серверы (в `.mcp.json`)
+### MCP-серверы
 
-**1. Playwright** — управление браузером, автоматизация
-**2. Chrome DevTools** — отладка Chrome, DOM, сеть
+**`.mcp.json`:** playwright + chrome-devtools (создан 2026-06-14)
+**`.openclaude.json`:** caveman-shrink (добавлен 2026-06-14)
 
-### MCP-серверы (через плагины / отдельно)
+### Провайдеры (ВОССТАНОВЛЕНЫ 2026-06-14)
+4 провайдера восстановлены из `configs/` memory-репо: Gitlawb Opengateway, DeepSeek, NVIDIA NIM, Bluesminds.
 
-**3. Context7** — документация библиотек
-**4. Firecrawl** — веб-скрейпинг (v1.0.8, требует FIRECRAWL_API_KEY)
-**5. CodeGraph** — семантический граф кода (в `~/.claude.json`, не в `.mcp.json`)
-**6. caveman-shrink** — сжатие описаний MCP-инструментов (в `~/.openclaude.json`)
-
-### Хуки
-
-**7. Security Guidance** — проверка на уязвимости перед применением
-**8. Caveman** — output compression (-65% токенов), SessionStart + UserPromptSubmit hooks
-
-### Агенты
-
-**9. Code Review** — мульти-агентное ревью PR
-**10. Frontend Design** — улучшение UI
-
-### LSP
-
-**11. TypeScript LSP** — IntelliSense TS/JS (v1.0.0)
-
-## Конфигурация
-
-**CodeGraph** (`~/.claude.json`):
-```json
-{
-  "mcpServers": {
-    "codegraph": {
-      "type": "stdio",
-      "command": "/data/data/com.termux/files/home/.local/bin/codegraph",
-      "args": ["serve", "--mcp"]
-    }
-  }
-}
-```
-
-**Playwright + Chrome DevTools** (`.mcp.json`):
-```json
-{
-  "mcpServers": {
-    "playwright": { "command": "npx", "args": ["@playwright/mcp@latest"] },
-    "chrome-devtools": { "command": "npx", "args": ["-y", "chrome-devtools-mcp@latest", "--headless"] }
-  }
-}
-```
-
-**caveman-shrink** (в `~/.openclaude.json`):
-```json
-"mcpServers": { "caveman-shrink": { "command": "npx", "args": ["-y", "caveman-shrink"] } }
-```
-
-## Установка плагинов
-
-`openclaude plugin install <name>@<marketplace>`
+### НЕ на Windows
+**CodeGraph** — Termux only (aarch64 binary).

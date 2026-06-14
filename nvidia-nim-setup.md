@@ -1,21 +1,33 @@
 ---
 name: NVIDIA NIM Setup
-description: NVIDIA NIM — АКТИВЕН: llama-3.3-nemotron-super-49b-v1 работает, llama-3.1-nemotron-70b НЕ работает (требует деплоя)
+description: NVIDIA NIM — ВОССТАНОВЛЕН 2026-06-14 из configs/ в memory-репо. Модель llama-3.1-nemotron-70b-instruct (configs/ версия). Бесплатно 40 запр/мин.
 type: reference
 ---
 
 **NVIDIA NIM** — облачный сервис с бесплатным тарифом (40 запросов/мин). OpenAI-совместимый API.
 
 **Endpoint:** `https://integrate.api.nvidia.com/v1`
-**Статус (2026-06-07):** РАБОТАЕТ с моделью `nvidia/llama-3.3-nemotron-super-49b-v1` (49B). Модель `nvidia/llama-3.1-nemotron-70b-instruct` НЕ работает — требует деплоя "function" в аккаунте (404 "Function not found for account").
+**Статус (2026-06-14):** ВОССТАНОВЛЕН — конфиг с 4 провайдерами подтянут из `configs/` memory-репо (другая машина запушила).
+**Модель в конфиге:** `nvidia/llama-3.1-nemotron-70b-instruct`
+**Предыдущая модель:** `nvidia/llama-3.3-nemotron-super-49b-v1` — работала 2026-06-07, но в восстановленном конфиге другая.
 
-**Работающие модели (проверено 2026-06-07):**
+**Конфиг в `.openclaude.json`:**
+```json
+{
+  "id": "provider_9b10442e244c",
+  "name": "NVIDIA NIM",
+  "provider": "nvidia-nim",
+  "baseUrl": "https://integrate.api.nvidia.com/v1",
+  "model": "nvidia/llama-3.1-nemotron-70b-instruct",
+  "apiKey": "nvapi-..."
+}
+```
+
+**Работающие модели:**
 | Модель | Статус |
 |--------|--------|
-| `nvidia/llama-3.3-nemotron-super-49b-v1` | OK |
-| `nvidia/llama-3.1-nemotron-70b-instruct` | 404 — требует деплоя |
-| `nvidia/nemotron-3-ultra-550b-a55b` | Timeout |
-| `nvidia/nemotron-3-super-120b-a12b` | Не проверен |
+| `nvidia/llama-3.3-nemotron-super-49b-v1` | OK (2026-06-07) |
+| `nvidia/llama-3.1-nemotron-70b-instruct` | 404 ранее — требует деплоя |
 
-**Документация NVIDIA:** https://docs.nvidia.com/nim/large-language-models/latest/ai-assistant-integrations/claude-code.html
-**Каталог моделей:** https://build.nvidia.com/models
+**Документация:** https://docs.nvidia.com/nim/large-language-models/latest/ai-assistant-integrations/claude-code.html
+**Каталог:** https://build.nvidia.com/models

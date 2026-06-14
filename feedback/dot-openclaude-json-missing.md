@@ -1,11 +1,20 @@
 ---
 name: .openclaude.json missing breaks /provider
-description: Если /provider зависает на 30с с "Topsy-turvying" и рекламным tip-ом — проверить наличие .openclaude.json
+description: `/provider` зависает/показывает урезанный список → проверить .openclaude.json. Recovery: backups/ ИЛИ configs/ в memory-репо.
 type: feedback
 ---
 
-Если `/provider` показывает `Topsy-turvying… (30s)` и рекламный tip (например, Xiaomi MiMo), вместо списка провайдеров — значит файл `.openclaude/.openclaude.json` отсутствует или был удалён.
+**Симптом 1:** `/provider` показывает `Topsy-turvying… (30s)` + рекламный tip.
+**Причина:** `.openclaude.json` отсутствует.
+**Fix:** восстановить из `backups/` ИЛИ из `configs/` memory-репо.
 
-**Why:** `.openclaude.json` хранит массив `providerProfiles` со всеми сконфигурированными провайдерами. Без него `/provider` не может ничего показать и уходит в таймаут. `.openclaude-profile.json` содержит только текущий активный профиль и не помогает.
+**Симптом 2:** `/provider` работает, но показывает только 1 провайдера вместо 4.
+**Причина:** `.openclaude.json` существует, но свежий (firstStartTime = сегодня). Старый конфиг заменён.
+**Fix:** проверить `configs/` в memory-репо — другая машина могла запушить полный конфиг. `cp configs/.openclaude.json ~/.openclaude.json`.
 
-**How to apply:** При жалобах на `/provider` — первым делом проверить `ls .openclaude/.openclaude.json`. Если файла нет — восстановить из `ls -t .openclaude/backups/` и перезапустить OpenClaude. Не пытаться чинить API или сеть — проблема локальная.
+**Симптом 3:** `sync.sh pull` подтянул `configs/` из GitHub, но провайдеры не появились.
+**Причина:** `copy_configs_to_oc` молча провалился — файл заблокирован процессом OpenClaude.
+**Fix:** ручной `cp` из `configs/`.
+
+**Why:** `.openclaude.json` хранит `providerProfiles`. Без него `/provider` падает. Бэкапы могут быть бесполезны если созданы после замены. `configs/` в GitHub-репо — дополнительный путь восстановления.
+**How to apply:** При проблемах с `/provider` — проверить ВСЕ три источника: текущий файл, бэкапы, configs/ в memory-репо.
