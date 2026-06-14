@@ -116,4 +116,4 @@
 - [Pinterest internal resource API pattern](feedback/pinterest-internal-resource-api-pattern.md) — all /resource/ endpoints need POST+source_url+data, not GET query params
 - [PinFlow Unfollow Zero](project/pinflow-unfollow-zero.md) — FollowingResource returns HTML not JSON; need WebView or real API endpoint (2026-06-12)
 - [Stale gradle intermediates](feedback/gradle-stale-intermediates.md) — interrupted builds → NoSuchFileException; fix: clean + assembleDebug (2026-06-12)
-- [Config sync gap](project/config-sync-gap.md) — конфиги синхронизируются через sync.sh + configs/ в memory repo (2026-06-14)
+- [Config sync gap](project/config-sync-gap.md) — конфиги через sync.sh + memory-sync.sh; project-dir=path hash — клонировать в правильную папку (2026-06-14)

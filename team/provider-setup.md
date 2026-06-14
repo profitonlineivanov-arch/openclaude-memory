@@ -13,4 +13,14 @@ description: 4 AI провайдера ВОССТАНОВЛЕНЫ 2026-06-14: Gi
 **Конфигурация:** `.openclaude.json` (все профили) + `.openclaude-profile.json` (активный).
 **Синхронизация:** `configs/` в GitHub-репо → `sync.sh pull` (но может потребоваться ручной `cp`).
 
+<<<<<<< HEAD
 **Важно:** У каждого провайдера СВОЙ список моделей. После смены провайдера через `/provider` — проверить модель через `/model`.
+=======
+**New device bootstrap:** Начинать с DeepSeek — дешевле всех, стабильный, `deepseek-v4-pro`. Достаточно одного провайдера для старта.
+
+**How to switch:**
+- `/provider` — cycle through configured providers
+- `/model <id>` — switch model within current provider (осторожно: не ставить модель от другого провайдера)
+
+**Configuration location:** `.openclaude.json` (все профили) + `.openclaude-profile.json` (активный).
+>>>>>>> 6ca6fe7 (Memory update: 2026-06-14 21:52)

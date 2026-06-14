@@ -10,6 +10,8 @@ type: user
 
 Telegram ID: 409695834. Интересуются режимом "каменный век", актуализация стиля подтверждена.
 
+Устройства: Termux (Android) + Windows ноутбук (C:\Users\Admin, project dir = `-C--Users-Admin`, настроен 2026-06-14, DeepSeek провайдер).
+
 Другие проекты:
 - **PinFlow** — Android Pinterest automator (Kotlin, Room DB, WorkManager). GitHub: profitonlineivanov-arch/pinflow (private). Клон: ~/pinflow/
 - **hanma.ru** — WordPress сайт, настроены фавиконы (2026-04-17)
