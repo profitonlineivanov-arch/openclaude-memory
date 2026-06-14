@@ -194,7 +194,10 @@
     "totalShown": 5
   },
   "showSpinnerTree": false,
-  "activeProviderProfileId": "provider_9b10442e244c",
+  "activeProviderProfileId": "provider_cabc33bbb096",
+  "mcpServers": {
+    "caveman-shrink": { "command": "npx", "args": ["-y", "caveman-shrink"] }
+  },
   "skillUsage": {
     "firecrawl:firecrawl-cli": {
       "usageCount": 1,

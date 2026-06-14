@@ -74,12 +74,12 @@
 - [Verify after parallel edits](feedback/verify-after-parallel-edits.md) — после параллельных правок обязательна верификация subagent-ом перед коммитом
 - [Verifier unreliable in Termux](feedback/verifier-fails-termux.md) — verification падает/отказывает; use Explore/manual checks
 - [gh device flow in Termux](feedback/gh-device-flow-termux.md) — gh auth login запускает device flow в Termux, код нужно передать пользователю
-- [MCP Servers Catalog](mcp-servers-catalog.md) — 8 плагинов/MCP-серверов: Playwright, Chrome DevTools, Context7, Firecrawl, Security Guidance, Code Review, TS LSP, Frontend Design
-- [Claude Code Plugins](plugins-installed.md) — 8 плагинов установлено (2026-06-06)
+- [MCP Servers Catalog](mcp-servers-catalog.md) — 8 плагинов + 3 MCP (Playwright, Chrome DevTools, caveman-shrink), CodeGraph Termux-only (2026-06-14)
+- [Claude Code Plugins](plugins-installed.md) — 8 плагинов восстановлено после потери конфига (2026-06-14)
 - [CodeGraph](graphify-tool.md) — colbymchenry/codegraph v0.9.9, MCP code intelligence, замена Graphify (2026-06-09)
-- [Bluesminds Provider](bluesminds-setup.md) — работает, но нестабильно: таймауты, нужен 30s timeout (2026-06-07)
+- [Bluesminds Provider](bluesminds-setup.md) — ПОТЕРЯН 2026-06-14, нужно пересоздать: Qwen 3.5 397B, таймауты 30s+
 - [OpenClaude Provider Architecture](openclaude-provider-architecture.md) — 2-файловая система: .openclaude.json (все) + .openclaude-profile.json (активный), бэкапы (2026-06-07)
-- [NVIDIA NIM Setup](nvidia-nim-setup.md) — РАБОТАЕТ: llama-3.3-nemotron-super-49b-v1; llama-3.1-nemotron-70b требует деплоя (2026-06-07)
+- [NVIDIA NIM Setup](nvidia-nim-setup.md) — ПОТЕРЯН 2026-06-14, нужно пересоздать: llama-3.3-nemotron-super-49b-v1, бесплатно 40/мин
 - [Continue started task](feedback/continue-started-task.md) — видимый прогресс + не стопориться до фикса/верификации/блокера
 - [PinFlow Auth Nick Fix](pinflow-5-fixes-done.md) — ник работает при браузер+профиль; APK pinflow-auth-hint.apk
 - [PinFlow Round 5 — pointer](project/pinflow-round5-fixes-done-2026-06-08.md) — superseded by implementation file, kept as index entry
