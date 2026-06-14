@@ -37,6 +37,8 @@ type: project
 - Решение: запустить `ls ~/.openclaude/projects/` на новом устройстве, найти созданную папку, клонировать репо внутрь неё как `memory/`.
 - **Windows env:** configs/settings.json содержит Termux-пути в `env` (`TMPDIR=/data/data/...`). На Windows нужно поправить на `%TEMP%` или удалить env целиком (Windows TMPDIR работает по умолчанию).
 - **Лишний клон:** если в projects/ есть отдельная папка `-memory` — она лишняя, хуки найдут `C--Users-Admin/memory`.
+- **Провайдеры теряются при bootstrap:** configs/ содержит все 4 провайдера, но на Windows ноуте 2026-06-14 провайдеры НЕ восстановились автоматически. Причина: configs/ в репо содержал устаревший .openclaude.json (только DeepSeek) до push с Termux. Требуется ручной `sync.sh pull` ПОСЛЕ клонирования.
+- **Windows bootstrap 2026-06-14:** .openclaude.json создан заново (firstStartTime 08:41), backups/ содержат только DeepSeek. Gitlawb/NVIDIA/Bluesminds пропали. Восстановлено через push configs/ с Termux → pull на ноуте.
 
 **Why:** Пользователь работает на desktop (Windows) + mobile (Termux), хочет единое окружение.
-**How to apply:** Полностью решено. На новом устройстве: clone → sync.sh pull → провайдер → restart.
+**How to apply:** На новом устройстве: clone → sync.sh pull → провайдер → restart. ВАЖНО: sync.sh pull делать СРАЗУ после клонирования, до первого запуска агента (или перезапустить после pull).
