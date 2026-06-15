@@ -1,6 +1,7 @@
 # Memory Index
 
-- [Gemma 4 Local Setup](project/gemma4-local-setup.md) — gemma4:e4b (9.6 GB) установлена через Ollama, готова к использованию (2026-06-15)
+- [Gemma 4 Local Setup](project/gemma4-local-setup.md) — gemma4:e4b установлена через Ollama, НЕ работает как провайдер (нет tool use) (2026-06-15)
+- [Local models need tool use](feedback/local-models-need-tool-use.md) — Ollama модели без tool use зацикливаются в OpenClaude (32k overflow)
 - [PinFlow Parallel Automation](project/pinflow-parallel-automation.md) — parallel task loops in PinterestAutomator to prevent task starvation (2026-06-11)
 - [PinFlow Auth Hint UI Update](project/pinflow-auth-hint-collapsible.md) — collapsible auth hint in AuthActivity to save screen space (2026-06-11)
 - [PinFlow PostSettings Board Hint Update](project/pinflow-board-hint-update.md) — updated board input hints in PostSettingsActivity (2026-06-11)
