@@ -1,21 +1,31 @@
 ---
 name: Claude Code Plugins Installed
-description: 9 плагинов установлены: context7, firecrawl, security-guidance, code-review, typescript-lsp, frontend-design, codegraph, caveman + playwright/chrome-devtools
+description: 8 плагинов: context7, firecrawl (v1.0.9), security-guidance, code-review, typescript-lsp, frontend-design, playwright, caveman + 3 MCP-сервера. Провайдеры восстановлены.
 type: reference
 ---
 
-**Установленные плагины (2026-06-06, обновлено 2026-06-09):**
-- context7 — документация библиотек
-- firecrawl — веб-скрейпинг (API v1.0.8)
-- security-guidance — проверка уязвимостей
-- code-review — мульти-агентное ревью PR
-- typescript-lsp — IntelliSense TS/JS (v1.0.0)
-- frontend-design — улучшение UI
-- caveman — output compression (-65% токенов), установлен 2026-06-09
+**Установленные плагины (2026-06-14):**
 
-**MCP-серверы (отдельно от плагинов):**
-- playwright, chrome-devtools — в `.mcp.json`
-- codegraph — в `~/.claude.json` (v0.9.9, Termux-patched)
-- caveman-shrink — в `~/.openclaude.json`
+| Плагин | Версия | Источник |
+|--------|--------|----------|
+| context7 | - | claude-plugins-official |
+| firecrawl | 1.0.9 | claude-plugins-official |
+| security-guidance | 2.0.6 | claude-plugins-official |
+| code-review | - | claude-plugins-official |
+| typescript-lsp | 1.0.0 | claude-plugins-official |
+| frontend-design | - | claude-plugins-official |
+| playwright | - | claude-plugins-official |
+| caveman | 25d22f8 | caveman |
 
-**Итого:** 9 плагинов + 3 отдельных MCP-сервера
+**MCP-серверы:**
+- `.mcp.json`: playwright + chrome-devtools
+- `.openclaude.json`: caveman-shrink
+- CodeGraph — Termux only
+
+**Провайдеры:** 4 (Gitlawb Opengateway, DeepSeek, NVIDIA NIM, Bluesminds) — восстановлены из configs/ memory-репо 2026-06-14.
+
+**Конфиги:**
+- `.openclaude.json` — провайдеры + caveman-shrink MCP
+- `settings.json` — enabledPlugins (8) + model (mimo-v2.5-pro) + env + хуки
+- `.mcp.json` — Playwright + Chrome DevTools
+- `installed_plugins.json` — версии и пути плагинов

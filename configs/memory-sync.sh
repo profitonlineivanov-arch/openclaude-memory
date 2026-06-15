@@ -14,6 +14,16 @@ for d in "$OC_DIR"/projects/*/memory; do
     fi
 done
 
+# Fallback: check project root for sync.sh
+if [ -z "$MEMORY_DIR" ]; then
+    for d in "$OC_DIR"/projects/*/; do
+        if [ -f "${d}sync.sh" ]; then
+            MEMORY_DIR="$d"
+            break
+        fi
+    done
+fi
+
 if [ -z "$MEMORY_DIR" ]; then
     echo "memory-sync: no memory/ with sync.sh found in $OC_DIR/projects/" >&2
     exit 1

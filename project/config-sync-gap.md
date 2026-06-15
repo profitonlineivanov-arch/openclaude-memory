@@ -14,6 +14,7 @@ type: project
 
 **Что НЕ синхронизируется:**
 - `settings.local.json` — содержит API-ключи в curl-командах permissions, GitHub push protection блокирует (GH013). Добавлен в `.gitignore`, история переписана для удаления секретов.
+- **Локальные модели (Ollama, Gemma)** — работают только на десктопе, на Android не запускаются. НЕ добавлять в memory sync.
 
 **Как работает:**
 - `memory-sync.sh` — враппер, автодискаверит `memory/` в `~/.openclaude/projects/*/memory`
@@ -33,12 +34,8 @@ type: project
 - OpenClaude формирует имя project-директории из хеша рабочей папки. На Termux это `-data-data-com-termux-files-home`, на Windows `-C--Users-Admin` (зависит от пути запуска).
 - Память работает ТОЛЬКО если memory/ лежит внутри правильной project-директории.
 - `memory-sync.sh` автодискаверит memory/ в `~/.openclaude/projects/*/memory` — это решает хуки.
-- Но сам агент ищет memory по своему project-path, который может не совпасть с тем куда клонирован репо.
-- Решение: запустить `ls ~/.openclaude/projects/` на новом устройстве, найти созданную папку, клонировать репо внутрь неё как `memory/`.
-- **Windows env:** configs/settings.json содержит Termux-пути в `env` (`TMPDIR=/data/data/...`). На Windows нужно поправить на `%TEMP%` или удалить env целиком (Windows TMPDIR работает по умолчанию).
-- **Лишний клон:** если в projects/ есть отдельная папка `-memory` — она лишняя, хуки найдут `C--Users-Admin/memory`.
-- **Провайдеры теряются при bootstrap:** configs/ содержит все 4 провайдера, но на Windows ноуте 2026-06-14 провайдеры НЕ восстановились автоматически. Причина: configs/ в репо содержал устаревший .openclaude.json (только DeepSeek) до push с Termux. Требуется ручной `sync.sh pull` ПОСЛЕ клонирования.
-- **Windows bootstrap 2026-06-14:** .openclaude.json создан заново (firstStartTime 08:41), backups/ содержат только DeepSeek. Gitlawb/NVIDIA/Bluesminds пропали. Восстановлено через push configs/ с Termux → pull на ноуте.
+- **Windows env:** configs/settings.json содержит Termux-пути в `env` (`TMPDIR=/data/data/...`). На Windows нужно поправить на `%TEMP%` или удалить env целиком.
+- **Провайдеры теряются при bootstrap:** configs/ содержит все провайдеры, но требуется ручной `sync.sh pull` ПОСЛЕ клонирования.
 
 **Why:** Пользователь работает на desktop (Windows) + mobile (Termux), хочет единое окружение.
-**How to apply:** На новом устройстве: clone → sync.sh pull → провайдер → restart. ВАЖНО: sync.sh pull делать СРАЗУ после клонирования, до первого запуска агента (или перезапустить после pull).
+**How to apply:** На новом устройстве: clone → sync.sh pull → провайдер → restart. Локальные модели (Ollama) НЕ добавлять в sync — Android не поддерживает.
