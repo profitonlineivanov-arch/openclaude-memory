@@ -22,11 +22,18 @@ copy_configs_from_oc() {
     [ -f "$OC_DIR/.openclaude-profile.json" ] && cp "$OC_DIR/.openclaude-profile.json" "$CONFIGS/.openclaude-profile.json"
 }
 
+git_safe_pull() {
+    git fetch origin main 2>/dev/null
+    if ! git merge --ff-only origin/main 2>/dev/null; then
+        git merge --no-edit origin/main 2>/dev/null || true
+    fi
+}
+
 cd "$MEMORY_DIR"
 
 case "${1:-sync}" in
     pull)
-        git pull --rebase origin main 2>/dev/null
+        git_safe_pull
         copy_configs_to_oc
         ;;
     push)
@@ -40,7 +47,7 @@ case "${1:-sync}" in
         fi
         ;;
     sync)
-        git pull --rebase origin main 2>/dev/null
+        git_safe_pull
         copy_configs_to_oc
         copy_configs_from_oc
         git add -A
