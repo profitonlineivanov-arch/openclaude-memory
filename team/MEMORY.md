@@ -5,7 +5,7 @@
 - [Remote server ref](remote-server-ref.md) — SSH to 45.146.164.144, lottery projects
 - [2x2 Architecture](2x2-architecture.md) — detailed architecture: 6 analyzers (incl. diagonal triggers), selector, driver, dashboard
 - [2x2 GitHub repo](2x2-github.md) — profitonlineivanov-arch/2x2.git, branch V8
-- [OpenClaude Memory Sync](openclaude-memory-sync.md) — GitHub sync: profitonlineivanov-arch/openclaude-memory
+- [OpenClaude Memory Sync](openclaude-memory-sync.md) — GitHub sync: HTTPS + PAT token file (config/sync-remote.txt), not SSH (MSYS2 can't access Windows ssh-agent). Local models excluded.
 - [Hugging Face Provider](huggingface-provider-setup.md) — УДАЛЁН из конфига: DNS + биллинг $0.10/мес (2026-06-07)
 - [2x2 Selector Iteration Analysis](2x2-selector-iteration-analysis.md) — оба 10k прогона завершены 2026-06-08, RI не даёт преимущества (без RI лучше на 3+ matches)
 - [2x2 Trigger Logic](2x2-trigger-logic.md) — текущие паттерны триггеров для П1-П4 (2026-06-09)
