@@ -30,7 +30,6 @@ cd "$MEMORY_DIR"
 case "${1:-sync}" in
     pull)
         git_safe_pull
-        copy_configs_to_oc
         ;;
     push)
         git add -A
