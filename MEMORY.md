@@ -1,7 +1,9 @@
 # Memory Index
 
-- [Gemma 4 Local Setup](project/gemma4-local-setup.md) — gemma4:e4b установлена через Ollama, НЕ работает как провайдер (нет tool use) (2026-06-15)
+- [Gemma 4 Local Setup](project/gemma4-local-setup.md) — 4 модели Ollama: qwen2.5:7b (работает), coder:7b, starcoder2:7b, gemma4:e4b. 14b удалён — не влезал в VRAM (2026-06-16)
+- [Ollama Local Provider](project/ollama-local-provider-setup.md) — qwen2.5:7b активна для OpenClaude, RTX 3050 8GB, 14b удалён (2026-06-16)
 - [Local models need tool use](feedback/local-models-need-tool-use.md) — Ollama модели без tool use зацикливаются в OpenClaude (32k overflow)
+- [OpenClaude Update](reference/openclaude-update-mechanism.md) — пакет @gitlawb/openclaude (не openclaude!), repo Gitlawb/openclaude, обновлён до 0.19.0 (2026-06-16)
 - [PinFlow Parallel Automation](project/pinflow-parallel-automation.md) — parallel task loops in PinterestAutomator to prevent task starvation (2026-06-11)
 - [PinFlow Auth Hint UI Update](project/pinflow-auth-hint-collapsible.md) — collapsible auth hint in AuthActivity to save screen space (2026-06-11)
 - [PinFlow PostSettings Board Hint Update](project/pinflow-board-hint-update.md) — updated board input hints in PostSettingsActivity (2026-06-11)
@@ -58,7 +60,7 @@
 - [Draw interval polling](feedback/draw-interval-polling.md) — draws каждые ~15мин, polling не чаще 5мин (300с)
 - [2x2 Dashboard Mobile Fix](project/2x2-dashboard-mobile-fix.md) — viewport + media queries для мобильных (2026-05-31)
 - [2x2 Favorable Periods](project/2x2-favorable-periods-task.md) — блочная подсветка благоприятных периодов с бейджами времени, 2 фазы (2026-05-31)
-- [Auto memory sync](feedback/auto-memory-sync.md) — память должна синхронизироваться автоматически через хуки SessionStart/SessionEnd
+- [Auto memory sync](feedback/auto-memory-sync.md) — BROKEN: stuck rebase + нет git auth на Windows. Фикс git_safe_pull в 7bbed53 не деплоен (2026-06-16)
 - [2x2 Missing Predictions Filled](project/2x2-missing-predictions-filled.md) — восстановлены #328765, #328766 через fill_missing.py (2026-06-07)
 - [2x2 Selector Iterations](team/2x2-selector-iterations.md) — статистика: 98.2% = 1 итерация, max=7, бэкенд анализ (2026-06-07)
 - [Selector Iteration RE](project/selector-iteration-reverse-engineering.md) — анализ restarts для 1/2/3/4 совпадений: 2 запуска (с RI и без) на 10k тиражей (2026-06-08)
@@ -118,4 +120,4 @@
 - [Pinterest internal resource API pattern](feedback/pinterest-internal-resource-api-pattern.md) — all /resource/ endpoints need POST+source_url+data, not GET query params
 - [PinFlow Unfollow Zero](project/pinflow-unfollow-zero.md) — FollowingResource returns HTML not JSON; need WebView or real API endpoint (2026-06-12)
 - [Stale gradle intermediates](feedback/gradle-stale-intermediates.md) — interrupted builds → NoSuchFileException; fix: clean + assembleDebug (2026-06-12)
-- [Config sync gap](project/config-sync-gap.md) — конфиги синхронизируются через sync.sh + configs/ в memory repo (2026-06-14)
+- [Config sync gap](project/config-sync-gap.md) — конфиги через sync.sh + memory-sync.sh; project-dir=path hash — клонировать в правильную папку (2026-06-14)

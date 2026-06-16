@@ -1,15 +1,21 @@
 ---
-name: Memory sync must be automatic
-description: User expects memory sync (git pull/push) to happen automatically at session start/end via hooks — not manually
+name: Memory sync must be automatic — currently BROKEN
+description: Auto sync via hooks not working on Windows: stuck rebase + no git auth. Fix committed (7bbed53) but not working.
 type: feedback
 ---
 
-Memory sync должна происходить автоматически при открытии и закрытии сессии, без ручного вызова.
+Memory sync должна происходить автоматически при SessionStart/SessionEnd через хуки.
 
-**Why:** Пользователь работает с двумя агентами (desktop + mobile) и рассчитывает, что память синхронизируется сама. Ручная синхронизация — лишний шаг, который легко забыть.
+**Текущий статус (2026-06-16): СЛОМАНО.**
 
-**How to apply:** В settings.json настроены хуки:
-- `SessionStart` → `git pull --rebase origin main` (скачать изменения)
-- `SessionEnd` → `bash sync.sh` (pull + push)
+**Проблемы:**
+1. `sync.sh` использовал `git pull --rebase` — при конфликтах зависает в interactive rebase, блокируя всю синхронизацию
+2. Фикс (git_safe_pull с merge вместо rebase) в коммите `7bbed53`, но не был деплоен в working tree
+3. На Windows нет git auth (ни SSH ключа, ни credential helper) — push падает молча
 
-Если хуки не сработали (сессия завершена не через /exit или Ctrl+C), нужно вручную вызвать `bash sync.sh sync` в директории memory перед выходом. Всегда проверяй синхронизацию в конце сессии.
+**Хуки в settings.json:**
+- `SessionStart` → `bash ~/.openclaude/memory-sync.sh pull 2>/dev/null`
+- `SessionEnd` → `bash ~/.openclaude/memory-sync.sh 2>/dev/null`
+
+**Why:** Пользователь работает с двумя агентами (desktop + mobile) и рассчитывает, что память синхронизируется сама.
+**How to apply:** НЕ заверять пользователя что sync работает, пока не проверено: git auth настроен, sync.sh с git_safe_pull запушен на GitHub, pull/push реально проходят без ошибок.
