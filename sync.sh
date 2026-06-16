@@ -8,6 +8,13 @@ CONFIGS="$MEMORY_DIR/configs"
 GITHUB_TOKEN="${GITHUB_TOKEN:-}"
 
 # Ensure HTTPS remote for automation (SSH key may not be available in all contexts)
+# Use token from file if GITHUB_TOKEN env var not set
+TOKEN_FILE="$MEMORY_DIR/config/sync-remote.txt"
+if [ -z "$GITHUB_TOKEN" ] && [ -f "$TOKEN_FILE" ]; then
+    # Extract token from second line (HTTPS URL with embedded token)
+    GITHUB_TOKEN="$(sed -n '2p' "$TOKEN_FILE" | sed 's|https://[^:]*:||' | sed 's|@github.com.*||')"
+fi
+
 git config remote.origin.url "https://github.com/profitonlineivanov-arch/openclaude-memory.git" 2>/dev/null
 
 git_safe_pull() {

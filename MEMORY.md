@@ -60,7 +60,7 @@
 - [Draw interval polling](feedback/draw-interval-polling.md) — draws каждые ~15мин, polling не чаще 5мин (300с)
 - [2x2 Dashboard Mobile Fix](project/2x2-dashboard-mobile-fix.md) — viewport + media queries для мобильных (2026-05-31)
 - [2x2 Favorable Periods](project/2x2-favorable-periods-task.md) — блочная подсветка благоприятных периодов с бейджами времени, 2 фазы (2026-05-31)
-- [Auto memory sync](feedback/auto-memory-sync.md) — BROKEN: stuck rebase + нет git auth на Windows. Фикс git_safe_pull в 7bbed53 не деплоен (2026-06-16)
+- [Auto memory sync](feedback/auto-memory-sync.md) — HTTPS+GITHUB_TOKEN настроен, но токен не пробрасывается в MSYS2 bash. Нужен Git Credential Manager или явная передача токена (2026-06-16)
 - [2x2 Missing Predictions Filled](project/2x2-missing-predictions-filled.md) — восстановлены #328765, #328766 через fill_missing.py (2026-06-07)
 - [2x2 Selector Iterations](team/2x2-selector-iterations.md) — статистика: 98.2% = 1 итерация, max=7, бэкенд анализ (2026-06-07)
 - [Selector Iteration RE](project/selector-iteration-reverse-engineering.md) — анализ restarts для 1/2/3/4 совпадений: 2 запуска (с RI и без) на 10k тиражей (2026-06-08)
