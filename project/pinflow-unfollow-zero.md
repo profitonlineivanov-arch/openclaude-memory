@@ -4,7 +4,9 @@ description: FollowingResource returns HTML (not JSON) — findFollowingInJson n
 type: project
 ---
 
-## Status (2026-06-12)
+## Status (2026-06-16)
+
+RESUMED. User wants to continue. Explore agent launched to investigate code.
 
 `FollowingResource` returns HTTP 200 with 408KB of **HTML** (React SSR page), not JSON. `JSONObject(htmlBody)` at line 898 throws `JSONException` → caught by outer try/catch at line 922 → returns empty list. `findFollowingInJson` never executes.
 
