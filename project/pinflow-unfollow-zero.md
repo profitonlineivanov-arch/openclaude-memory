@@ -1,64 +1,30 @@
 ---
-name: PinFlow Unfollow Zero
-description: FollowingResource returns HTML (not JSON) — findFollowingInJson never runs; need alternative approach (WebView or real API endpoint)
+name: PinFlow Unfollow Fix v2
+description: Unfollow parser fix v2 — isUserObj widened to json.has("username"), APK built and delivered 2026-06-17
 type: project
 ---
 
-## Status (2026-06-16)
+Unfollow не находит пользователей при 403KB JSON от FollowingResource.
 
-RESUMED. User wants to continue. Explore agent launched to investigate code.
+**Root cause 2026-06-17:** `findFollowingInJson()` фильтр `isUserObj` слишком строгий — требует `hasFollowState || id.isNotEmpty()`. Pinterest изменил структуру JSON, объекты пользователей не имеют follow-state полей.
 
-`FollowingResource` returns HTTP 200 with 408KB of **HTML** (React SSR page), not JSON. `JSONObject(htmlBody)` at line 898 throws `JSONException` → caught by outer try/catch at line 922 → returns empty list. `findFollowingInJson` never executes.
+**Fix applied (v2):** `isUserObj = type == "user" || id.startsWith("/User/") || json.has("username")` (строка 936 PinterestAutomator.kt).
 
-Debug file `/sdcard/Download/following_debug.json` confirmed HTML content: starts with `<!DOCTYPE html>`, contains `__PWS_INITIAL_PROPS__` but `initialReduxState` has no following user data. Only embedded resource response is `UserSettingsResource` — no following/follower data.
+**Build:** BUILD SUCCESSFUL 2026-06-17, rebuilt 2026-06-18 06:29. APK: `/sdcard/Download/pinflow-unfollow-fix-v2.apk` (8.7 MB).
 
-## Root Cause
+**Root cause 2026-06-18 07:53:** FollowingResource возвращает HTML page (398KB) вместо JSON. Заголовок `Content-Type: text/html` вместо `application/json`. Pinterest изменил endpoint или требует другие заголовки.
 
-Pinterest's `FollowingResource` endpoint is a **React SSR page**, not a data API. Following users are loaded dynamically via client-side JavaScript after page render — they are NOT in the initial HTML server response. This approach CANNOT work.
+**Fix v4 (2026-06-18 07:57):** Добавлены заголовки:
+- `Accept: application/json`
+- `Content-Type: application/x-www-form-urlencoded`
 
-## Debug Data Analyzed (2026-06-12)
+APK: `/sdcard/Download/pinflow-unfollow-v4.apk` (8.8 MB).
 
-File: `/storage/emulated/0/Download/following_debug.json` (408,208 bytes)
+**Root cause 2026-06-18 07:59:** `following_debug.json` содержит HTML, а не JSON. FollowingResource возвращает HTML страницу (398KB) с `response.code == 200`. Парсер пытается парсить HTML как JSON и находит 0 пользователей.
 
-- HTML starts with `<!DOCTYPE html><html class="ru" lang="ru">`
-- `__PWS_INITIAL_PROPS__` (script 57, 130KB JSON): bootstrap config + routes + UserSettingsResource only
-- `initialReduxState.users` = has only logged-in user (breathefree0177, id=778278516763399193), NO following list
-- Script 59 (200KB): route manifest, no API endpoints
-- Script 73: secondary redux state, also no user data
-- `serverResourceResponse` pushes: 0 (zero)
-- `dataHandler()` calls: 0 (zero)  
-- `__PWS_RESOURCE_DATA_BEFORE_INIT__.push`: 1 occurrence (function definition only, no data)
-- Relay completed requests: 0
-- `resource_response` patterns: only `UserSettingsResource` (v3_get_user_settings)
-- `followed_by_me`, `"type":"user"` patterns in HTML: 0
-- Bootstrap context: `current_url: https://www.pinterest.com/resource/FollowingResource/`, referrer: `https://www.pinterest.com/Soulexpert/following/`
-- Route: `www/[username]/_following` exists but has no preloaded resource data
-- Username from context: `Soulexpert`
+**Fix в работе:** Проверка `body.startsWith("<!DOCTYPE")` для детекта HTML и fallback на HTML парсинг.
 
-## Code Path (PinterestAutomator.kt)
+**Status:** Unfixed. JSON endpoint возвращает HTML. Pinterest требует другие заголовки или сменил endpoint.
 
-- Line 846-927: `getFollowingUsers()` — POST to `/resource/FollowingResource/` with `source_url=/$username/following/&data=...`
-- Line 897: `val json = JSONObject(body)` — **throws JSONException** on HTML
-- Line 922: `catch (e: Exception)` — catches JSONException, returns empty list
-- Line 929-957: `findFollowingInJson()` — never reached, expects `type=="user"`, `id.startsWith("/User/")`
-
-## Approaches to Fix (NEXT SESSION)
-
-1. **WebView + JS injection**: Load `/$username/following/` in hidden WebView, wait for page load + render, inject JavaScript to extract following users from hydrated Redux store. Most reliable but slower.
-2. **Find real API endpoint**: Pinterest's client JS makes an actual API call (likely GraphQL/relay) to fetch following users. Capture via Chrome DevTools Network tab on the following page. Fastest if found.
-3. **DOM scraping via WebView**: Wait for full render, extract user elements from DOM after JS hydration completes.
-
-## Previous Attempts (ALL FAILED)
-
-- v1-v3: GET requests with query params — wrong API pattern
-- v4: POST + `source_url` + `data` as form params — returns HTML, not JSON
-- `JSONObject(HTML)` → JSONException → empty list
-- Debug JSON dump → confirmed HTML, zero user data in SSR
-
-## Next Step
-
-Open `https://www.pinterest.com/Soulexpert/following/` in Chrome with DevTools Network tab to capture the real API call that fetches following users. Replicate that call in Kotlin.
-
-**Why:** Unfollow is core automation. `FollowingResource` fundamentally cannot work — returns HTML without user data. Must find/pick alternative mechanism.
-
-**How to apply:** Do NOT attempt further fixes with `FollowingResource` POST endpoint. Choose WebView or find real API via DevTools.
+**Why:** API сломался — HTML вместо JSON, код не детектирует это.
+**How to apply:** Детектить HTML по первым символам, использовать HTML fallback с парсингом [data-test-id] элементов.

@@ -118,6 +118,8 @@
 - [PinFlow Board Settings UI](project/pinflow-board-settings-ui.md) — update board input hints (2026-06-11)
 - [Pinterest createPin two-stage](feedback/pinterest-create-pin-two-stage.md) — upload multipart → PinResource/create/ with source_url+data
 - [Pinterest internal resource API pattern](feedback/pinterest-internal-resource-api-pattern.md) — all /resource/ endpoints need POST+source_url+data, not GET query params
-- [PinFlow Unfollow Zero](project/pinflow-unfollow-zero.md) — FollowingResource returns HTML not JSON; need WebView or real API endpoint (2026-06-12)
+- [PinFlow Unfollow Fix v2](project/pinflow-unfollow-zero.md) — isUserObj widened to json.has("username"), APK pinflow-unfollow-fix-v2.apk delivered 2026-06-18
+- [PinFlow Unfollow — API blocked](project/pinflow-unfollow-session-summary.md) — FollowingResource отдаёт HTML/403, v5-v10 не помогли, нужен WebView/GraphQL (2026-06-18)
+- [PinFlow Remote Build Workflow](feedback/pinflow-remote-build-workflow.md) — APK builds on server 45.146.164.144 (Termux aarch64 can't build x86_64)
 - [Stale gradle intermediates](feedback/gradle-stale-intermediates.md) — interrupted builds → NoSuchFileException; fix: clean + assembleDebug (2026-06-12)
 - [Config sync gap](project/config-sync-gap.md) — конфиги через sync.sh + memory-sync.sh; project-dir=path hash — клонировать в правильную папку (2026-06-14)
