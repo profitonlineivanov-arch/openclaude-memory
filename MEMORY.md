@@ -60,7 +60,7 @@
 - [Draw interval polling](feedback/draw-interval-polling.md) — draws каждые ~15мин, polling не чаще 5мин (300с)
 - [2x2 Dashboard Mobile Fix](project/2x2-dashboard-mobile-fix.md) — viewport + media queries для мобильных (2026-05-31)
 - [2x2 Favorable Periods](project/2x2-favorable-periods-task.md) — блочная подсветка благоприятных периодов с бейджами времени, 2 фазы (2026-05-31)
-- [Auto memory sync](feedback/auto-memory-sync.md) — HTTPS+GITHUB_TOKEN настроен, но токен не пробрасывается в MSYS2 bash. Нужен Git Credential Manager или явная передача токена (2026-06-16)
+- [Memory sync — memory only](feedback/auto-memory-sync.md) — configs/ исключены из sync, только .md память (2026-06-19)
 - [2x2 Missing Predictions Filled](project/2x2-missing-predictions-filled.md) — восстановлены #328765, #328766 через fill_missing.py (2026-06-07)
 - [2x2 Selector Iterations](team/2x2-selector-iterations.md) — статистика: 98.2% = 1 итерация, max=7, бэкенд анализ (2026-06-07)
 - [Selector Iteration RE](project/selector-iteration-reverse-engineering.md) — анализ restarts для 1/2/3/4 совпадений: 2 запуска (с RI и без) на 10k тиражей (2026-06-08)
@@ -81,7 +81,7 @@
 - [MCP Servers Catalog](mcp-servers-catalog.md) — 8 плагинов + 3 MCP (Playwright, Chrome DevTools, caveman-shrink), CodeGraph Termux-only (2026-06-14)
 - [Claude Code Plugins](plugins-installed.md) — 8 плагинов восстановлено после потери конфига (2026-06-14)
 - [CodeGraph](graphify-tool.md) — colbymchenry/codegraph v0.9.9, MCP code intelligence, замена Graphify (2026-06-09)
-- [Bluesminds Provider](bluesminds-setup.md) — ПОТЕРЯН 2026-06-14, нужно пересоздать: Qwen 3.5 397B, таймауты 30s+
+- [Bluesminds Provider](bluesminds-setup.md) — ВОССТАНОВЛЕН, работает: Qwen 3.5 397B, модели gpt-4o/GPT-5.5 доступны (2026-06-18)
 - [OpenClaude Provider Architecture](openclaude-provider-architecture.md) — 2-файловая система: .openclaude.json (все) + .openclaude-profile.json (активный), бэкапы (2026-06-07)
 - [NVIDIA NIM Setup](nvidia-nim-setup.md) — ПОТЕРЯН 2026-06-14, нужно пересоздать: llama-3.3-nemotron-super-49b-v1, бесплатно 40/мин
 - [Continue started task](feedback/continue-started-task.md) — видимый прогресс + не стопориться до фикса/верификации/блокера
@@ -122,4 +122,4 @@
 - [PinFlow Unfollow — API blocked](project/pinflow-unfollow-session-summary.md) — FollowingResource отдаёт HTML/403, v5-v10 не помогли, нужен WebView/GraphQL (2026-06-18)
 - [PinFlow Remote Build Workflow](feedback/pinflow-remote-build-workflow.md) — APK builds on server 45.146.164.144 (Termux aarch64 can't build x86_64)
 - [Stale gradle intermediates](feedback/gradle-stale-intermediates.md) — interrupted builds → NoSuchFileException; fix: clean + assembleDebug (2026-06-12)
-- [Config sync gap](project/config-sync-gap.md) — конфиги через sync.sh + memory-sync.sh; project-dir=path hash — клонировать в правильную папку (2026-06-14)
+- [Config sync — memory only](project/config-sync-gap.md) — configs/ удалён из tracking, только .md память synced (2026-06-19)

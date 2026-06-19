@@ -1,40 +1,27 @@
 ---
-name: Config sync BROKEN on Windows
-description: sync.sh git_safe_pull fix (7bbed53) не деплоен на Windows + нет git auth → push не работает
+name: Sync scope — memory only, no configs
+description: sync.sh теперь синхронизирует только .md файлы памяти; configs/ в .gitignore, не трекается (2026-06-19)
 type: project
 ---
 
-**Статус (2026-06-16): СЛОМАНО на Windows.**
+**Решение принято (2026-06-19):** configs/ удалён из git tracking, добавлен в .gitignore.
 
-**Проблемы:**
-1. **sync.sh с `git pull --rebase`** — старый sync.sh в working tree использует rebase, который зависает при конфликтах (stuck interactive rebase). Фикс (git_safe_pull с merge) есть в коммите `7bbed53`, но не деплоен в working tree — восстановлен через `git checkout 7bbed53 -- sync.sh`.
-2. **Нет git auth на Windows** — remote HTTPS, но нет credential helper и SSH ключа (SSH ключ только на Termux). Push падает молча.
-3. **Ollama-провайдеры не должны синхронизироваться** — .openclaude.json содержит "Ollama Local", который работает только на Windows. При sync.sh pull на Termux этот провайдер ломает `/provider`.
+**Коммит 80aaad3** — 5 файлов удалено из tracking:
+- `configs/.openclaude.json` — провайдеры, API-ключи
+- `configs/settings.json` — хуки, плагины, модель
+- `configs/.openclaude-profile.json` — активный профиль
+- `configs/memory-sync.sh` — враппер
 
-**Что синхронизируется (git-tracked в configs/):**
-- `.openclaude.json` — провайдеры, API-ключи, статистика
-- `settings.json` — хуки, плагины, модель, env
-- `.openclaude-profile.json` — активный профиль
-- `memory-sync.sh` — враппер
+**Что синхронизируется теперь:**
+- `.md` файлы памяти (feedback, project, reference, user, team)
+- `MEMORY.md` индексы
+- `.gitignore`
 
 **Что НЕ синхронизируется:**
-- `settings.local.json` — GitHub push protection блокирует (GH013)
-- **Ollama провайдеры** — НЕ должны быть в .openclaude.json при пуше с Windows на GitHub, иначе Termux получает нерабочие провайдеры
+- Провайдеры, настройки, тулзы, скиллы
+- `settings.local.json` (было в .gitignore раньше)
+- `config/sync-remote.txt` (PAT токен)
 
-**sync.sh fix (commit 7bbed53):**
-```bash
-git_safe_pull() {
-    git fetch origin main 2>/dev/null
-    if ! git merge --ff-only origin/main 2>/dev/null; then
-        git merge --no-edit origin/main 2>/dev/null || true
-    fi
-}
-```
+**Why:** Настройки устройства не должны тянуться на другое устройство — Ollama-провайдеры ломали Termux, хуки не совпадают между платформами. Память — общая, конфиг — локальный.
 
-**Что нужно сделать:**
-- [ ] Настроить git auth на Windows (SSH ключ или token)
-- [ ] Запушить исправленный sync.sh (с git_safe_pull) на GitHub
-- [ ] Отфильтровать Ollama-провайдеры из .openclaude.json перед синхронизацией (или использовать device-specific конфиги)
-
-**Why:** Пользователь работает на desktop (Windows) + mobile (Termux). Синхронизация должна быть автоматической и не ломать конфигурацию на другом устройстве.
-**How to apply:** После настройки auth: запушить исправленный sync.sh. Рассмотреть фильтрацию Ollama из .openclaude.json перед push.
+**How to apply:** При синхронизации через `sync.sh` / `memory-sync.sh` — только память. Настройки восстанавливать вручную или из backups/.
