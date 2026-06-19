@@ -16,8 +16,10 @@ type: reference
 - Синхронизируются ТОЛЬКО .md файлы памяти
 
 Аутентификация:
-- PAT токен в config/sync-remote.txt (в .gitignore)
-- **2026-06-19:** токен-файл отсутствует, push падает. Нужно восстановить или gh auth login.
+- `gh auth login --web -p https` (device flow в Termux)
+- `git config --global credential.helper '/data/data/com.termux/files/usr/bin/gh auth git-credential'`
+- gh автоматически отдаёт токен при push/pull — token-in-URL не нужен
+- PAT токен в config/sync-remote.txt больше НЕ используется
 
 Алиасы в ~/.bashrc:
 - `mpull` — git pull --rebase origin main
