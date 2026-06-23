@@ -78,7 +78,7 @@
 - [Verify after parallel edits](feedback/verify-after-parallel-edits.md) — после параллельных правок обязательна верификация subagent-ом перед коммитом
 - [Verifier unreliable in Termux](feedback/verifier-fails-termux.md) — verification падает/отказывает; use Explore/manual checks
 - [gh device flow in Termux](feedback/gh-device-flow-termux.md) — gh auth login запускает device flow в Termux, код нужно передать пользователю
-- [MCP Servers Catalog](mcp-servers-catalog.md) — 8 плагинов + 3 MCP (Playwright, Chrome DevTools, caveman-shrink), CodeGraph Termux-only (2026-06-14)
+- [MCP Servers Catalog](mcp-servers-catalog.md) — 8 плагинов + 4 MCP: chrome-devtools✅ playwright⚠️ caveman-shrink❌ codegraph✅ (2026-06-23)
 - [Claude Code Plugins](plugins-installed.md) — 8 плагинов восстановлено после потери конфига (2026-06-14)
 - [CodeGraph](graphify-tool.md) — colbymchenry/codegraph v0.9.9, MCP code intelligence, замена Graphify (2026-06-09)
 - [Bluesminds Provider](bluesminds-setup.md) — ВОССТАНОВЛЕН, работает: Qwen 3.5 397B, модели gpt-4o/GPT-5.5 доступны (2026-06-18)
@@ -106,7 +106,7 @@
 - [Don't extrapolate sub-tasks from prereqs](feedback/dont-extrapolate-subtasks-from-prereqs.md) — "изучи FOO.py" в prerequisite list ≠ "сделай прогон без FOO"; список файлов — это план, не подзадачи (2026-06-08)
 - [CodeGraph Analysis](project/codegraph-analysis.md) — v0.9.9 installed, Termux-patched, pinflow indexed, MCP registered (2026-06-09)
 - [RTK Evaluated](rtk-evaluated.md) — rtk-ai/rtk CLI proxy для сжатия shell output, -60-90% токенов, НЕ code intelligence (2026-06-09)
-- [Caveman Evaluated](caveman-evaluated.md) — output compression plugin, -65% output токенов, поддерживает OpenClaude (2026-06-09)
+- [Caveman Evaluated](caveman-evaluated.md) — output compression plugin, hooks работают, caveman-shrink MCP сломан (2026-06-23)
 - [PinFlow Local Workflow](feedback/pinflow-local-workflow.md) — перед сборкой сверять local↔server (gradle.properties, local.properties, imports) (2026-06-11)
 - [PinFlow Board Loader — WORKING](project/pinflow-board-loader-implementation.md) — dual-stage: BoardsResource + BoardResource/get/, 4 commits (включая detailed logging), GitHub master (2026-06-10)
 - [PinFlow Board Loader Status](project/pinflow-board-loader-status.md) — РАБОТАЕТ, подтверждено пользователем, 3 коммита запушены (2026-06-10)
