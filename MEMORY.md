@@ -120,8 +120,8 @@
 - [Pinterest internal resource API pattern](feedback/pinterest-internal-resource-api-pattern.md) — all /resource/ endpoints need POST+source_url+data, not GET query params
 - [PinFlow Unfollow Fix v2](project/pinflow-unfollow-zero.md) — isUserObj widened to json.has("username"), APK pinflow-unfollow-fix-v2.apk delivered 2026-06-18
 - [PinFlow Unfollow — API blocked](project/pinflow-unfollow-session-summary.md) — FollowingResource отдаёт HTML/403, v5-v10 не помогли, нужен WebView/GraphQL (2026-06-18)
-- [PinFlow Test 2026-06-21 + Fixes Applied](project/pinflow-test-2026-06-21.md) — 4 бага найдены, 3 исправлены, followTime=0 pending (2026-06-21)
-- [PinFlow followTime fix deployed](project/pinflow-followtime-fix-deployed.md) — fix implemented, built, tested. Logs exported (2026-06-22)
+- [PinFlow Test 2026-06-21 + Fixes Applied](project/pinflow-test-2026-06-21.md) — 4 бага найдены, 3 исправлены; 2026-06-22 shows 3 persist + username mismatch
+- [PinFlow followTime fix deployed](project/pinflow-followtime-fix-deployed.md) — 3 bugs persist after test: NetworkOnMainThread, CSRF, followTime=0 + username mismatch (2026-06-22)
 - [PinFlow Remote Build Workflow](feedback/pinflow-remote-build-workflow.md) — APK builds on server 45.146.164.144 (Termux aarch64 can't build x86_64)
 - [Stale gradle intermediates](feedback/gradle-stale-intermediates.md) — interrupted builds → NoSuchFileException; fix: clean + assembleDebug (2026-06-12)
 - [Config sync — memory only](project/config-sync-gap.md) — configs/ удалён из tracking, только .md память synced (2026-06-19)
