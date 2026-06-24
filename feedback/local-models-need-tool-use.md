@@ -1,11 +1,19 @@
 ---
 name: Local models need tool use
-description: Ollama local models without tool use (Gemma 4 etc.) fail as OpenClaude providers — quantization doesn't help, only tool-use-capable models work
+description: Ollama local models must support tool use to work as OpenClaude providers. Gemma 4 failed despite tool use support; qwen2.5:7b works; qwen2.5:14b removed due to VRAM (not tool use)
 type: feedback
 ---
 
 Локальные модели через Ollama НЕ работают как провайдеры OpenClaude без поддержки tool use.
 
-**Why:** Gemma 4 (gemma4:e4b) зациклилась при первом же запросе — генерировала мусор до 32k output token лимита. Модель не понимает формат tool use (Claude Code протокол). Вся линейка Gemma (2, 3, 4) от Google НЕ поддерживает tool use. Единственные модели Google с tool use — Gemini (только cloud). LM Studio — просто другой рантайм, та же проблема (спрашивали 2026-06-15).
+**Модели с tool use (из Ollama):**
+- `qwen2.5:14b` — ✅ tools, ❌ thinking, 9 GB — **НЕ влезает в RTX 3050 8GB** (Vulkan alloc fail)
+- `qwen2.5-coder:7b` — ✅ tools, ❌ thinking, 4.7 GB — **работает**
+- `gemma4:e4b` — ✅ tools, ✅ thinking, 9.6 GB — **НЕ работает** (зацикливается, генерирует мусор до 32k)
+- `starcoder2:7b` — ❌ tools — **НЕ подходит**
 
-**How to apply:** Проблема в формате tool use, не в размере модели и не в рантайме (Ollama/LM Studio/vLLM). Квантирование не помогает. Gemma 3 26B — тоже не работает. qwen2.5:14b (9.0 GB) УСТАНОВЛЕН но тоже НЕ работает в OpenClaude (2026-06-15, пользователь подтвердил). Локальные модели через Ollama/OpenAI-compatible API не поддерживают tool use в формате, который ожидает OpenClaude. Остаться на cloud провайдерах (Gitlawb Opengateway, DeepSeek, NVIDIA NIM, Bluesminds).
+**Рабочая модель:** qwen2.5:7b / qwen2.5-coder:7b (поддержка tool use + влезает в VRAM).
+
+**Why:** Проблема Gemma 4 — не отсутствие tool use (она его поддерживает), а что-то другое (thinking mode? формат?). qwen2.5:14b удалена чисто из-за VRAM.
+
+**How to apply:** Проверять tool use поддержку + размер модели перед установкой. Модели >7 GB не влезут в RTX 3050 8GB.

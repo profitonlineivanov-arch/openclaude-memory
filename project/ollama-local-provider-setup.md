@@ -1,16 +1,20 @@
 ---
 name: Ollama Local Provider Setup
-description: RTX 3050 8GB — qwen2.5:7b работает, 14b удалён. 4 модели в Ollama, qwen2.5:7b активна для OpenClaude.
+description: RTX 3050 8GB — models on D:\Ollama\models (OLLAMA_MODELS env var). qwen2.5:7b works, 14b removed (VRAM). 4 models installed, ollama list may show empty if service needs restart.
 type: project
 ---
 
-**Готово (2026-06-16):**
-- qwen2.5:7b установлен (4.7 GB) — влезает в RTX 3050 8GB
-- qwen2.5:14b удалён — Vulkan allocation fail (нужно ~10 GB buffer, есть только 8 GB)
-- Провайдер "Ollama Local" в .openclaude.json использует qwen2.5:7b
-- `/provider` → "Ollama Local" работает
+**Местоположение моделей:** `D:\Ollama\models` (User env var `OLLAMA_MODELS=D:\Ollama\models`, System env var НЕ задан).
+- Манифесты: `D:\Ollama\models\manifests\registry.ollama.ai/library/` — 4 модели (gemma4:e4b, qwen2.5/7b, qwen2.5-coder/7b, starcoder2/7b)
+- Блобы: `D:\Ollama\models\blobs/` — 17 файлов, 22 GB
 
-**Ограничение:** Максимум ~7 GB на модель из-за Vulkan-оверхеда. Более агрессивные кванты (Q3, Q2) не стоят потери качества — 7b Q4_K_M > 14b Q2.
+**Провайдер:** "Ollama Local" в .openclaude.json, переключение через `/provider`.
 
-**Why:** qwen2.5:14b не влезал в VRAM, ошибка `alloc_tensor_range: failed to allocate Vulkan0 buffer of size 1046986752`.
-**How to apply:** Провайдер настроен, переключение через `/provider`.
+**Известная проблема:** `ollama list` показывает пустой список. Причина — `OLLAMA_MODELS=D:\Ollama\models` задан как **User** переменная, а Ollama работает в **системном** контексте. Перезапуск НЕ помогает.
+**Решение:** Win+I → Система → О системе → Доп. параметры → Переменные среды → добавить `OLLAMA_MODELS` = `D:\Ollama\models` в **системные** переменные → перезапустить Ollama.
+**НЕ перемещать модели на C!** Пользователь категорически против.
+
+**Размерные ограничения:** RTX 3050 8GB → максимум ~7 GB модель из-за Vulkan-оверхеда. qwen2.5:14b (9 GB) не влезает (Vulkan alloc fail).
+
+**Why:** Пользователь работает с локальными моделями через Ollama для экономии токенов.
+**How to apply:** Если `ollama list` пуст — перезапустить Ollama. Модели >7 GB не ставить.

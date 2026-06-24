@@ -1,9 +1,13 @@
 # Memory Index
 
 - [Gemma 4 Local Setup](project/gemma4-local-setup.md) — 4 модели Ollama: qwen2.5:7b (работает), coder:7b, starcoder2:7b, gemma4:e4b. 14b удалён — не влезал в VRAM (2026-06-16)
-- [Ollama Local Provider](project/ollama-local-provider-setup.md) — qwen2.5:7b активна для OpenClaude, RTX 3050 8GB, 14b удалён (2026-06-16)
-- [Local models need tool use](feedback/local-models-need-tool-use.md) — Ollama модели без tool use зацикливаются в OpenClaude (32k overflow)
+- [Ollama Local Provider](project/ollama-local-provider-setup.md) — модели на D:\Ollama\models, User→System env var нужен, НЕ трогать модели (2026-06-18)
+- [Don't fix infra autonomously](feedback/dont-fix-infrastructure-autonomously.md) — известная проблема → объяснить фикс → стоп, не серия обходных маневров (2026-06-18)
+- [Local models need tool use](feedback/local-models-need-tool-use.md) — qwen2.5:7b работает, 14b удалена из VRAM, gemma4 зацикливается (2026-06-16)
 - [OpenClaude Update](reference/openclaude-update-mechanism.md) — пакет @gitlawb/openclaude (не openclaude!), repo Gitlawb/openclaude, обновлён до 0.19.0 (2026-06-16)
+- [DeepSeek V4 Pro](reference/deepseek-v4-pro-active-model.md) — был активен 2026-06-18, затем mimo-v2.5-pro
+- [Mimo V2.5 Pro Active](reference/mimo-v25-pro-active-model.md) — был активен 2026-06-18, затем superseded by free-model
+- [Free-model Active](reference/free-model-active-provider.md) — `free-model` added via `/provider` and now active (2026-06-23)
 - [PinFlow Parallel Automation](project/pinflow-parallel-automation.md) — parallel task loops in PinterestAutomator to prevent task starvation (2026-06-11)
 - [PinFlow Auth Hint UI Update](project/pinflow-auth-hint-collapsible.md) — collapsible auth hint in AuthActivity to save screen space (2026-06-11)
 - [PinFlow PostSettings Board Hint Update](project/pinflow-board-hint-update.md) — updated board input hints in PostSettingsActivity (2026-06-11)
@@ -118,6 +122,7 @@
 - [PinFlow Board Settings UI](project/pinflow-board-settings-ui.md) — update board input hints (2026-06-11)
 - [Pinterest createPin two-stage](feedback/pinterest-create-pin-two-stage.md) — upload multipart → PinResource/create/ with source_url+data
 - [Pinterest internal resource API pattern](feedback/pinterest-internal-resource-api-pattern.md) — all /resource/ endpoints need POST+source_url+data, not GET query params
-- [PinFlow Unfollow Zero](project/pinflow-unfollow-zero.md) — FollowingResource returns HTML not JSON; need WebView or real API endpoint (2026-06-12)
+- [PinFlow Unfollow Bug](project/pinflow-unfollow-zero.md) — 3 code-level root causes found 2026-06-23, fix in progress (rawUserId + trim literal + isFollower semantics)
 - [Stale gradle intermediates](feedback/gradle-stale-intermediates.md) — interrupted builds → NoSuchFileException; fix: clean + assembleDebug (2026-06-12)
 - [Config sync gap](project/config-sync-gap.md) — конфиги через sync.sh + memory-sync.sh; project-dir=path hash — клонировать в правильную папку (2026-06-14)
+- [Verify before contradicting](feedback/verify-before-contradicting.md) — не утверждать "не работает" когда сессионные логи показывают обратное (2026-06-18)
