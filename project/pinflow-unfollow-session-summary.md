@@ -1,10 +1,10 @@
 ---
 name: PinFlow Unfollow Session Summary 2026-06-21
-description: Все попытки получить following через API провалились — Pinterest блокирует FollowingResource, нужен WebView/GraphQL
+description: Все попытки получить following через API провалились — Pinterest блокирует FollowingResource, нужен WebView/GraphQL. Статус на 2026-06-25: FollowingResource 100% 403.
 type: project
 ---
 
-**Дата:** 2026-06-18, обновлён 2026-06-21
+**Дата:** 2026-06-18, обновлён 2026-06-25
 
 **Попробованные подходы (v5-v10):**
 
@@ -22,14 +22,17 @@ type: project
 
 **Root cause:** Pinterest изменил FollowingResource API — отдаёт HTML/ошибку вместо JSON. Список following подгружается через JS (React hydration), а не через initial HTML или API.
 
-**followTime=0 issue (2026-06-21, обновлён 2026-06-21 session):**
-- При follow: `followedUsers[user.username] = now` — теперь сохраняет по username (v3 fix, PinterestAutomator.kt)
-- При unfollow: `getFollowingUsers()` возвращает HTML/403, fallback создаёт `UserDataWithFollowerStatus(id = username, username = username)` без followTime.
-- **Root cause:** приложение никогда не делало follow — все подписки были до начала разработки. `followedUsers` SharedPreferences пуст.
-- **Fix applied:** хранение по username вместо numeric ID (v3).
-- **Осталось:** WebView/GraphQL для получения real followTime, либо safe fallback для pre-existing follows.
+**Статус на 2026-06-25:** FollowingResource ранее возвращал JSON intermittently (сессия 2026-06-12: 200 OK 408KB). Сейчас (тест pinflow-fixes.apk) 100% 403 — Pinterest полностью заблокировал API endpoint для всех версий.
 
-**Следующие шаги (обновлён 2026-06-21):**
-1. **HTML state parsing** — пробуем `window.__PINTEREST_APP__` / `window.__INITIAL_STATE__` из HTML по brace-matching, extract реальный JSON для `findFollowingInJson`. Исправлено: `UserDataWithFollowerStatus` получил `followTime: Long`, `findFollowingInJson` вытягивает `followed_at`.
-2. **Safe fallback** — если `followTime == 0` → skip unfollow (не трогаем pre-existing). В `executeUnfollowTask`: приоритет `user.followTime`, затем `followedUsers`, skip при 0.
-3. WebView/GraphQL — отложен до проверки HTML state parsing
+**Решение от 2026-06-25:** Follow/unfollow отложены на следующий этап разработки. Код unfollow сохранён в отдельной ветке GitHub. Из текущей версии приложения функциональность unfollow удалена.
+
+**followTime=0 issue (2026-06-25):**
+- Приложение не делало follow самостоятельно — все подписки существовали до разработки
+- `followedUsers` SharedPreferences пуст
+- HTML embedded JSON не содержит `followed_at` ни в каком виде
+- `collectFollowTimes()` не находит данных
+- **Итог:** unfollow не работает, т.к. followTime=0 для всех существующих подписок
+
+**Необходимо для фикса:**
+1. WebView/GraphQL для получения списка following и followTime
+2. Либо механизм unfollow без followTime (по возрасту подписки из HTML, или просто unfollow всех с задержкой)

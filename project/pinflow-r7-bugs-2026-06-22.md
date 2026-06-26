@@ -1,6 +1,6 @@
 ---
 name: PinFlow R7 bugs plan
-description: PinFlow Round 7 — 4 bugs identified 2026-06-22, fix attempt in progress 2026-06-23
+description: PinFlow R7 — 4 bugs identified 2026-06-22, 2 fixed (NetworkOnMainThread, Username), 2 deferred to unfollow branch (CSRF, followTime=0) 2026-06-25
 type: project
 ---
 
@@ -12,52 +12,34 @@ type: project
 **File:** AuthActivity.kt, `extractUsernameViaHttp()` line ~543
 **Problem:** `webView.settings.userAgentString` called on `DefaultDispatcher-worker` (IO) — WebView methods require Main thread.
 **Fix:** Wrap whole function body in `withContext(Dispatchers.Main) { ... }`.
+**Status:** ✅ FIXED (confirmed in log 2026-06-25)
 
 ### Bug 2: CSRF NOT FOUND on 2nd automation run
 **File:** PinterestAutomator.kt, `getCookies()` line 492
 **Problem:** `getCookies()` falls back to `account.cookies` (stale from constructor). After re-login, CookieManager has fresh csrftoken but Automator uses old account.cookies.
 **Fix:** Remove `account.cookies` fallback, always use `CookieManager.getCookie(BASE_URL)`.
+**Status:** ❌ PERSISTS — deferred to unfollow branch (2026-06-25)
 
 ### Bug 3: followTime=0 for all 12 users
 **File:** PinterestAutomator.kt, `findFollowingInJson()` line 1045
 **Problem:** Pinterest JSON does NOT contain `followed_at`. Embedded usernames parsed without followTime, all skipped as "unknown followTime".
 **Fix:** Add `collectFollowTimes()` helper that walks `__PINTEREST_APP__`/`__INITIAL_STATE__` JSON for any `followed_at`/`follow_time` fields and passes to `UserDataWithFollowerStatus`.
+**Status:** ❌ PERSISTS — deferred to unfollow branch (2026-06-25)
 
 ### Bug 4: Username mismatch (Soulexpert vs breathefree0177)
 **File:** PinterestAutomator.kt `start()` line ~65
-**Problem:** After re-login, `account.username` in Automator = old value. `startAutomation()` in MainActivity passes `effectiveAccount` from DB, but after re-auth session may be stale.
-**Fix:** Refresh username at start: `val freshUsername = SessionManager(context).getUserName() ?: account.username; this.account = account.copy(username = freshUsername)`.
+**Problem:** After re-login, `account.username` in Automator = old value.
+**Fix:** Refresh username at start from SessionManager.
+**Status:** ✅ FIXED (confirmed in log 2026-06-25)
 
-## Fix Attempt (2026-06-23, in progress)
+## Resolution (2026-06-25)
 
-### Round 1: 4 Python patches via SSH heredoc — FAILED
-- Wrote patch1.py..patch5.py via `cat > /tmp/patch.py << 'EOF'` in SSH heredocs
-- Nested quotes (`\"`, `${...}`) broke bash escaping — patches 3 and 4 failed immediately
-- Applied 3 patches that did run, built:
-  - **Compile error:** `AuthActivity.kt:587:19 Expecting ')'` — patch1 inserted `withContext(Dispatchers.Main) {` but `return try {` followed — unbalanced
-  - **Duplicate line:** patch4 inserted `val freshUsername` twice
-- **Restored from .bak** (backups at *.bak and *.bak2)
+User decided to **defer follow/unfollow to next development phase**. All follow/unfollow code preserved in `unfollow` branch on GitHub. Bugs 2 and 3 only affect unfollow flow, so they move with it.
 
-### Round 2: Write locally, SCP, run (in progress)
-- Write `apply_fixes.sh` locally via Write tool → SCP to server → bash on server
-- **Why:** avoids all nested-quote hell with heredocs
-- Script applies 5 sed rules for all 4 bugs
-- **User interrupted** before SCP+execute completed
-
-## Files to modify
-- /root/pinflow_scp/app/src/main/java/com/pinflow/ui/AuthActivity.kt (Bug 1)
-- /root/pinflow_scp/app/src/main/java/com/pinflow/automator/PinterestAutomator.kt (Bug 2, 3, 4)
+## Server git state (2026-06-25)
+- master: has R7 fix commit (073c1e6), ahead of origin/master
+- unfollow: branch created from R7 commit with full follow/unfollow code
+- Both branches need push to GitHub
 
 ## Build server
 SSH root@45.146.164.144 → cd /root/pinflow_scp → ./gradlew assembleDebug
-
-## APK delivery
-scp to /sdcard/Download/pinflow-r7.apk
-
-## Status (2026-06-23)
-**In progress.** Round 1 failed compile. Restored from .bak. Round 2: apply_fixes.sh written locally at `/data/data/com.termux/files/home/apply_fixes.sh`, needs SCP to server + execute + rebuild + APK delivery.
-
-## Lessons
-- PinFlow Kotlin source has `$` and `\"` everywhere — never send fix patches via SSH heredoc.
-- Always: Write locally → SCP → run on server. (Matches existing ssh-quoting-workaround rule.)
-- Patch spray (sed/Python with complex escaping) unreliable for Kotlin. Better: `Read` server file → `Write` new version locally (with exact changes) → SCP over.
