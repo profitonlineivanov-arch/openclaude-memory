@@ -138,4 +138,5 @@
 - [Device log access — Termux](feedback/device-log-access-termux.md) — Termux нет adb, /sdcard/ и /storage/* недоступны без opt-in; проси пользователя положить артефакт самому (2026-06-28)
 - [When user says "find it yourself"](feedback/user-says-find-yourself.md) — pivot на server/git/code, не проси device-side данные (2026-06-28)
 - [Termux shared-storage opt-in](feedback/termux-storage-optin-required.md) — /storage/* и /home/storage/* работают только после termux-setup-storage; не sweep'ить (2026-06-28)
+- [Do not promise impossible actions](feedback/do-not-promise-impossible.md) — не обещать «посмотрю позже», если не можешь (2026-06-28)
 - [PinFlow package path](reference/pinflow-package-path.md) — package = com.pinflow (не com.pinterest.automator), актуальный source layout (2026-06-28)
