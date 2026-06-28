@@ -130,5 +130,12 @@
 - [Stale gradle intermediates](feedback/gradle-stale-intermediates.md) — interrupted builds → NoSuchFileException; fix: clean + assembleDebug (2026-06-12)
 - [Config sync — memory only](project/config-sync-gap.md) — configs/ удалён из tracking, только .md память synced (2026-06-19)
 - [ZenMux Provider](project/zenmux-provider-setup.md) — бесплатные модели z-ai/glm-5.2-free, moonshotai/kimi-k2.7-code-free, нужен API key (2026-06-19)
-- [PinFlow Local Repo Status 2026-06-28](project/pinflow-local-repo-status-2026-06-28.md) — local ~/pinflow master at 18c2b94, only app-debug.apk uncommitted (2026-06-28)
+- [PinFlow Local Repo Status 2026-06-28](project/pinflow-local-repo-status-2026-06-28.md) — CSRF fix committed 5be1a33 on server, APK ~/downloads/pinflow-csrf-fix.apk, NOT delivered/tested; local 3 commits behind
 - [PinFlow Hidden Follow/Unfollow UI](feedback/pinflow-hide-broken-ui.md) — hide broken UI via visibility=gone + force false in loadSettings, don't delete code (2026-06-28)
+- [PinFlow boards broken 2026-06-28](project/pinflow-boards-broken-csrf-2026-06-28.md) — CSRF fix committed 5be1a33, APK built, awaiting user test (login ru.pinterest.com → Загрузить доски)
+- [Retrofit with helper, not rewrite](feedback/retrofit-with-helper-not-rewrite.md) — когда «раньше работало» + один недостающий параметр: singleton helper + 1 строка замены, не переписывать парсер/UI
+- [Stop on frustrated interrupt](feedback/stop-on-frustrated-interrupt.md) — после «и что?»/«как процесс?» стоп sweep /sdcard, pivot на server-side сразу
+- [Device log access — Termux](feedback/device-log-access-termux.md) — Termux нет adb, /sdcard/ и /storage/* недоступны без opt-in; проси пользователя положить артефакт самому (2026-06-28)
+- [When user says "find it yourself"](feedback/user-says-find-yourself.md) — pivot на server/git/code, не проси device-side данные (2026-06-28)
+- [Termux shared-storage opt-in](feedback/termux-storage-optin-required.md) — /storage/* и /home/storage/* работают только после termux-setup-storage; не sweep'ить (2026-06-28)
+- [PinFlow package path](reference/pinflow-package-path.md) — package = com.pinflow (не com.pinterest.automator), актуальный source layout (2026-06-28)
