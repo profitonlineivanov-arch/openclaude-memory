@@ -1,22 +1,27 @@
 ---
-name: Memory sync — FIXED with token file + HTTPS
-description: Auto sync via hooks now works on Windows: HTTPS + PAT token file replaces broken SSH
+name: Memory sync — memory only, no configs
+description: sync.sh синхронизирует только .md память через GitHub; configs/ исключены из tracking (2026-06-19)
 type: feedback
 ---
 
-**Решение найдено (2026-06-16).**
+**Архитектура (2026-06-19):**
+- PAT токен в `config/sync-remote.txt` (в .gitignore)
+- sync.sh читает токен из файла, HTTPS remote
+- `configs/` в .gitignore — провайдеры, хуки, тулзы НЕ синхронизируются
+- **2026-06-19:** токен-файл ОТСУТСТВУЕТ (удалился вместе с configs/). Push без токена падает. Fix:
+  1. `gh auth login --web -p https` (device flow в Termux, код передать пользователю)
+  2. `gh auth token` → получить gho_...
+  3. `git remote set-url origin "https://user:TOKEN@github.com/..."` → push → `git remote set-url origin "https://github.com/..."` (вернуть чистый URL)
+  - gh auth НЕ делает git push автоматически — нужен token в URL или credential helper
 
-**Финальный подход:**
-- PAT токен хранится в файле `config/sync-remote.txt` (в .gitignore, не коммитится)
-- sync.sh читает токен из файла: `sed -n '2p' config/sync-remote.txt | sed 's|https://[^:]*:||' | sed 's|@github.com.*||'`
-- GITHUB_TOKEN env var не используется (не пробрасывается в MSYS2 bash)
-- HTTPS remote для автоматики, SSH remote для терминала
+**Что synced:**
+- .md файлы памяти (feedback, project, reference, user, team)
+- MEMORY.md индексы
 
-**Почему не SSH:**
-- MSYS2 bash не видит Windows ssh-agent
-- Git Credential Manager использует `manager` (кроссплатформенный), не `wincred`
-- PAT с HTTPS решил проблему
+**Что НЕ synced:**
+- .openclaude.json, settings.json, .openclaude-profile.json
+- settings.local.json, config/sync-remote.txt
 
-**Статус (2026-06-16):** РАБОТАЕТ. 3 коммита запушены, auto-sync хуки готовы к автоматической работе.
+**Why:** Пользователь решил что настройки — устройство-специфичные. Ollama-провайдеры ломали Termux. Скиллы и тулзы разные между платформами.
 
-**Важно:** Локальные модели (Ollama) НЕ синхронизируются — на другом устройстве работать не будут.
+**How to apply:** Не пытаться синхронизировать конфиги. Для нового устройства — настроить провайдеры вручную.

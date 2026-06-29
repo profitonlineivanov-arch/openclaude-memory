@@ -6,7 +6,7 @@ type: reference
 
 **npm package:** `@gitlawb/openclaude`
 **GitHub repo:** `Gitlawb/openclaude`
-**Current version:** 0.19.0 (updated 2026-06-16)
+**Current version:** 0.19.0 (verified 2026-06-17)
 
 **Update command:**
 ```

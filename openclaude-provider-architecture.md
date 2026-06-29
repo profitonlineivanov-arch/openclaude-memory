@@ -16,9 +16,7 @@ OpenClaude использует **OpenAI-совместимый формат API
 **Путь 1 — бэкапы:** `ls -lt .openclaude/backups/` → `cp backups/<latest> .openclaude/.openclaude.json`
 - Бесполезны если ВСЕ бэкапы созданы ПОСЛЕ потери (firstStartTime = сегодня)
 
-**Путь 2 — configs/ в memory-репо:** `cd memory && bash sync.sh pull && cp configs/.openclaude.json ~/.openclaude.json`
-- Работает если другая машина запушила полный конфиг в `configs/`
-- `sync.sh pull` подтягивает `configs/` из GitHub, но `copy_configs_to_oc` может молча провалиться (файл заблокирован процессом)
+**Путь 2 — configs/ в memory-репо:** ~~УДАЛЁН 2026-06-19~~. configs/ исключён из tracking (.gitignore). Recovery через GitHub невозможен.
 
 **Путь 3 — ручное пересоздание:** через `/provider` или редактирование `.openclaude.json`
 

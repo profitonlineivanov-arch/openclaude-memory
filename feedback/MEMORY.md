@@ -1,0 +1,1 @@
+- [Model Tool Scope Limitation](feedback/model-tool-scope-limitation.md) — Tools run against isolated state (ollama list limited to Ollama API) (2026-06-29)
