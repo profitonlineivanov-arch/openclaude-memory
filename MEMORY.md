@@ -67,6 +67,9 @@
 - [Selector Iteration RE](project/selector-iteration-reverse-engineering.md) — анализ restarts для 1/2/3/4 совпадений: 2 запуска (с RI и без) на 10k тиражей (2026-06-08)
 - [Selector iteration uses full pipeline](selector-iteration-uses-full-pipeline.md) — анализ итераций требует ПОЛНЫЙ пайплайн Селектора, не упрощенную версию
 - [2x2 Selector Iteration Analysis Complete](team/2x2-selector-iteration-analysis.md) — restarts-based методология, 10k run launched on server 18:28 (2026-06-07)
+- [2x2 Selector Dual Attempt](project/2x2-selector-dual-attempt-2026-06-30.md) — configurable selector_attempts, N-1 отбрасываются, attempts учтены (2026-06-30)
+- [2x2 Fix Type Russian Labels](project/2x2-selector-fix-type-russian-labels-2026-06-30.md) — fix_type на русском: Перестановка цифр, Смена позиций, Пропуск по RI (2026-06-30)
+- [2x2 Timing Settings Dashboard](project/2x2-timing-settings-dashboard-2026-06-30.md) — /timing страница с редактированием параметров HourlyTimingAnalyzer через UI (2026-06-30)
 - [User communication when misunderstood](feedback/user-frustration-escalation.md) — escalation tier 3 = payment/refund demands; concrete pre-turn ritual for status-check tasks
 - [Don't invent task goals](feedback/dont-invent-task-goals.md) — выполняешь ssh/проверку без явной цели → спросить о цели, не придумывать мотивацию самому (2026-06-08)
 - [Don't reconstruct when denied](feedback/dont-reconstruct-when-denied.md) — пользователь отверг мою цель → «не знаю, скажи прямо», НЕ перечислять догадки (2026-06-08)
@@ -80,6 +83,7 @@
 - [Verifier unreliable in Termux](feedback/verifier-fails-termux.md) — verification падает/отказывает; use Explore/manual checks
 - [gh device flow in Termux](feedback/gh-device-flow-termux.md) — gh auth login запускает device flow в Termux, код нужно передать пользователю
 - [MCP Servers Catalog](mcp-servers-catalog.md) — 8 плагинов + 4 MCP: chrome-devtools✅ playwright⚠️ caveman-shrink❌ codegraph✅ (2026-06-23)
+- [Dashboard templates need restart](feedback/dashboard-template-needs-restart.md) — модульные HTML-строки в dashboard_2x2.py требуют рестарта процесса, в отличие от файлов в templates/
 - [Claude Code Plugins](plugins-installed.md) — 8 плагинов восстановлено после потери конфига (2026-06-14)
 - [CodeGraph](graphify-tool.md) — colbymchenry/codegraph v0.9.9, MCP code intelligence, замена Graphify (2026-06-09)
 - [Bluesminds Provider](bluesminds-setup.md) — ВОССТАНОВЛЕН, работает: Qwen 3.5 397B, модели gpt-4o/GPT-5.5 доступны (2026-06-18)
