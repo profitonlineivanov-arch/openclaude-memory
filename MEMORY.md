@@ -25,7 +25,7 @@
 - [Hanma.ru Favicon Setup](favicon-hanma-ru.md) — создан HTML-код для фавиконов hanma.ru (2026-04-17)
 - [2x2 Project](project-2x2.md) — лотерейный предиктор 2x2: RI v3, диагональные триггеры, AC quality (2026-05-26)
 - [2x2 DB schema](2x2-db-schema.md) — DB at database/lottery.db (not root!), draw_number, predictions_v4, created_at (not timestamp)
-- [2x2 AC Quality Broken](project/2x2-ac-quality-broken-2026-06-29.md) — trigger ACs not saved by driver_v5.py, fix applied 2026-06-29
+- [2x2 AC Quality — 2 bugs + fix](project/2x2-ac-quality-fixed-2026-06-30.md) — wrong config key + driver calls analyze() not analyze_with_details()
 - [2x2 Backfill Mismatch](project/2x2-pattern-analyzer-bug-2026-06-29.md) — anti_candidates_history ≠ dashboard (/trigger uses in-memory compute, not DB)
 - [2x2 Dashboard Reorganization](project/2x2-dashboard-reorganization.md) — /beams restyled + AC stats 50/100/500, AC stays on /trigger (2026-06-01 CORRECTED)
 - [2x2 Hourly Analysis](project/2x2-hourly-analysis.md) — лучшие часы для прогнозов: 10-15 (49%), худшие: 08,13 (42%) (2026-05-29)
