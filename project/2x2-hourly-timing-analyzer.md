@@ -9,10 +9,10 @@ type: project
 **Что делает**: анализирует命中率 прогнозов по часам суток и дню недели, выдаёт сигнал PLAY/WAIT.
 
 **Файлы**:
-- `/root/projects/2x2/hourly_timing_analyzer.py` — основной модуль
+- `/root/projects/2x2/hourly_timing_analyzer.py` — основной модуль (с 2026-07-01: авто-загрузка YAML конфига + _save_config())
 - `dashboard_2x2.py` — баннер + подсветка строк (API: /api/timing_signal, /api/favorable_draws, /api/favorable_periods)
 - `driver_v5.py` — вызов update_stats() после каждого цикла
-- `config_v5.yaml` — секция hourly_timing (порог 0.47)
+- `config_v5.yaml` — секция hourly_timing (порог 0.5; через feedback корректируется и сохраняется обратно)
 
 **БД**: таблица `hourly_timing_stats` (rolling windows 7/30/90/all-time)
 
@@ -33,7 +33,7 @@ type: project
 - Base score = hit_rate за **90 дней** (или best available window) — изменено с 30d для стабильности
 - Adjustment 1: **21-дневный** тренд — если 21d hit_rate лучше 90d, добавляется `+trend * 0.3` (увеличено с 7d — 7 дней слишком мало для hour+dow статистики)
 - Adjustment 2: streak mean reversion — после серии >= 8 проигрышей подряд добавляется `+0.03`
-- Порог: score >= 0.47 → PLAY, иначе WAIT (адаптивный 0.40–0.55 через feedback)
+- Порог: score >= threshold → PLAY (базовый 0.5 в config_v5.yaml, адаптивный 0.40–0.55 через feedback, runtime 0.5 — синхронизирован с YAML с 2026-07-01)
 - best_hours и next_favorable тоже используют окно 90d
 
 **Feedback-механизм (реализован 2026-05-31):**
@@ -60,4 +60,4 @@ Reason строка показывает "за 90д" (не 30д).
 - All: PLAY 51.7% (6123), WAIT 57.6% (6769) — 12892 записей
 
 **Why:** Пользователь заинтересован в feedback-механизме для корректировки сигналов — чтобы система училась на своих ошибках.
-**How to apply:** При изменениях в timing analyzer — feedback-механизм уже интегрирован. Порог корректируется автоматически в памяти (не в конфиге). При добавлении новых метрик — расширять analyze_feedback().
+**How to apply:** При изменениях в timing analyzer — feedback-механизм уже интегрирован. Порог корректируется автоматически и сохраняется в config_v5.yaml через _save_config(). При добавлении новых метрик — расширять analyze_feedback().
