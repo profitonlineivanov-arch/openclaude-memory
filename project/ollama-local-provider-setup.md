@@ -1,16 +1,37 @@
 ---
 name: Ollama Local Provider Setup
-description: RTX 3050 8GB — qwen2.5:7b работает, 14b удалён. 4 модели в Ollama, qwen2.5:7b активна для OpenClaude.
+description: Смартфон 8GB RAM (3.3GB avail), CPU only, no GPU. gemma2:2b + qwen3:4b установлены. gemma4:e4b удалена, e2b отменена.
 type: project
 ---
 
-**Готово (2026-06-16):**
-- qwen2.5:7b установлен (4.7 GB) — влезает в RTX 3050 8GB
-- qwen2.5:14b удалён — Vulkan allocation fail (нужно ~10 GB buffer, есть только 8 GB)
-- Провайдер "Ollama Local" в .openclaude.json использует qwen2.5:7b
-- `/provider` → "Ollama Local" работает
+**Текущее состояние (2026-07-02, обновлено):**
+- gemma2:2b (1.6 GB) — локальная, работает на CPU
+- **qwen3:4b** (2.5 GB) — УСТАНОВЛЕНА 2026-07-02. Tool use поддержка. CPU inference очень медленная на смартфоне (~2-5 мин на ответ).
+- gemma4:e2b — была установлена, попытка использовать через `/provider` 2026-07-02: сессия упала, переключились обратно на Gitlawb mimo-v2.5-pro. Без tool use, зацикливается. `.openclaude-profile.json` может застрять на e2b после краша — переключить вручную.
+- gemma4:31b-cloud (0 MB) — облачная модель, зарегистрирована в Ollama
 
-**Ограничение:** Максимум ~7 GB на модель из-за Vulkan-оверхеда. Более агрессивные кванты (Q3, Q2) не стоят потери качества — 7b Q4_K_M > 14b Q2.
+**Ollama как провайдер (2026-07-02):**
+- Ollama — implicit/auto-detected провайдер, НЕ в `providerProfiles` в `.openclaude.json`
+- Endpoint: `http://localhost:11434/v1`
+- qwen3:4b добавлена вручную в `additionalModelOptionsCache` (scope: `openai:http://localhost:11434/v1`) — иначе не появляется в `/model` UI
+- **Баг UI**: модель `gemma4:e2b` сохраняется в конфиг как `gemma4:e2b\n\n7,2 ГБ · 128 КБ...` — UI metadata приклеивается к имени. Видно в backups/.openclaude.json.backup.*
+- **qwen3:4b не видна в `/model`** без рестарта — кэш обновлён, но OpenClaude UI кеширует список моделей в RAM. Решение: выход + заново запустить `claude`
+- `.openclaude-profile.json` не содержит Ollama профиль — при переключении на Ollama через `/provider` profile создаётся динамически
 
-**Why:** qwen2.5:14b не влезал в VRAM, ошибка `alloc_tensor_range: failed to allocate Vulkan0 buffer of size 1046986752`.
-**How to apply:** Провайдер настроен, переключение через `/provider`.
+**Ресурсы устройства (2026-07-02):**
+- Смартфон (Android, Termux)
+- RAM: 7.6 GB total, **3.3 GB доступно**
+- GPU: **нет** — inference только на CPU
+- CPU: 8 ядер
+- Диск: 122 GB свободно
+
+**Доступные gemma4 теги (ollama.com/library/gemma4):** e2b, e4b, 12b, 26b, 31b, 31b-cloud, latest (+ mlx варианты). Нет квантованных тегов — только полные веса.
+
+**Альтернативы для малого RAM (проверено 2026-07-02):**
+- qwen3:4b (~2.5 GB Q4) — лучший quality/RAM ratio с tool use
+- qwen3:1.7b — меньше, ниже качество
+- qwen2.5:3b — были проблемы с memory в прошлом
+- phi4-mini:3.8b — нет уверенности в tool use
+
+**Why:** e2b=7.2 GB и e4b=9.6 GB обе не влезают в 3.3 GB. Ollama gemma4 не имеет квантованных тегов. qwen3:4b (~2.5 GB) — самый качественный вариант с tool use.
+**How to apply:** Локально — gemma2:2b (1.6 GB) работает быстро, qwen3:4b (2.5 GB) работает но медленно на CPU. Cloud — gemma4:31b-cloud. Переключение через `/provider`.

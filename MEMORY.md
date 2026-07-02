@@ -1,7 +1,6 @@
 # Memory Index
 
-- [Gemma 4 Local Setup](project/gemma4-local-setup.md) — 4 модели Ollama: qwen2.5:7b (работает), coder:7b, starcoder2:7b, gemma4:e4b. 14b удалён — не влезал в VRAM (2026-06-16)
-- [Ollama Local Provider](project/ollama-local-provider-setup.md) — qwen2.5:7b активна для OpenClaude, RTX 3050 8GB, 14b удалён (2026-06-16)
+- [Ollama Local Provider](project/ollama-local-provider-setup.md) — gemma2:2b + qwen3:4b установлены. e4b удалена, e2b отменена. CPU inference медленная (2026-07-02)
 - [Local models need tool use](feedback/local-models-need-tool-use.md) — Ollama модели без tool use зацикливаются в OpenClaude (32k overflow)
 - [OpenClaude Update](reference/openclaude-update-mechanism.md) — пакет @gitlawb/openclaude (не openclaude!), repo Gitlawb/openclaude, обновлён до 0.19.0 (2026-06-16)
 - [PinFlow Parallel Automation](project/pinflow-parallel-automation.md) — parallel task loops in PinterestAutomator to prevent task starvation (2026-06-11)
