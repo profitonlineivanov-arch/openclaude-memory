@@ -82,7 +82,7 @@
 - [Verify after parallel edits](feedback/verify-after-parallel-edits.md) — после параллельных правок обязательна верификация subagent-ом перед коммитом
 - [Verifier unreliable in Termux](feedback/verifier-fails-termux.md) — verification падает/отказывает; use Explore/manual checks
 - [gh device flow in Termux](feedback/gh-device-flow-termux.md) — gh auth login запускает device flow в Termux, код нужно передать пользователю
-- [MCP Servers Catalog](mcp-servers-catalog.md) — 8 плагинов + 3 MCP (Playwright, Chrome DevTools, caveman-shrink), CodeGraph Termux-only (2026-06-14)
+- [MCP Servers Catalog](mcp-servers-catalog.md) — 8 плагинов + 4 MCP: chrome-devtools✅ playwright⚠️ caveman-shrink❌ codegraph✅ (2026-06-23)
 - [Claude Code Plugins](plugins-installed.md) — 8 плагинов восстановлено после потери конфига (2026-06-14)
 - [CodeGraph](graphify-tool.md) — colbymchenry/codegraph v0.9.9, MCP code intelligence, замена Graphify (2026-06-09)
 - [Bluesminds Provider](bluesminds-setup.md) — ВОССТАНОВЛЕН, работает: Qwen 3.5 397B, модели gpt-4o/GPT-5.5 доступны (2026-06-18)
@@ -110,7 +110,8 @@
 - [Don't extrapolate sub-tasks from prereqs](feedback/dont-extrapolate-subtasks-from-prereqs.md) — "изучи FOO.py" в prerequisite list ≠ "сделай прогон без FOO"; список файлов — это план, не подзадачи (2026-06-08)
 - [CodeGraph Analysis](project/codegraph-analysis.md) — v0.9.9 installed, Termux-patched, pinflow indexed, MCP registered (2026-06-09)
 - [RTK Evaluated](rtk-evaluated.md) — rtk-ai/rtk CLI proxy для сжатия shell output, -60-90% токенов, НЕ code intelligence (2026-06-09)
-- [Caveman Evaluated](caveman-evaluated.md) — output compression plugin, -65% output токенов, поддерживает OpenClaude (2026-06-09)
+- [Caveman Evaluated](caveman-evaluated.md) — output compression plugin, hooks работают, caveman-shrink MCP сломан (2026-06-23)
+- [Ruflo Evaluated](project/ruflo-evaluation.md) — agent meta-harness ruvnet/ruflo, совместим с OpenClaude через MCP server (2026-07-06)
 - [PinFlow Local Workflow](feedback/pinflow-local-workflow.md) — перед сборкой сверять local↔server (gradle.properties, local.properties, imports) (2026-06-11)
 - [PinFlow Board Loader — WORKING](project/pinflow-board-loader-implementation.md) — dual-stage: BoardsResource + BoardResource/get/, 4 commits (включая detailed logging), GitHub master (2026-06-10)
 - [PinFlow Board Loader Status](project/pinflow-board-loader-status.md) — РАБОТАЕТ, подтверждено пользователем, 3 коммита запушены (2026-06-10)
@@ -129,8 +130,15 @@
 - [Verify before contradicting](feedback/verify-before-contradicting.md) — не утверждать "не работает" когда сессионные логи показывают обратное (2026-06-18)
 =======
 - [PinFlow Unfollow Fix v2](project/pinflow-unfollow-zero.md) — isUserObj widened to json.has("username"), APK pinflow-unfollow-fix-v2.apk delivered 2026-06-18
-- [PinFlow Unfollow — API blocked](project/pinflow-unfollow-session-summary.md) — FollowingResource отдаёт HTML/403, v5-v10 не помогли, нужен WebView/GraphQL (2026-06-18)
+- [PinFlow Unfollow — API blocked](project/pinflow-unfollow-session-summary.md) — FollowingResource 100% 403, followTime=0 persist (обновлён 2026-06-25)
+- [PinFlow Test 2026-06-21 + Fixes Applied](project/pinflow-test-2026-06-21.md) — 4 бага найдены, 3 исправлены; 2026-06-22 shows 3 persist + username mismatch
+- [PinFlow followTime fix deployed](project/pinflow-followtime-fix-deployed.md) — SUPERSEDED by R7 branch: followTime persisted, CSRF persisted (2026-06-22)
+- [PinFlow R7 bugs plan](project/pinflow-r7-bugs-2026-06-22.md) — 4 bugs: 2 fixed (WebView thread, Username stale), 2 deferred to unfollow branch (2026-06-25)
 - [PinFlow Remote Build Workflow](feedback/pinflow-remote-build-workflow.md) — APK builds on server 45.146.164.144 (Termux aarch64 can't build x86_64)
 - [Stale gradle intermediates](feedback/gradle-stale-intermediates.md) — interrupted builds → NoSuchFileException; fix: clean + assembleDebug (2026-06-12)
 - [Config sync — memory only](project/config-sync-gap.md) — configs/ удалён из tracking, только .md память synced (2026-06-19)
+<<<<<<< HEAD
+>>>>>>> origin/main
+=======
+- [ZenMux Provider](project/zenmux-provider-setup.md) — бесплатные модели z-ai/glm-5.2-free, moonshotai/kimi-k2.7-code-free, нужен API key (2026-06-19)
 >>>>>>> origin/main

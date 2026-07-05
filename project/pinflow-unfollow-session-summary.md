@@ -1,10 +1,10 @@
 ---
-name: PinFlow Unfollow Session Summary 2026-06-18
-description: Все попытки получить following через API провалились — Pinterest блокирует FollowingResource
+name: PinFlow Unfollow Session Summary 2026-06-21
+description: Все попытки получить following через API провалились — Pinterest блокирует FollowingResource, нужен WebView/GraphQL. Статус на 2026-06-25: FollowingResource 100% 403.
 type: project
 ---
 
-**Дата:** 2026-06-18
+**Дата:** 2026-06-18, обновлён 2026-06-25
 
 **Попробованные подходы (v5-v10):**
 
@@ -22,11 +22,17 @@ type: project
 
 **Root cause:** Pinterest изменил FollowingResource API — отдаёт HTML/ошибку вместо JSON. Список following подгружается через JS (React hydration), а не через initial HTML или API.
 
-**Race condition:** Параллельные потоки отписок и подписок получают разные cookies — один находит CSRF, другой нет.
+**Статус на 2026-06-25:** FollowingResource ранее возвращал JSON intermittently (сессия 2026-06-12: 200 OK 408KB). Сейчас (тест pinflow-fixes.apk) 100% 403 — Pinterest полностью заблокировал API endpoint для всех версий.
 
-**APK:** v10 в /sdcard/Download/pinflow-unfollow-v10.apk
+**Решение от 2026-06-25:** Follow/unfollow отложены на следующий этап разработки. Код unfollow сохранён в отдельной ветке GitHub. Из текущей версии приложения функциональность unfollow удалена.
 
-**Следующие шаги:**
-1. Использовать Selenium/WebView для рендеринга JS и извлечения following
-2. Или использовать Pinterest GraphQL API (если есть)
-3. Или попробовать другие endpoints: /resource/UserFollowingResource/, /resource/BoardFollowingResource/
+**followTime=0 issue (2026-06-25):**
+- Приложение не делало follow самостоятельно — все подписки существовали до разработки
+- `followedUsers` SharedPreferences пуст
+- HTML embedded JSON не содержит `followed_at` ни в каком виде
+- `collectFollowTimes()` не находит данных
+- **Итог:** unfollow не работает, т.к. followTime=0 для всех существующих подписок
+
+**Необходимо для фикса:**
+1. WebView/GraphQL для получения списка following и followTime
+2. Либо механизм unfollow без followTime (по возрасту подписки из HTML, или просто unfollow всех с задержкой)

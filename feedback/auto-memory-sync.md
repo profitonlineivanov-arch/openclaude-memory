@@ -8,11 +8,11 @@ type: feedback
 - PAT токен в `config/sync-remote.txt` (в .gitignore)
 - sync.sh читает токен из файла, HTTPS remote
 - `configs/` в .gitignore — провайдеры, хуки, тулзы НЕ синхронизируются
-- **2026-06-19:** токен-файл ОТСУТСТВУЕТ (удалился вместе с configs/). Push без токена падает. Fix:
-  1. `gh auth login --web -p https` (device flow в Termux, код передать пользователю)
-  2. `gh auth token` → получить gho_...
-  3. `git remote set-url origin "https://user:TOKEN@github.com/..."` → push → `git remote set-url origin "https://github.com/..."` (вернуть чистый URL)
-  - gh auth НЕ делает git push автоматически — нужен token в URL или credential helper
+**Аутентификация (обновлено 2026-06-19):**
+- `gh auth login --web -p https` (device flow в Termux, код передать пользователю)
+- `git config --global credential.helper '/data/data/com.termux/files/usr/bin/gh auth git-credential'`
+- gh credential helper автоматически отдаёт токен при git push/pull — токен в URL НЕ нужен
+- Токен-файл `config/sync-remote.txt` больше не используется
 
 **Что synced:**
 - .md файлы памяти (feedback, project, reference, user, team)

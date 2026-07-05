@@ -18,9 +18,9 @@ type: reference
 | caveman | 25d22f8 | caveman |
 
 **MCP-серверы:**
-- `.mcp.json`: playwright + chrome-devtools
-- `.openclaude.json`: caveman-shrink
-- CodeGraph — Termux only
+- `.mcp.json`: playwright + chrome-devtools ✅ (chrome-devtools 1.4.0, playwright-mcp check failed)
+- `.openclaude.json`: caveman-shrink ❌ (spawn ENOENT — сломан)
+- CodeGraph ✅ 0.9.9 — Termux only, работает
 
 **Провайдеры:** 4 (Gitlawb Opengateway, DeepSeek, NVIDIA NIM, Bluesminds) — восстановлены из configs/ memory-репо 2026-06-14.
 
