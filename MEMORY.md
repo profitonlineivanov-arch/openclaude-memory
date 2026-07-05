@@ -145,3 +145,4 @@
 - [Do not promise impossible actions](feedback/do-not-promise-impossible.md) — не обещать «посмотрю позже», если не можешь (2026-06-28)
 - [PinFlow package path](reference/pinflow-package-path.md) — package = com.pinflow (не com.pinterest.automator), актуальный source layout (2026-06-28)
 - [Explain params concretely](feedback/explain-params-concretely.md) — объяснять параметры через данные пользователя, не абстрактно
+- [OpenCode Zen Provider](project/opencode-zen-provider.md) — новый провайдер, добавлен 2026-07-03, модели gpt-5.4/deepseek-v4-flash-free
