@@ -41,3 +41,23 @@ type: project
 
 **Why:** User спросил "можно ли использовать для этого агента" — ответ: да, через MCP server. Затем спросил "что даст и как увижу" — ответ: конкретные выгоды для 2x2, PinFlow, сервера.
 **How to apply:** При вопросах об интеграции сторонних agent harness-ов — предлагать MCP server как основной путь. При объяснении новых инструментов — привязывать к конкретным проектам пользователя (2x2, PinFlow, сервер).
+
+## Установка (2026-07-06)
+
+**Статус:** Установлен и подключён.
+
+**Шаги:**
+1. `npm install -g ruflo@latest` → ruflo@3.25.1
+2. `openclaude mcp add ruflo -- node <npm-path>/ruflo.js mcp start` → stdio MCP добавлен
+3. `openclaude mcp list` → ruflo ✓ Connected
+
+**Проблемы:** Симлинк `ruflo` не создался в bash (Windows/msys2). Работает через прямой путь к `bin/ruflo.js`.
+
+**Доступные MCP-инструменты (~100+):**
+- Agent (10): spawn, exec, terminate, status, list, pool, health, update, logs, managed-агенты
+- Swarm (4): init, status, shutdown, health
+- Memory (24): key-value store, agenticow (COW-fork vector DB), semantic search, экспорт/импорт
+- Hooks (20+): pre/post command, pre/post edit, SONA обучение, routing, session management
+- Config (6): get/set/list/reset/export/import
+
+**Далее:** Пользователь согласился перезапустить OpenClaude, чтобы инструменты стали доступны.

@@ -55,8 +55,7 @@ type: project
 **Почему:** PinFlow — коммерческий автоматизатор, защита от декомпиляции и копирования логики критична.
 
 **Git state:**
-- master: R7 commit (073c1e6) + unfollow removal commit (741f895, -1188 lines), ahead of origin/master
+- master: R7 commit (073c1e6) + unfollow removal (741f895) + build fix (97da5f0), pushed to origin/master
 - unfollow: branch from 073c1e6 with full follow/unfollow code
-- Both need push to GitHub origin
 
-**Build status:** FAILED — activity_main.xml:373 has broken SwitchMaterial tag (Python script line-by-line removal corrupted XML structure). Needs fix before APK can build.
+**Build status:** FIXED 2026-06-26 — Python script left 4 orphaned artifacts: unclosed SwitchMaterial tags in activity_main.xml, activity declarations without android:name in AndroidManifest.xml, @string/follows reference (deleted resource), extra braces in MainActivity.kt + PinterestAutomator.kt. All fixed via SSH sed/Python, APK 8.3MB BUILD SUCCESSFUL.

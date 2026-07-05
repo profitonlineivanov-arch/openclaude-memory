@@ -16,7 +16,7 @@ type: reference
 7. **playwright@claude-plugins-official** — управление браузером
 8. **caveman@caveman** — output compression
 
-### MCP-серверы (2026-06-23)
+### MCP-серверы (2026-07-06)
 
 | Сервер | Конфиг | Статус |
 |--------|--------|--------|
@@ -24,6 +24,7 @@ type: reference
 | playwright-mcp | `.mcp.json` | ⚠️ не проверен (нет chromium в Termux) |
 | caveman-shrink | `.openclaude.json` | ❌ УДАЛЁН 2026-06-23 (npm 404) |
 | codegraph | глобал npm | ✅ 0.9.9 |
+| ruflo | `.openclaude.json` | ✅ 3.25.1 — agent meta-harness, ~100+ инструментов (2026-07-06) |
 
 **caveman-shrink** — настроен в `.openclaude.json` но `npx -y caveman-shrink` не работает. Caveman плагин работает через hooks, MCP не нужен.
 

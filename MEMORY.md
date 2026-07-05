@@ -29,7 +29,8 @@
 - [Hanma.ru Favicon Setup](favicon-hanma-ru.md) — создан HTML-код для фавиконов hanma.ru (2026-04-17)
 - [2x2 Project](project-2x2.md) — лотерейный предиктор 2x2: RI v3, диагональные триггеры, AC quality (2026-05-26)
 - [2x2 DB schema](2x2-db-schema.md) — DB at database/lottery.db (not root!), draw_number, predictions_v4, created_at (not timestamp)
-- [2x2 AC quality stats](2x2-ac-quality-stats.md) — on BOTH /trigger and /beams, error rate by analyzer/position, Chart.js (CORRECTED 2026-06-01)
+- [2x2 AC Quality — 2 bugs + fix](project/2x2-ac-quality-fixed-2026-06-30.md) — wrong config key + driver calls analyze() not analyze_with_details()
+- [2x2 Backfill Mismatch](project/2x2-pattern-analyzer-bug-2026-06-29.md) — anti_candidates_history ≠ dashboard (/trigger uses in-memory compute, not DB)
 - [2x2 Dashboard Reorganization](project/2x2-dashboard-reorganization.md) — /beams restyled + AC stats 50/100/500, AC stays on /trigger (2026-06-01 CORRECTED)
 - [2x2 Hourly Analysis](project/2x2-hourly-analysis.md) — лучшие часы для прогнозов: 10-15 (49%), худшие: 08,13 (42%) (2026-05-29)
 - [2x2 Hourly Timing Analyzer](project/2x2-hourly-timing-analyzer.md) — HourlyTimingAnalyzer: PLAY/WAIT + feedback loop, auto-threshold, порт 5000
@@ -70,6 +71,9 @@
 - [Selector Iteration RE](project/selector-iteration-reverse-engineering.md) — анализ restarts для 1/2/3/4 совпадений: 2 запуска (с RI и без) на 10k тиражей (2026-06-08)
 - [Selector iteration uses full pipeline](selector-iteration-uses-full-pipeline.md) — анализ итераций требует ПОЛНЫЙ пайплайн Селектора, не упрощенную версию
 - [2x2 Selector Iteration Analysis Complete](team/2x2-selector-iteration-analysis.md) — restarts-based методология, 10k run launched on server 18:28 (2026-06-07)
+- [2x2 Selector Dual Attempt](project/2x2-selector-dual-attempt-2026-06-30.md) — configurable selector_attempts, N-1 отбрасываются, attempts учтены (2026-06-30)
+- [2x2 Fix Type Russian Labels](project/2x2-selector-fix-type-russian-labels-2026-06-30.md) — fix_type на русском: Перестановка цифр, Смена позиций, Пропуск по RI (2026-06-30)
+- [2x2 Timing Settings Dashboard](project/2x2-timing-settings-dashboard-2026-06-30.md) — /timing страница с редактированием параметров HourlyTimingAnalyzer через UI (2026-06-30)
 - [User communication when misunderstood](feedback/user-frustration-escalation.md) — escalation tier 3 = payment/refund demands; concrete pre-turn ritual for status-check tasks
 - [Don't invent task goals](feedback/dont-invent-task-goals.md) — выполняешь ssh/проверку без явной цели → спросить о цели, не придумывать мотивацию самому (2026-06-08)
 - [Don't reconstruct when denied](feedback/dont-reconstruct-when-denied.md) — пользователь отверг мою цель → «не знаю, скажи прямо», НЕ перечислять догадки (2026-06-08)
@@ -83,6 +87,7 @@
 - [Verifier unreliable in Termux](feedback/verifier-fails-termux.md) — verification падает/отказывает; use Explore/manual checks
 - [gh device flow in Termux](feedback/gh-device-flow-termux.md) — gh auth login запускает device flow в Termux, код нужно передать пользователю
 - [MCP Servers Catalog](mcp-servers-catalog.md) — 8 плагинов + 4 MCP: chrome-devtools✅ playwright⚠️ caveman-shrink❌ codegraph✅ (2026-06-23)
+- [Dashboard templates need restart](feedback/dashboard-template-needs-restart.md) — модульные HTML-строки в dashboard_2x2.py требуют рестарта процесса, в отличие от файлов в templates/
 - [Claude Code Plugins](plugins-installed.md) — 8 плагинов восстановлено после потери конфига (2026-06-14)
 - [CodeGraph](graphify-tool.md) — colbymchenry/codegraph v0.9.9, MCP code intelligence, замена Graphify (2026-06-09)
 - [Bluesminds Provider](bluesminds-setup.md) — ВОССТАНОВЛЕН, работает: Qwen 3.5 397B, модели gpt-4o/GPT-5.5 доступны (2026-06-18)
@@ -111,7 +116,13 @@
 - [CodeGraph Analysis](project/codegraph-analysis.md) — v0.9.9 installed, Termux-patched, pinflow indexed, MCP registered (2026-06-09)
 - [RTK Evaluated](rtk-evaluated.md) — rtk-ai/rtk CLI proxy для сжатия shell output, -60-90% токенов, НЕ code intelligence (2026-06-09)
 - [Caveman Evaluated](caveman-evaluated.md) — output compression plugin, hooks работают, caveman-shrink MCP сломан (2026-06-23)
+<<<<<<< HEAD
 - [Ruflo Evaluated](project/ruflo-evaluation.md) — agent meta-harness ruvnet/ruflo, совместим с OpenClaude через MCP server (2026-07-06)
+=======
+- [gstack Evaluation](reference/gstack-evaluation.md) — garrytan/gstack evaluated, not compatible but user wants adapted skills (2026-06-26)
+- [gstack Adapted Skills](project/gstack-adapted-skills.md) — /review /plan /secaudit /spec as OpenClaude skills, BLOCKED by GitHub access (2026-06-26)
+- [GitHub blocked in Termux](reference/github-blocked-in-termux.md) — WebFetch can't reach github.com/raw.githubusercontent.com (private IPs) (2026-06-26)
+>>>>>>> origin/main
 - [PinFlow Local Workflow](feedback/pinflow-local-workflow.md) — перед сборкой сверять local↔server (gradle.properties, local.properties, imports) (2026-06-11)
 - [PinFlow Board Loader — WORKING](project/pinflow-board-loader-implementation.md) — dual-stage: BoardsResource + BoardResource/get/, 4 commits (включая detailed logging), GitHub master (2026-06-10)
 - [PinFlow Board Loader Status](project/pinflow-board-loader-status.md) — РАБОТАЕТ, подтверждено пользователем, 3 коммита запушены (2026-06-10)
@@ -141,4 +152,17 @@
 >>>>>>> origin/main
 =======
 - [ZenMux Provider](project/zenmux-provider-setup.md) — бесплатные модели z-ai/glm-5.2-free, moonshotai/kimi-k2.7-code-free, нужен API key (2026-06-19)
+<<<<<<< HEAD
+>>>>>>> origin/main
+=======
+- [PinFlow Local Repo Status 2026-06-28](project/pinflow-local-repo-status-2026-06-28.md) — CSRF fix committed 5be1a33 on server, APK ~/downloads/pinflow-csrf-fix.apk, NOT delivered/tested; local 3 commits behind
+- [PinFlow Hidden Follow/Unfollow UI](feedback/pinflow-hide-broken-ui.md) — hide broken UI via visibility=gone + force false in loadSettings, don't delete code (2026-06-28)
+- [PinFlow boards broken 2026-06-28](project/pinflow-boards-broken-csrf-2026-06-28.md) — CSRF fix committed 5be1a33, APK built, awaiting user test (login ru.pinterest.com → Загрузить доски)
+- [Retrofit with helper, not rewrite](feedback/retrofit-with-helper-not-rewrite.md) — когда «раньше работало» + один недостающий параметр: singleton helper + 1 строка замены, не переписывать парсер/UI
+- [Stop on frustrated interrupt](feedback/stop-on-frustrated-interrupt.md) — после «и что?»/«как процесс?» стоп sweep /sdcard, pivot на server-side сразу
+- [Device log access — Termux](feedback/device-log-access-termux.md) — Termux нет adb, /sdcard/ и /storage/* недоступны без opt-in; проси пользователя положить артефакт самому (2026-06-28)
+- [When user says "find it yourself"](feedback/user-says-find-yourself.md) — pivot на server/git/code, не проси device-side данные (2026-06-28)
+- [Termux shared-storage opt-in](feedback/termux-storage-optin-required.md) — /storage/* и /home/storage/* работают только после termux-setup-storage; не sweep'ить (2026-06-28)
+- [Do not promise impossible actions](feedback/do-not-promise-impossible.md) — не обещать «посмотрю позже», если не можешь (2026-06-28)
+- [PinFlow package path](reference/pinflow-package-path.md) — package = com.pinflow (не com.pinterest.automator), актуальный source layout (2026-06-28)
 >>>>>>> origin/main
