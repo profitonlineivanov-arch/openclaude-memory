@@ -146,3 +146,6 @@
 - [PinFlow package path](reference/pinflow-package-path.md) — package = com.pinflow (не com.pinterest.automator), актуальный source layout (2026-06-28)
 - [Explain params concretely](feedback/explain-params-concretely.md) — объяснять параметры через данные пользователя, не абстрактно
 - [OpenCode Zen Provider](project/opencode-zen-provider.md) — новый провайдер, добавлен 2026-07-03, модели gpt-5.4/deepseek-v4-flash-free
+- [Detector404 Wiki Links](project/detector404-wikipedia-links.md) — битые внешние ссылки Википедии → detector404.ru (2026-07-05)
+- [Broken Link Checker Tool](project/broken-link-checker-tool.md) — user wants universal SEO broken link checker app (2026-07-06)
+- [Proxy for blocked vs dead](feedback/proxy-distinguish-blocked-dead.md) — external proxy to distinguish RKN-blocked from truly dead sites (2026-07-05)
