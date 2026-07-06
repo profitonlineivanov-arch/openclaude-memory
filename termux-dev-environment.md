@@ -13,7 +13,7 @@ type: reference
 | Python | установлен | (версия не проверена в сессии) |
 | Node.js | установлен | 22 |
 | ffmpeg | установлен | — |
-| yt-dlp | установлен | — |
+| yt-dlp | установлен | 2026.7.4 (pip install --user, 2026-07-06) |
 | git | установлен | SSH key auth к GitHub |
 | gh CLI | установлен | v2.93.0 (pkg), не аутентифицирован — нет GitHub токена |
 | adb | НЕ установлен | `adb: command not found` (2026-06-07). `pm install` тоже не работает (exit 255, нет прав). Для установки APK использовать `termux-open <.apk>` |

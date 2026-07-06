@@ -5,7 +5,8 @@
 - [OpenClaude Update](reference/openclaude-update-mechanism.md) — пакет @gitlawb/openclaude (не openclaude!), repo Gitlawb/openclaude, обновлён до 0.19.0 (2026-06-16)
 - [DeepSeek V4 Pro](reference/deepseek-v4-pro-active-model.md) — был активен 2026-06-18, затем mimo-v2.5-pro
 - [Mimo V2.5 Pro Active](reference/mimo-v25-pro-active-model.md) — был активен 2026-06-18, затем superseded by free-model
-- [Free-model Active](reference/free-model-active-provider.md) — `free-model` added via `/provider` and now active (2026-06-23)
+- [Free-model Active](reference/free-model-active-provider.md) — был активен 2026-06-23, затем superseded by deepseek-v4-flash
+- [DeepSeek V4 Flash Active](reference/deepseek-v4-flash-active-model.md) — активен с 2026-07-06, переключён с free-model
 - [PinFlow Parallel Automation](project/pinflow-parallel-automation.md) — parallel task loops in PinterestAutomator to prevent task starvation (2026-06-11)
 - [PinFlow Auth Hint UI Update](project/pinflow-auth-hint-collapsible.md) — collapsible auth hint in AuthActivity to save screen space (2026-06-11)
 - [PinFlow PostSettings Board Hint Update](project/pinflow-board-hint-update.md) — updated board input hints in PostSettingsActivity (2026-06-11)
@@ -115,6 +116,8 @@
 - [RTK Evaluated](rtk-evaluated.md) — rtk-ai/rtk CLI proxy для сжатия shell output, -60-90% токенов, НЕ code intelligence (2026-06-09)
 - [Caveman Evaluated](caveman-evaluated.md) — output compression plugin, hooks работают, caveman-shrink MCP сломан (2026-06-23)
 - [Ruflo Evaluated](project/ruflo-evaluation.md) — agent meta-harness ruvnet/ruflo, совместим с OpenClaude через MCP server (2026-07-06)
+- [LeronX Engine](reference/leronx-engine.md) — open-source AI video generation pipeline, GitHub Leron-X/leronx (2026-07-06)
+- [Behavior Skills MD not found](project/behavior-skills-md-not-found.md) — поиск проекта на GitHub, 0 результатов (2026-07-06)
 - [PinFlow Local Workflow](feedback/pinflow-local-workflow.md) — перед сборкой сверять local↔server (gradle.properties, local.properties, imports) (2026-06-11)
 - [PinFlow Board Loader — WORKING](project/pinflow-board-loader-implementation.md) — dual-stage: BoardsResource + BoardResource/get/, 4 commits (включая detailed logging), GitHub master (2026-06-10)
 - [PinFlow Board Loader Status](project/pinflow-board-loader-status.md) — РАБОТАЕТ, подтверждено пользователем, 3 коммита запушены (2026-06-10)
@@ -126,6 +129,8 @@
 - [PinFlow Board Settings UI](project/pinflow-board-settings-ui.md) — update board input hints (2026-06-11)
 - [Pinterest createPin two-stage](feedback/pinterest-create-pin-two-stage.md) — upload multipart → PinResource/create/ with source_url+data
 - [Pinterest internal resource API pattern](feedback/pinterest-internal-resource-api-pattern.md) — all /resource/ endpoints need POST+source_url+data, not GET query params
+- [Agent-Reach](reference/agent-reach.md) — CLI для доступа AI к веб-платформам, НЕ качает видео (2026-07-06)
+- [PinPilot Sales Phase](project/pinpilot-sales-phase.md) — PinPilot продажи + видео: 2/5 скачано на сервере, YouTube blocked (2026-07-06)
 <<<<<<< HEAD
 - [PinFlow Unfollow Bug](project/pinflow-unfollow-zero.md) — 3 code-level root causes found 2026-06-23, fix in progress (rawUserId + trim literal + isFollower semantics)
 - [Stale gradle intermediates](feedback/gradle-stale-intermediates.md) — interrupted builds → NoSuchFileException; fix: clean + assembleDebug (2026-06-12)

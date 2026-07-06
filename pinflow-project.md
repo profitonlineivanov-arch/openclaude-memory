@@ -1,10 +1,10 @@
 ---
 name: pinflow-project
-description: PinFlow — Android Pinterest automator. Build on server 45.146.164.144 (x86_64). GitHub repo + local clone.
+description: PinPilot (ex-PinFlow) — Android Pinterest automator. Renamed 2026-07-06. Build on server 45.146.164.144 (x86_64). GitHub repo + local clone.
 type: project
 ---
 
-PinFlow — Android Pinterest automator (Kotlin, Room DB, WorkManager, OkHttp3, Jsoup).
+PinPilot (ранее PinFlow) — Android Pinterest automator (Kotlin, Room DB, WorkManager, OkHttp3, Jsoup). Переименован 2026-07-06.
 
 ## Репозиторий
 - **GitHub**: https://github.com/profitonlineivanov-arch/pinflow (private, SSH key auth)
@@ -35,6 +35,15 @@ PinFlow — Android Pinterest automator (Kotlin, Room DB, WorkManager, OkHttp3, 
 ## Kotlin уроки сборки
 - Sealed enum `when` требует все ветки или `else`
 - suspend-функции нельзя вызывать из не-suspend лямбд без `launch { }`
+
+## Статус 2026-07-06
+- PinPilot — новое название (ex-PinFlow). Пользователь в режиме продаж — думает о монетизации PinPilot
+- Нужны тестовые видео для PinPilot: 5 коротких роликов про продвижение в Pinterest (для загрузки как пины со ссылкой на приложение)
+- YouTube заблокирован RKN в РФ. yt-dlp через прокси (138.59.207.154:9963) подключается к YouTube, но антибот требует cookies браузера
+- Agent-Reach (Panniantong/Agent-Reach) HE качает видео — только текст/субтитры/поиск. Для скачивания видео нужен сервер или cookies
+
+## Статус 2026-07-06 (позже)
+- Будет пробовать LeronX Engine на ноутбуке (для генерации видео)
 
 ## История сессий
 
