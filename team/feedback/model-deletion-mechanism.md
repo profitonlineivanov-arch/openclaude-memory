@@ -1,0 +1,4 @@
+Model deletion mechanism (ollama rm) must be executed with external tools; this agent only supports model switching via /model command. The system does not contain a direct internal function to remove models, relying on platform/OS primitives like `ollama rm <model>`.
+
+**Why:** User asked how to delete local models after learning the switching mechanism, requiring external shell commands for deletion (e.g., `ollama rm {model_name}`).
+**How to apply:** To confirm model removal or attempt a delete, always assume the need for an explicit shell command (`ollama rm`) and expect potential 'Model not found' errors if the dependency is missing.
