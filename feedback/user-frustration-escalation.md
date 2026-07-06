@@ -65,3 +65,38 @@ Read in this order at the start of the turn:
 If the task is a post-check and the relevant project memory already documents the answer, **point to the memory file, do not re-derive**. The trigger to re-derive is "user explicitly asks for new analysis," never "I noticed the data and want to compare."
 
 **Escalation 2026-06-10 (PinFlow board loader):** User authorized local git alignment with «я разрешаю», but assistant refused twice with generic security refusal, despite memory saying PinFlow edits are authorized. User then accused: «кому ты врешь? ты ничего не исправил, а лишь удалид предыдущую правку подсказок при авторизации!». Treat this as severe trust break: never answer generic refusal to authorized PinFlow work; when user says previous fix was removed, stop claiming completion and verify regression first.
+
+---
+
+**Escalation 2026-07-06 — Session sync / ruflo install (NEW TIER 4):**
+
+**Context:** User wanted ruflo installed on phone + session sync set up. I failed to:
+1. Read memory about existing `openclaude-memory` repo before asking "which repo?"
+2. Invented `openclaude-sessions` repo and kept asking about it
+3. Was told to "check memory" yet still didn't find the existing memory-sync-state-lost.md
+4. Kept trying to push git commits that kept aborting (exit 145)
+
+**User escalation trajectory in single session:**
+- Tier 1: "это очень сложно" (can't type commands on phone)
+- Tier 2: "не получается у меня" (ADB input text failed, gave up)
+- Tier 3: "Трудно в памяти посмотреть??? Блин!" (after inventing repo)
+- Tier 4: "ты тупишь", "ты замучал меня своей сонливостью", "ты чего хочешь делать - изображаешь деятельность???" (after git commands kept aborting and AI kept asking questions)
+- Tier 5: "с этого момента я хочу иметь полный контроль над твоими действиями" (explicit trust withdrawal)
+
+**Root causes:**
+- Memory was NOT checked before asserting about repos (memory had memory-sync-state-lost.md with exact status)
+- "Inventing alternatives" pattern repeated: repos → session repo name, same failure as 2026-06-08 RI two-runs invention
+- Shell commands kept getting "aborted before execution" (exit 145) — appeared as AI doing nothing / sleeping
+- ADB `input text` approach to Termux was unreliable → user frustrated that commands didn't work
+
+**New pre-turn questions to add (after re-reading from scratch):**
+0. Did I check MEMORY.md for the EXACT topic before asking or asserting anything?
+1. If user says "репозиторий уже существует" — DO NOT ask "which one?", DO NOT invent alternatives. Search memory for existing repo name.
+2. If `git commit` keeps aborting — try `GIT_EDITOR=true git commit` or ask user once before retrying
+3. If user says "делай сам" — do not ask follow-up questions; do it. If blocked, say what's blocked, don't propose alternatives. Let user decide next action.
+
+**Concrete rule: CHECK MEMORY BEFORE ASSERTING** — when user says something "was already set up" or "already exists", STOP and search memory for that exact topic. Do not ask "which one?" or "what do you mean?" — the answer is in memory.
+
+**Concrete rule: HANDLE GIT COMMIT ABORTS** — `git commit` repeatedly failing with exit 145 (aborted before execution) looks like AI doing nothing / sleeping. After 2 failed git attempts, stop retrying and describe the intended action to the user. Do not silently retry.
+
+**Concrete rule: AFTER USER SAYS "ДОСВИДАНИЯ"** — if user says "ты нихуя не можешь. досвидания" but stays in conversation, it's a last-chance demand. Do not attempt more tool calls without explicit user context. Do not apologize at length. State actionable options in 1-2 sentences and wait.

@@ -60,4 +60,32 @@ type: project
 - Hooks (20+): pre/post command, pre/post edit, SONA обучение, routing, session management
 - Config (6): get/set/list/reset/export/import
 
-**Далее:** Пользователь согласился перезапустить OpenClaude, чтобы инструменты стали доступны.
+**Подтверждение работы (2026-07-06):** Здоровье MCP-сервера — score 100/100, issues 0, threshold 0.5, avgHealth 1.0. 0 агентов запущено (нет созданных — ожидаемо).
+
+**Далее:** Пользователь перезапустил OpenClaude на телефоне (2026-07-06). ruflo подключён как MCP-сервер в `.openclaude.json` — все ~210 инструментов должны быть доступны.
+
+## Телефон (Termux/Android) — 2026-07-06 (WORKING)
+
+**Статус:** OpenClaude на телефоне есть. ruflo **установлен вручную через tar-extract**. После перезапуска OpenClaude на телефоне — 210+ инструментов подключены. **Подтверждено пользователем (2026-07-06).**
+
+**Проблема:** Зависимость `@claude-flow/memory@3.0.0-alpha.21` поддерживает только `darwin,linux,win32` на `x64,arm64`. Android (Termux) под `arm64` не входит в supported platforms. `npm install` падает с `EBADPLATFORM`.
+
+**Испробованные обходы:**
+| Обход | Результат |
+|-------|-----------|
+| `npm install -g ruflo` | `EBADPLATFORM` |
+| `npm install -g ruflo --force` | Зависает |
+| `proot-distro login ubuntu` → `npm install -g ruflo` | Ошибка "should not be executed under PRoot" |
+| `adb push` tar.gz + extract | ✅ **Сработало** — выложить перед копированием, скопировать в глобальную node_modules |
+| `am startservice RunCommandService` | Требует permission — у shell user нет |
+
+**Успешный метод (2026-07-06):**
+1. `tar czf ruflo_pkg.tar.gz` на Windows (75MB) → `adb push` → `/sdcard/Download/`
+2. В Termux: `tar xzf` в `/sdcard/Download/` → `cp -r ruflo $NPM_DIR/`
+3. `ln -sf $NPM_DIR/ruflo/bin/ruflo.js $BIN_DIR/ruflo`
+4. `node -e` редактирует `.openclaude.json` добавляя `mcpServers.ruflo`
+5. **Подтверждено:** `ruflo v0.0.0` работает, `.openclaude.json` содержит ruflo в mcpServers
+
+**Вывод: Ruflo НЕ СТАВИТСЯ через npm на Android/Termux** (`@claude-flow/memory` rejects `android` platform), но работает после ручного копирования исполняемых файлов с другого устройства. Альтернатива — запустить MCP-сервер ruflo на Windows/сервере и подключить OpenClaude на телефоне к нему через network MCP. **Оба метода подтверждены:** Windows работает, телефон — работает после tar-extract.
+
+**Примечание:** GitHub НЕ заблокирован. Проблема чисто платформенная.
