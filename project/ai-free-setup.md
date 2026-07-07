@@ -20,7 +20,7 @@ type: project
 - "AI Free — DeepSeek" (id: provider_ai-free-deepseek) — deepseek-v4-pro, deepseek-v4-flash, deepseek-reasoner
 - "AI Free — Qwen" (id: provider_ai-free-qwen) — qwen3.7-max, qwen3.7-plus, qwen3.6-max-preview
 
-**Автозапуск:** hook в settings.json → SessionStart запускает `npm run api` если localhost:4318 не отвечает.
+**Автозапуск:** hook в settings.json → SessionStart запускает `npm run api` если localhost:4318 не отвечает. Переписан на PowerShell 2026-07-07 (bash-версия не работала в Windows).
 
 **Cookies:** `~/.deepseek-cli/auth.json`, `~/.qwen-cli/auth.json`. Протухают раз в несколько недель — `npm run login` / `npm run login-qwen` обновляет.
 
