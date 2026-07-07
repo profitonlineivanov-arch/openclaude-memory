@@ -121,13 +121,10 @@
 - [ADB on Windows](reference/adb-windows-available.md) — input text unreliable for Termux, push/pull файлов работает (2026-07-06)
 - [Phone OpenClaude status](reference/phone-openclaude-not-installed.md) — Termux HAS OpenClaude, ruflo работает через tar-extract + ADB (2026-07-06)
 - [Wikipedia Broken Links Scan](project/wikipedia-broken-links-scan-2026-07-06.md) — scanned 15 ru.wikipedia pages, ~30 dead links, results on /sdcard/Download/ + desktop (2026-07-06)
-<<<<<<< HEAD
 - [Ruflo Evaluated](project/ruflo-evaluation.md) — agent meta-harness, совместим с OpenClaude через MCP, на телефоне работает через tar-extract (2026-07-06)
-=======
 - [gstack Evaluation](reference/gstack-evaluation.md) — garrytan/gstack evaluated, not compatible but user wants adapted skills (2026-06-26)
 - [gstack Adapted Skills](project/gstack-adapted-skills.md) — /review /plan /secaudit /spec as OpenClaude skills, BLOCKED by GitHub access (2026-06-26)
 - [GitHub blocked in Termux](reference/github-blocked-in-termux.md) — WebFetch can't reach github.com/raw.githubusercontent.com (private IPs) (2026-06-26)
->>>>>>> origin/main
 - [PinFlow Local Workflow](feedback/pinflow-local-workflow.md) — перед сборкой сверять local↔server (gradle.properties, local.properties, imports) (2026-06-11)
 - [PinFlow Board Loader — WORKING](project/pinflow-board-loader-implementation.md) — dual-stage: BoardsResource + BoardResource/get/, 4 commits (включая detailed logging), GitHub master (2026-06-10)
 - [PinFlow Board Loader Status](project/pinflow-board-loader-status.md) — РАБОТАЕТ, подтверждено пользователем, 3 коммита запушены (2026-06-10)
@@ -160,6 +157,7 @@
 <<<<<<< HEAD
 >>>>>>> origin/main
 =======
+- [PinFlux Landing Analysis](project/pinflux-landing-page-analysis.md) — pinflux.in structure: 20 sections, sales letter style, reference for PinFlow landing (2026-07-07)
 - [PinFlow Local Repo Status 2026-06-28](project/pinflow-local-repo-status-2026-06-28.md) — CSRF fix committed 5be1a33 on server, APK ~/downloads/pinflow-csrf-fix.apk, NOT delivered/tested; local 3 commits behind
 - [PinFlow Hidden Follow/Unfollow UI](feedback/pinflow-hide-broken-ui.md) — hide broken UI via visibility=gone + force false in loadSettings, don't delete code (2026-06-28)
 - [PinFlow boards broken 2026-06-28](project/pinflow-boards-broken-csrf-2026-06-28.md) — CSRF fix committed 5be1a33, APK built, awaiting user test (login ru.pinterest.com → Загрузить доски)
