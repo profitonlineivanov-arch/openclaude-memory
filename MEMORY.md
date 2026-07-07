@@ -137,6 +137,7 @@
 - [Pinterest createPin two-stage](feedback/pinterest-create-pin-two-stage.md) — upload multipart → PinResource/create/ with source_url+data
 - [Pinterest internal resource API pattern](feedback/pinterest-internal-resource-api-pattern.md) — all /resource/ endpoints need POST+source_url+data, not GET query params
 <<<<<<< HEAD
+- [AI Free Setup](project/ai-free-setup.md) — бесплатный OpenAI-compatible провайдер (DeepSeek/Qwen) через localhost:4318, автозапуск hook (2026-07-07)
 - [PinFlow Unfollow Bug](project/pinflow-unfollow-zero.md) — 3 code-level root causes found 2026-06-23, fix in progress (rawUserId + trim literal + isFollower semantics)
 - [Stale gradle intermediates](feedback/gradle-stale-intermediates.md) — interrupted builds → NoSuchFileException; fix: clean + assembleDebug (2026-06-12)
 - [Config sync gap](project/config-sync-gap.md) — конфиги через sync.sh + memory-sync.sh; project-dir=path hash — клонировать в правильную папку (2026-06-14)
