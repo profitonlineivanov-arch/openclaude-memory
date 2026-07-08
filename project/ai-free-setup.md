@@ -16,11 +16,11 @@ type: project
 3. `npm run login` (DeepSeek), `npm run login-qwen` (Qwen)
 4. `npm run api` → API на http://127.0.0.1:4318/v1
 
-**Провайдеры в OpenClaude:**
-- "AI Free — DeepSeek" (id: provider_ai-free-deepseek) — deepseek-v4-pro, deepseek-v4-flash, deepseek-reasoner
-- "AI Free — Qwen" (id: provider_ai-free-qwen) — qwen3.7-max, qwen3.7-plus, qwen3.6-max-preview
+**Провайдеры в OpenClaude (ДОБАВЛЕНЫ 2026-07-09):**
+- "AI Free — DeepSeek" (id: provider_ai-free-deepseek) — deepseek-v4-pro
+- "AI Free — Qwen" (id: provider_ai-free-qwen) — qwen3.7-max
 
-**Автозапуск:** hook в settings.json → SessionStart запускает `npm run api` если localhost:4318 не отвечает. Переписан на PowerShell 2026-07-07 (bash-версия не работала в Windows).
+**Автозапуск (НАСТРОЕН 2026-07-09):** hook в settings.json → SessionStart проверяет localhost:4318, если не отвечает — запускает `npm run api` через PowerShell (Start-Process -WindowHidden). Путь: `C:\Users\Admin\ai-free\`.
 
 **Cookies:** `~/.deepseek-cli/auth.json`, `~/.qwen-cli/auth.json`. Протухают раз в несколько недель — `npm run login` / `npm run login-qwen` обновляет.
 
