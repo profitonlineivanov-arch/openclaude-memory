@@ -61,3 +61,26 @@ type: project
 - Config (6): get/set/list/reset/export/import
 
 **Далее:** Пользователь согласился перезапустить OpenClaude, чтобы инструменты стали доступны.
+
+## Session tools — НЕ РАБОТАЮТ (2026-07-08)
+
+В контексте cross-device session sync протестированы session tools:
+
+| Инструмент | Результат |
+|-----------|-----------|
+| `mcp__ruflo__session_list` | ✅ sessions: [], total: 0 |
+| `mcp__ruflo__session_current` | ✅ "No saved sessions" |
+| `mcp__ruflo__session_save` | ❌ "Tool call aborted during URL elicitation" |
+| `mcp__ruflo__session_export` | ❌ не проверялся (save не работает) |
+
+**Вердикт:** Session API требует какой-то URL-конфигурации, которой нет. Инструменты есть, но бесполезны для переноса сессий между устройствами. План cross-device sync через ruflo отменён. Использовать hook-based handoff через git память.
+
+## MCP сервер — подтверждён работоспособен (2026-07-08)
+
+Повторная проверка через день:
+- `ruflo mcp start` — PID 29125, работает как Node.js daemon в фоне
+- RSS ~18MB, CPU 0.2% — здоров
+- Конфиг в `.openclaude.json` (global) + `.openclaude/.openclaude.json` (profile)
+- Все `mcp__ruflo__*` инструменты доступны в сессии
+- Бинарник: `/data/data/com.termux/files/usr/bin/ruflo` (в PATH)
+- **Health:** ✅ MCP сервер стабилен, session_save/export остаются нерабочими (независимая проблема)
