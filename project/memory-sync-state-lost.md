@@ -42,3 +42,5 @@ type: project
 - Phone's OpenClaude agent configures sync independently (likely a different AI)
 - ADB `input text` → Termux doesn't work reliably; can't automate phone setup from laptop
 - **Status as of last interaction:** git remote set to openclaude-memory, no commits/push yet, no settings.json — setup INCOMPLETE
+
+**UPDATE (2026-07-08):** Windows setup ВЫПОЛНЕН. Скрипты созданы, hooks добавлены в settings.json, handoffs/ директория готова. См. project/cross-device-session-sync.md.

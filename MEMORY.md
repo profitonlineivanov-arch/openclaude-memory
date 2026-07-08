@@ -20,7 +20,7 @@
 - [Termux Android build impossible](feedback/termux-android-build-impossible.md) — AAPT2 x86_64 на aarch64, только сервер 45.146.164.144
 - [User communication style](user-style.md) — fast typos in Russian, casual tone, mobile keyboard
 - [Session continuity](session-continuity.md) — user resumes from crashed sessions, forwards other AIs' responses
-- [Cross-device session sync](project/cross-device-session-sync.md) — GitHub-based handoff between Termux and Windows (2026-07-07)
+- [Cross-device session sync](project/cross-device-session-sync.md) — hook-based handoff через GitHub. Windows настроена: handoff.sh + pickup.sh + hooks (2026-07-08)
 - [Multiple AI agents](user-multi-ai.md) — consults other AIs when one can't solve a problem
 - [SSH quoting workaround](ssh-quoting-workaround.md) — nested quotes break over SSH; write script locally, SCP, then run
 - [PinFlow Project](pinflow-project.md) — Android Pinterest automator, GitHub repo profitonlineivanov-arch/pinflow, ~/pinflow/

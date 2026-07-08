@@ -94,11 +94,16 @@ Ruflo MCP tools перечислены среди доступных (session_ex
 
 **Тест (2026-07-08):** session-handoff.sh успешно отработал — создал handoffs/latest.md, session_id, извлёк сообщения, запушен в GitHub.
 
-**Настройка Windows:**
-На ноутбуке нужно скопировать 2 скрипта и hooks в settings.json:
-1. Создать `~/.openclaude/session-handoff.sh` и `~/.openclaude/session-pickup.sh` (копировать содержимое с телефона)
-2. Добавить hooks в `~/.openclaude/settings.json` (как на телефоне)
-3. Убедиться что memory git репо клонирован и sync.sh работает
+**Настройка Windows — ВЫПОЛНЕНО (2026-07-08):**
+1. ✅ `~/.openclaude/session-handoff.sh` создан (адаптирован под Windows: python3, mktemp, forward slashes)
+2. ✅ `~/.openclaude/session-pickup.sh` создан
+3. ✅ hooks добавлены в `~/.openclaude/settings.json`:
+   - SessionStart: memory-sync.sh pull → session-pickup.sh → AI Free API
+   - SessionEnd: session-handoff.sh → memory-sync.sh
+4. ✅ `memory/handoffs/` директория создана
+5. ✅ скрипты `chmod +x`
+
+**Следующий шаг:** протестировать — закрыть сессию, открыть новую, проверить что handoff появился.
 
 **Why:** Пользователь работает на 2 устройствах (Android Termux + Windows ноутбук) и хочет продолжать диалоги на разных машинах без ручных команд. GitHub уже используется для памяти. Ruflo session tools нестабильны. Пользователь устал от обсуждения планов — реализовано сразу.
 **How to apply:** При старте сессии — проверить `_handoff_pending.md` в памяти. Если есть — прочитать контекст, продолжить, удалить файл. Никаких действий от пользователя не требуется.
