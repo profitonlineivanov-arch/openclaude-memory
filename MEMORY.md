@@ -66,6 +66,7 @@
 - [2x2 Dashboard Mobile Fix](project/2x2-dashboard-mobile-fix.md) — viewport + media queries для мобильных (2026-05-31)
 - [2x2 Favorable Periods](project/2x2-favorable-periods-task.md) — блочная подсветка благоприятных периодов с бейджами времени, 2 фазы (2026-05-31)
 - [Memory sync — memory only](feedback/auto-memory-sync.md) — configs/ исключены из sync, только .md память (2026-06-19)
+- [Session sync in progress](project/memory-sync-state-lost.md) — git init + remote exist, settings.json hooks missing; user demanded full control after errors (2026-07-06)
 - [2x2 Missing Predictions Filled](project/2x2-missing-predictions-filled.md) — восстановлены #328765, #328766 через fill_missing.py (2026-06-07)
 - [2x2 Selector Iterations](team/2x2-selector-iterations.md) — статистика: 98.2% = 1 итерация, max=7, бэкенд анализ (2026-06-07)
 - [Selector Iteration RE](project/selector-iteration-reverse-engineering.md) — анализ restarts для 1/2/3/4 совпадений: 2 запуска (с RI и без) на 10k тиражей (2026-06-08)
@@ -86,6 +87,7 @@
 - [Verify after parallel edits](feedback/verify-after-parallel-edits.md) — после параллельных правок обязательна верификация subagent-ом перед коммитом
 - [Verifier unreliable in Termux](feedback/verifier-fails-termux.md) — verification падает/отказывает; use Explore/manual checks
 - [gh device flow in Termux](feedback/gh-device-flow-termux.md) — gh auth login запускает device flow в Termux, код нужно передать пользователю
+- [`!` command clarity](feedback/bang-command-clarity.md) — user doesn't grasp ! runs in their terminal, thinks AI executes it
 - [MCP Servers Catalog](mcp-servers-catalog.md) — 8 плагинов + 4 MCP: chrome-devtools✅ playwright⚠️ caveman-shrink❌ codegraph✅ (2026-06-23)
 - [Dashboard templates need restart](feedback/dashboard-template-needs-restart.md) — модульные HTML-строки в dashboard_2x2.py требуют рестарта процесса, в отличие от файлов в templates/
 - [Claude Code Plugins](plugins-installed.md) — 8 плагинов восстановлено после потери конфига (2026-06-14)
@@ -116,9 +118,19 @@
 - [CodeGraph Analysis](project/codegraph-analysis.md) — v0.9.9 installed, Termux-patched, pinflow indexed, MCP registered (2026-06-09)
 - [RTK Evaluated](rtk-evaluated.md) — rtk-ai/rtk CLI proxy для сжатия shell output, -60-90% токенов, НЕ code intelligence (2026-06-09)
 - [Caveman Evaluated](caveman-evaluated.md) — output compression plugin, hooks работают, caveman-shrink MCP сломан (2026-06-23)
+<<<<<<< HEAD
 - [Ruflo Evaluated](project/ruflo-evaluation.md) — agent meta-harness ruvnet/ruflo, совместим с OpenClaude через MCP server (2026-07-06)
 - [LeronX Engine](reference/leronx-engine.md) — open-source AI video generation pipeline, GitHub Leron-X/leronx (2026-07-06)
 - [Behavior Skills MD not found](project/behavior-skills-md-not-found.md) — поиск проекта на GitHub, 0 результатов (2026-07-06)
+=======
+- [ADB on Windows](reference/adb-windows-available.md) — input text unreliable for Termux, push/pull файлов работает (2026-07-06)
+- [Phone OpenClaude status](reference/phone-openclaude-not-installed.md) — Termux HAS OpenClaude, ruflo работает через tar-extract + ADB (2026-07-06)
+- [Wikipedia Broken Links Scan](project/wikipedia-broken-links-scan-2026-07-06.md) — scanned 15 ru.wikipedia pages, ~30 dead links, results on /sdcard/Download/ + desktop (2026-07-06)
+- [Ruflo Evaluated](project/ruflo-evaluation.md) — agent meta-harness, совместим с OpenClaude через MCP, на телефоне работает через tar-extract (2026-07-06)
+- [gstack Evaluation](reference/gstack-evaluation.md) — garrytan/gstack evaluated, not compatible but user wants adapted skills (2026-06-26)
+- [gstack Adapted Skills](project/gstack-adapted-skills.md) — /review /plan /secaudit /spec as OpenClaude skills, BLOCKED by GitHub access (2026-06-26)
+- [GitHub blocked in Termux](reference/github-blocked-in-termux.md) — WebFetch can't reach github.com/raw.githubusercontent.com (private IPs) (2026-06-26)
+>>>>>>> origin/main
 - [PinFlow Local Workflow](feedback/pinflow-local-workflow.md) — перед сборкой сверять local↔server (gradle.properties, local.properties, imports) (2026-06-11)
 - [PinFlow Board Loader — WORKING](project/pinflow-board-loader-implementation.md) — dual-stage: BoardsResource + BoardResource/get/, 4 commits (включая detailed logging), GitHub master (2026-06-10)
 - [PinFlow Board Loader Status](project/pinflow-board-loader-status.md) — РАБОТАЕТ, подтверждено пользователем, 3 коммита запушены (2026-06-10)
@@ -133,6 +145,7 @@
 - [Agent-Reach](reference/agent-reach.md) — CLI для доступа AI к веб-платформам, НЕ качает видео (2026-07-06)
 - [PinPilot Sales Phase](project/pinpilot-sales-phase.md) — PinPilot продажи + видео: 2/5 скачано на сервере, YouTube blocked (2026-07-06)
 <<<<<<< HEAD
+- [AI Free Setup](project/ai-free-setup.md) — бесплатный OpenAI-compatible провайдер (DeepSeek/Qwen) через localhost:4318, автозапуск hook (2026-07-07)
 - [PinFlow Unfollow Bug](project/pinflow-unfollow-zero.md) — 3 code-level root causes found 2026-06-23, fix in progress (rawUserId + trim literal + isFollower semantics)
 - [Stale gradle intermediates](feedback/gradle-stale-intermediates.md) — interrupted builds → NoSuchFileException; fix: clean + assembleDebug (2026-06-12)
 - [Config sync gap](project/config-sync-gap.md) — конфиги через sync.sh + memory-sync.sh; project-dir=path hash — клонировать в правильную папку (2026-06-14)
@@ -153,6 +166,7 @@
 <<<<<<< HEAD
 >>>>>>> origin/main
 =======
+- [PinFlux Landing Analysis](project/pinflux-landing-page-analysis.md) — pinflux.in structure: 20 sections, sales letter style, reference for PinFlow landing (2026-07-07)
 - [PinFlow Local Repo Status 2026-06-28](project/pinflow-local-repo-status-2026-06-28.md) — CSRF fix committed 5be1a33 on server, APK ~/downloads/pinflow-csrf-fix.apk, NOT delivered/tested; local 3 commits behind
 - [PinFlow Hidden Follow/Unfollow UI](feedback/pinflow-hide-broken-ui.md) — hide broken UI via visibility=gone + force false in loadSettings, don't delete code (2026-06-28)
 - [PinFlow boards broken 2026-06-28](project/pinflow-boards-broken-csrf-2026-06-28.md) — CSRF fix committed 5be1a33, APK built, awaiting user test (login ru.pinterest.com → Загрузить доски)
