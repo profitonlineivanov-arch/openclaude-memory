@@ -63,16 +63,42 @@ Ruflo MCP tools перечислены среди доступных (session_ex
 - session-start хук: пуллит, читает handoff → продолжаем
 - Настройка: hooks в settings.json
 
-**Доп. детали:**
-- `.openclaude.json` имеет ДВА ключа `mcpServers` (строка 130 пустой для projects/, строка 203 для глобального). Ruflo добавлен в глобальный.
-- `settings.json` — ruflo не упоминается. MCP серверы конфигурятся в `.openclaude.json`.
+## Реализация hook-based handoff (2026-07-08)
 
-**Схема работы (handoff через .md, fallback):**
-1. На телефоне: я пишу handoff-заметку в .md память с текущим контекстом
-2. sync.sh пушит в GitHub
-3. На винде: git pull, память синхронизируется
-4. Я читаю handoff на винде → продолжаю
-5. И наоборот
+**Скрипты:**
+- `~/.openclaude/session-handoff.sh` — SessionEnd hook. Читает `session_context.md` из памяти, сохраняет в `handoffs/latest.md`, коммитит и пушит.
+- `~/.openclaude/session-pickup.sh` — SessionStart hook. Проверяет handoff с другого устройства (по hostname). Если cross-device — копирует в `_handoff_pending.md`.
 
-**Why:** Пользователь работает на 2 устройствах (Android Termux + Windows ноутбук) и хочет продолжать диалоги на разных машинах. GitHub уже используется для памяти.
-**How to apply:** При запросе на переключение устройства — сохранить handoff-заметку в .md, сказать запустить sync.sh, на другом устройстве память подтянется. Если ruflo MCP заработает — можно экспортировать полную сессию вместо ручного handoff.
+**hooks в settings.json:**
+- SessionStart: `memory-sync.sh pull` → `session-pickup.sh`
+- SessionEnd: `session-handoff.sh` → `memory-sync.sh`
+
+**Пользователь (2026-07-08):** "исключим из сценария мои дополнительные команды и специальные слова. надо автоматом синхронизировать при открытии и закрытии сессии" — никаких AI команд/ручных шагов.
+
+## Реализация hook-based handoff (2026-07-08)
+
+**Скрипты:**
+- `~/.openclaude/session-handoff.sh` — SessionEnd hook. **Автоматически** извлекает последние 15 сообщений из JSONL сессии, пишет в `handoffs/latest.md`, коммитит и пушит.
+- `~/.openclaude/session-pickup.sh` — SessionStart hook. Проверяет handoff с другого устройства (по hostname). Если cross-device — копирует в `_handoff_pending.md`.
+
+**hooks в settings.json:**
+- SessionStart: `memory-sync.sh pull` → `session-pickup.sh`
+- SessionEnd: `session-handoff.sh` → `memory-sync.sh`
+
+**Автоматический протокол (без участия человека или AI):**
+1. Пользователь закрывает сессию (Ctrl+D, exit, закрытие окна)
+2. SessionEnd hook: session-handoff.sh находит JSONL текущей сессии → извлекает последние 15 сообщений → пишет `handoffs/latest.md` с device/hostname/timestamp → git add + commit + push
+3. На целевом устройстве: SessionStart hook → `memory-sync.sh pull` → `session-pickup.sh` сравнивает hostname handoff'а с текущим
+4. Если hostname отличается (cross-device): копирует в `_handoff_pending.md` и `~/.openclaude/_last_handoff.md`
+5. AI видит `_handoff_pending.md` при старте → читает контекст → продолжает → удаляет `_handoff_pending.md`
+
+**Тест (2026-07-08):** session-handoff.sh успешно отработал — создал handoffs/latest.md, session_id, извлёк сообщения, запушен в GitHub.
+
+**Настройка Windows:**
+На ноутбуке нужно скопировать 2 скрипта и hooks в settings.json:
+1. Создать `~/.openclaude/session-handoff.sh` и `~/.openclaude/session-pickup.sh` (копировать содержимое с телефона)
+2. Добавить hooks в `~/.openclaude/settings.json` (как на телефоне)
+3. Убедиться что memory git репо клонирован и sync.sh работает
+
+**Why:** Пользователь работает на 2 устройствах (Android Termux + Windows ноутбук) и хочет продолжать диалоги на разных машинах без ручных команд. GitHub уже используется для памяти. Ruflo session tools нестабильны. Пользователь устал от обсуждения планов — реализовано сразу.
+**How to apply:** При старте сессии — проверить `_handoff_pending.md` в памяти. Если есть — прочитать контекст, продолжить, удалить файл. Никаких действий от пользователя не требуется.
