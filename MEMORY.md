@@ -1,13 +1,12 @@
 # Memory Index
 
-- [Gemma 4 Local Setup](project/gemma4-local-setup.md) — 4 модели Ollama: qwen2.5:7b (работает), coder:7b, starcoder2:7b, gemma4:e4b. 14b удалён — не влезал в VRAM (2026-06-16)
-- [Ollama Local Provider](project/ollama-local-provider-setup.md) — модели на D:\Ollama\models, User→System env var нужен, НЕ трогать модели (2026-06-18)
-- [Don't fix infra autonomously](feedback/dont-fix-infrastructure-autonomously.md) — известная проблема → объяснить фикс → стоп, не серия обходных маневров (2026-06-18)
-- [Local models need tool use](feedback/local-models-need-tool-use.md) — qwen2.5:7b работает, 14b удалена из VRAM, gemma4 зацикливается (2026-06-16)
+- [Ollama Local Provider](project/ollama-local-provider-setup.md) — gemma2:2b + qwen3:4b установлены. e4b удалена, e2b отменена. CPU inference медленная (2026-07-02)
+- [Local models need tool use](feedback/local-models-need-tool-use.md) — Ollama модели без tool use зацикливаются в OpenClaude (32k overflow)
 - [OpenClaude Update](reference/openclaude-update-mechanism.md) — пакет @gitlawb/openclaude (не openclaude!), repo Gitlawb/openclaude, обновлён до 0.19.0 (2026-06-16)
 - [DeepSeek V4 Pro](reference/deepseek-v4-pro-active-model.md) — был активен 2026-06-18, затем mimo-v2.5-pro
 - [Mimo V2.5 Pro Active](reference/mimo-v25-pro-active-model.md) — был активен 2026-06-18, затем superseded by free-model
-- [Free-model Active](reference/free-model-active-provider.md) — `free-model` added via `/provider` and now active (2026-06-23)
+- [Free-model Active](reference/free-model-active-provider.md) — был активен 2026-06-23, затем superseded by deepseek-v4-flash
+- [DeepSeek V4 Flash Active](reference/deepseek-v4-flash-active-model.md) — активен с 2026-07-06, переключён с free-model
 - [PinFlow Parallel Automation](project/pinflow-parallel-automation.md) — parallel task loops in PinterestAutomator to prevent task starvation (2026-06-11)
 - [PinFlow Auth Hint UI Update](project/pinflow-auth-hint-collapsible.md) — collapsible auth hint in AuthActivity to save screen space (2026-06-11)
 - [PinFlow PostSettings Board Hint Update](project/pinflow-board-hint-update.md) — updated board input hints in PostSettingsActivity (2026-06-11)
@@ -21,6 +20,7 @@
 - [Termux Android build impossible](feedback/termux-android-build-impossible.md) — AAPT2 x86_64 на aarch64, только сервер 45.146.164.144
 - [User communication style](user-style.md) — fast typos in Russian, casual tone, mobile keyboard
 - [Session continuity](session-continuity.md) — user resumes from crashed sessions, forwards other AIs' responses
+- [Cross-device session sync](project/cross-device-session-sync.md) — GitHub-based handoff between Termux and Windows (2026-07-07)
 - [Multiple AI agents](user-multi-ai.md) — consults other AIs when one can't solve a problem
 - [SSH quoting workaround](ssh-quoting-workaround.md) — nested quotes break over SSH; write script locally, SCP, then run
 - [PinFlow Project](pinflow-project.md) — Android Pinterest automator, GitHub repo profitonlineivanov-arch/pinflow, ~/pinflow/
@@ -118,6 +118,11 @@
 - [CodeGraph Analysis](project/codegraph-analysis.md) — v0.9.9 installed, Termux-patched, pinflow indexed, MCP registered (2026-06-09)
 - [RTK Evaluated](rtk-evaluated.md) — rtk-ai/rtk CLI proxy для сжатия shell output, -60-90% токенов, НЕ code intelligence (2026-06-09)
 - [Caveman Evaluated](caveman-evaluated.md) — output compression plugin, hooks работают, caveman-shrink MCP сломан (2026-06-23)
+<<<<<<< HEAD
+- [Ruflo Evaluated](project/ruflo-evaluation.md) — agent meta-harness ruvnet/ruflo, совместим с OpenClaude через MCP server (2026-07-06)
+- [LeronX Engine](reference/leronx-engine.md) — open-source AI video generation pipeline, GitHub Leron-X/leronx (2026-07-06)
+- [Behavior Skills MD not found](project/behavior-skills-md-not-found.md) — поиск проекта на GitHub, 0 результатов (2026-07-06)
+=======
 - [ADB on Windows](reference/adb-windows-available.md) — input text unreliable for Termux, push/pull файлов работает (2026-07-06)
 - [Phone OpenClaude status](reference/phone-openclaude-not-installed.md) — Termux HAS OpenClaude, ruflo работает через tar-extract + ADB (2026-07-06)
 - [Wikipedia Broken Links Scan](project/wikipedia-broken-links-scan-2026-07-06.md) — scanned 15 ru.wikipedia pages, ~30 dead links, results on /sdcard/Download/ + desktop (2026-07-06)
@@ -125,6 +130,7 @@
 - [gstack Evaluation](reference/gstack-evaluation.md) — garrytan/gstack evaluated, not compatible but user wants adapted skills (2026-06-26)
 - [gstack Adapted Skills](project/gstack-adapted-skills.md) — /review /plan /secaudit /spec as OpenClaude skills, BLOCKED by GitHub access (2026-06-26)
 - [GitHub blocked in Termux](reference/github-blocked-in-termux.md) — WebFetch can't reach github.com/raw.githubusercontent.com (private IPs) (2026-06-26)
+>>>>>>> origin/main
 - [PinFlow Local Workflow](feedback/pinflow-local-workflow.md) — перед сборкой сверять local↔server (gradle.properties, local.properties, imports) (2026-06-11)
 - [PinFlow Board Loader — WORKING](project/pinflow-board-loader-implementation.md) — dual-stage: BoardsResource + BoardResource/get/, 4 commits (включая detailed logging), GitHub master (2026-06-10)
 - [PinFlow Board Loader Status](project/pinflow-board-loader-status.md) — РАБОТАЕТ, подтверждено пользователем, 3 коммита запушены (2026-06-10)
@@ -136,6 +142,8 @@
 - [PinFlow Board Settings UI](project/pinflow-board-settings-ui.md) — update board input hints (2026-06-11)
 - [Pinterest createPin two-stage](feedback/pinterest-create-pin-two-stage.md) — upload multipart → PinResource/create/ with source_url+data
 - [Pinterest internal resource API pattern](feedback/pinterest-internal-resource-api-pattern.md) — all /resource/ endpoints need POST+source_url+data, not GET query params
+- [Agent-Reach](reference/agent-reach.md) — CLI для доступа AI к веб-платформам, НЕ качает видео (2026-07-06)
+- [PinPilot Sales Phase](project/pinpilot-sales-phase.md) — PinPilot продажи + видео: 2/5 скачано на сервере, YouTube blocked (2026-07-06)
 <<<<<<< HEAD
 - [AI Free Setup](project/ai-free-setup.md) — бесплатный OpenAI-compatible провайдер (DeepSeek/Qwen) через localhost:4318, автозапуск hook (2026-07-07)
 - [PinFlow Unfollow Bug](project/pinflow-unfollow-zero.md) — 3 code-level root causes found 2026-06-23, fix in progress (rawUserId + trim literal + isFollower semantics)
@@ -169,4 +177,12 @@
 - [Termux shared-storage opt-in](feedback/termux-storage-optin-required.md) — /storage/* и /home/storage/* работают только после termux-setup-storage; не sweep'ить (2026-06-28)
 - [Do not promise impossible actions](feedback/do-not-promise-impossible.md) — не обещать «посмотрю позже», если не можешь (2026-06-28)
 - [PinFlow package path](reference/pinflow-package-path.md) — package = com.pinflow (не com.pinterest.automator), актуальный source layout (2026-06-28)
+<<<<<<< HEAD
+- [Explain params concretely](feedback/explain-params-concretely.md) — объяснять параметры через данные пользователя, не абстрактно
+- [OpenCode Zen Provider](project/opencode-zen-provider.md) — новый провайдер, добавлен 2026-07-03, модели gpt-5.4/deepseek-v4-flash-free
+- [Detector404 Wiki Links](project/detector404-wikipedia-links.md) — битые внешние ссылки Википедии → detector404.ru (2026-07-05)
+- [Broken Link Checker Tool](project/broken-link-checker-tool.md) — user wants universal SEO broken link checker app (2026-07-06)
+- [Proxy for blocked vs dead](feedback/proxy-distinguish-blocked-dead.md) — external proxy to distinguish RKN-blocked from truly dead sites (2026-07-05)
+=======
+>>>>>>> origin/main
 >>>>>>> origin/main

@@ -15,4 +15,19 @@ type: project
 
 **Параметры на странице:** play_threshold, min_predictions, windows, z_score, pseudo_count, decay_half_life, streak_mean_reversion, weekend_bonus, streak_lift_hours (таблица час→бонус), enabled
 
+**min_predictions** (Пользователь не понял, 2026-07-01): Фильтр — час считается значимым только если total_predictions в его слоте >= min_predictions. Используется в get_signal() (проверка есть ли данные для часа) и best_hours/next_favorable (фильтрация результатов). При min=30 для 90d окна ~1 прогноз/день на час. Выше=строже, ниже=больше шума. **Вывод:** нужны тултипы/пояснения к полям формы на /timing.
+
+**Полный walkthrough параметров (2026-07-01):** Пользователь запросил объяснение ВСЕХ параметров /timing простым языком. Система score = bayes_rate(90d) + trend×0.3 + streak_reversion + streak_lift_hours + weekend_bonus + month_delta×0.1 объяснена.
+
+**UI-пояснения добавлены (2026-07-01):** Расширены описания в карточках параметров на странице /timing — play_threshold (низкий/высокий/0.5), min_predictions (зачем 30), windows (каждый период), z_score, pseudo_count, decay_half_life, streak_mean_reversion (≥8 проигрышей), weekend_bonus, streak_lift_hours (бонус при hit). Добавлен блок «Как работает анализатор» с примерами PLAY/WAIT. Рестарт НЕ нужен — templates/ читаются с диска.
+
+**Замеченная нестыковка — ИСПРАВЛЕНО (2026-07-01):**
+- `/timing` показывал `play_threshold: 0.5` (из config_v5.yaml)
+- Баннер на главной показывал `adjusted_threshold: 0.47` (hardcoded default)
+- **Root cause:** `__init__` не читал YAML — `cfg = config or {}`, а config=None всегда → все настройки из /timing игнорировались
+- **Fix:** `_load_yaml_config()` — авто-загрузка из config_v5.yaml при config=None + `_save_config()` — сохранение скорректированного порога обратно в YAML
+- Теперь `adjusted_threshold` = `play_threshold` из YAML (0.5), баннер синхронизирован с /timing
+
 **Когда обращаться:** когда пользователь хочет менять настройки анализатора времени через UI / не через YAML вручную
+
+**Git:** commits a644609 + 1f6dd16 pushed to feature/vertical-trigger (2026-07-01). 1f6dd16 = expanded parameter explanations in timing_settings.html. Flask reads templates/ from disk — no restart needed after HTML edits.

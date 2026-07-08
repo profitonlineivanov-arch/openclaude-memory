@@ -4,7 +4,7 @@ description: 8 плагинов + 3 MCP (Playwright, Chrome DevTools, codegraph)
 type: reference
 ---
 
-## Текущее состояние (2026-06-23)
+## Текущее состояние (2026-07-08)
 
 ### Плагины (8)
 1. **context7@claude-plugins-official** — документация библиотек
@@ -16,7 +16,7 @@ type: reference
 7. **playwright@claude-plugins-official** — управление браузером
 8. **caveman@caveman** — output compression
 
-### MCP-серверы (2026-07-06)
+### MCP-серверы (2026-07-08)
 
 | Сервер | Конфиг | Статус |
 |--------|--------|--------|
@@ -24,9 +24,20 @@ type: reference
 | playwright-mcp | `.mcp.json` | ⚠️ не проверен (нет chromium в Termux) |
 | caveman-shrink | `.openclaude.json` | ❌ УДАЛЁН 2026-06-23 (npm 404) |
 | codegraph | глобал npm | ✅ 0.9.9 |
-| ruflo | `.openclaude.json` | ✅ 3.25.1 — agent meta-harness, ~100+ инструментов (2026-07-06) |
+| ruflo | `.openclaude.json` | ✅ добавлен 2026-07-08, MCP стартует (из бекапов) |
 
 **caveman-shrink** — настроен в `.openclaude.json` но `npx -y caveman-shrink` не работает. Caveman плагин работает через hooks, MCP не нужен.
+
+**ruflo:**
+- Бинарник: `/data/data/com.termux/files/usr/bin/ruflo` — ✅
+- Версия: `ruflo v0.0.0` (на сервере могла быть 3.25.1)
+- MCP статус: running, PID 3146, stdio transport
+- Инструменты: ~100+ (session_export/import, agent_spawn, workflow_execute и др.)
+- session_save: ⚠️ FAIL — "Tool call aborted during URL elicitation" (неизвестный URL)
+
+  **Вывод:** session_export/import/save инструменты есть, но session_save падает с ошибкой. Только для чтения/списка. Полноценная syn-хронизация через ruflo не работает.
+- Конфиг добавлен в `.openclaude.json` (корневой `mcpServers`), изначально отсутствовал после сброса конфига, восстановлен из бекапов
+- Есть и на Windows (подтверждено пользователем)
 
 **CodeGraph** — Termux only (aarch64 binary). Индексирует только PinFlow локально. Остальное — на сервере.
 

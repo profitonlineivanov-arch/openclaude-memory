@@ -60,6 +60,32 @@ type: project
 - Hooks (20+): pre/post command, pre/post edit, SONA обучение, routing, session management
 - Config (6): get/set/list/reset/export/import
 
+<<<<<<< HEAD
+**Далее:** Пользователь согласился перезапустить OpenClaude, чтобы инструменты стали доступны.
+
+## Session tools — НЕ РАБОТАЮТ (2026-07-08)
+
+В контексте cross-device session sync протестированы session tools:
+
+| Инструмент | Результат |
+|-----------|-----------|
+| `mcp__ruflo__session_list` | ✅ sessions: [], total: 0 |
+| `mcp__ruflo__session_current` | ✅ "No saved sessions" |
+| `mcp__ruflo__session_save` | ❌ "Tool call aborted during URL elicitation" |
+| `mcp__ruflo__session_export` | ❌ не проверялся (save не работает) |
+
+**Вердикт:** Session API требует какой-то URL-конфигурации, которой нет. Инструменты есть, но бесполезны для переноса сессий между устройствами. План cross-device sync через ruflo отменён. Использовать hook-based handoff через git память.
+
+## MCP сервер — подтверждён работоспособен (2026-07-08)
+
+Повторная проверка через день:
+- `ruflo mcp start` — PID 29125, работает как Node.js daemon в фоне
+- RSS ~18MB, CPU 0.2% — здоров
+- Конфиг в `.openclaude.json` (global) + `.openclaude/.openclaude.json` (profile)
+- Все `mcp__ruflo__*` инструменты доступны в сессии
+- Бинарник: `/data/data/com.termux/files/usr/bin/ruflo` (в PATH)
+- **Health:** ✅ MCP сервер стабилен, session_save/export остаются нерабочими (независимая проблема)
+=======
 **Подтверждение работы (2026-07-06):** Здоровье MCP-сервера — score 100/100, issues 0, threshold 0.5, avgHealth 1.0. 0 агентов запущено (нет созданных — ожидаемо).
 
 **Далее:** Пользователь перезапустил OpenClaude на телефоне (2026-07-06). ruflo подключён как MCP-сервер в `.openclaude.json` — все ~210 инструментов должны быть доступны.
@@ -89,3 +115,4 @@ type: project
 **Вывод: Ruflo НЕ СТАВИТСЯ через npm на Android/Termux** (`@claude-flow/memory` rejects `android` platform), но работает после ручного копирования исполняемых файлов с другого устройства. Альтернатива — запустить MCP-сервер ruflo на Windows/сервере и подключить OpenClaude на телефоне к нему через network MCP. **Оба метода подтверждены:** Windows работает, телефон — работает после tar-extract.
 
 **Примечание:** GitHub НЕ заблокирован. Проблема чисто платформенная.
+>>>>>>> origin/main
