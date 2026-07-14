@@ -169,3 +169,4 @@
 - [Proxy for blocked vs dead](feedback/proxy-distinguish-blocked-dead.md) — external proxy to distinguish RKN-blocked from truly dead sites (2026-07-05)
 - [Ruflo Setup Pinterest](project/ruflo-setup-pinterest.md) — claude-flow@github настроен через Gemini, требует перезапуск OpenClaude (2026-07-12)
 - [Gemini proxy setup](reference/gemini-proxy-setup.md) — Gemini геоблок РФ, HTTPS_PROXY+NO_PROXY в settings.json env, per-profile нет (2026-07-14)
+- [Memory sync conflict fix](project/memory-sync-conflict-fix-2026-07-14.md) — MEMORY.md merge-маркеры от sync; чистка + push в origin/main; pre-commit hook сбрасывает staging (2026-07-14)
