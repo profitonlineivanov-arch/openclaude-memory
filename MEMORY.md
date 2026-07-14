@@ -61,7 +61,7 @@
 - [2x2 Selector Attempts](project/2x2-selector-attempts.md) — упрощённая sim невалидна, реальный пайплайн (Triple Beam+Selector) запущен 2026-05-29
 - [2x2 Endurance Test](project/2x2-endurance-test-results.md) — 20 draws × 500 attempts: 1=100%, 2=100%, 3=75%, 4=5%
 - [Iteration Tuner](project/iteration-profile-concept.md) — система оптимизации числа итераций Селектора (profile + feedback)
-- [Real pipeline for simulations](feedback/real-pipeline-for-simulations.md) — нельзя заменять реальный Селектор随机ным выбором, нужен полный пайплайн
+- [Real pipeline for simulations](feedback/real-pipeline-for-simulations.md) — нельзя заменять реальный Селектор случайным выбором, нужен полный пайплайн
 - [Draw interval polling](feedback/draw-interval-polling.md) — draws каждые ~15мин, polling не чаще 5мин (300с)
 - [2x2 Dashboard Mobile Fix](project/2x2-dashboard-mobile-fix.md) — viewport + media queries для мобильных (2026-05-31)
 - [2x2 Favorable Periods](project/2x2-favorable-periods-task.md) — блочная подсветка благоприятных периодов с бейджами времени, 2 фазы (2026-05-31)
@@ -118,19 +118,15 @@
 - [CodeGraph Analysis](project/codegraph-analysis.md) — v0.9.9 installed, Termux-patched, pinflow indexed, MCP registered (2026-06-09)
 - [RTK Evaluated](rtk-evaluated.md) — rtk-ai/rtk CLI proxy для сжатия shell output, -60-90% токенов, НЕ code intelligence (2026-06-09)
 - [Caveman Evaluated](caveman-evaluated.md) — output compression plugin, hooks работают, caveman-shrink MCP сломан (2026-06-23)
-<<<<<<< HEAD
-- [Ruflo Evaluated](project/ruflo-evaluation.md) — agent meta-harness ruvnet/ruflo, совместим с OpenClaude через MCP server (2026-07-06)
+- [Ruflo Evaluated](project/ruflo-evaluation.md) — agent meta-harness ruvnet/ruflo, evaluated for OpenClaude compatibility (2026-07-06)
 - [LeronX Engine](reference/leronx-engine.md) — open-source AI video generation pipeline, GitHub Leron-X/leronx (2026-07-06)
 - [Behavior Skills MD not found](project/behavior-skills-md-not-found.md) — поиск проекта на GitHub, 0 результатов (2026-07-06)
-=======
 - [ADB on Windows](reference/adb-windows-available.md) — input text unreliable for Termux, push/pull файлов работает (2026-07-06)
 - [Phone OpenClaude status](reference/phone-openclaude-not-installed.md) — Termux HAS OpenClaude, ruflo работает через tar-extract + ADB (2026-07-06)
 - [Wikipedia Broken Links Scan](project/wikipedia-broken-links-scan-2026-07-06.md) — scanned 15 ru.wikipedia pages, ~30 dead links, results on /sdcard/Download/ + desktop (2026-07-06)
-- [Ruflo Evaluated](project/ruflo-evaluation.md) — agent meta-harness, совместим с OpenClaude через MCP, на телефоне работает через tar-extract (2026-07-06)
 - [gstack Evaluation](reference/gstack-evaluation.md) — garrytan/gstack evaluated, not compatible but user wants adapted skills (2026-06-26)
 - [gstack Adapted Skills](project/gstack-adapted-skills.md) — /review /plan /secaudit /spec as OpenClaude skills, BLOCKED by GitHub access (2026-06-26)
 - [GitHub blocked in Termux](reference/github-blocked-in-termux.md) — WebFetch can't reach github.com/raw.githubusercontent.com (private IPs) (2026-06-26)
->>>>>>> origin/main
 - [PinFlow Local Workflow](feedback/pinflow-local-workflow.md) — перед сборкой сверять local↔server (gradle.properties, local.properties, imports) (2026-06-11)
 - [PinFlow Board Loader — WORKING](project/pinflow-board-loader-implementation.md) — dual-stage: BoardsResource + BoardResource/get/, 4 commits (включая detailed logging), GitHub master (2026-06-10)
 - [PinFlow Board Loader Status](project/pinflow-board-loader-status.md) — РАБОТАЕТ, подтверждено пользователем, 3 коммита запушены (2026-06-10)
@@ -144,28 +140,17 @@
 - [Pinterest internal resource API pattern](feedback/pinterest-internal-resource-api-pattern.md) — all /resource/ endpoints need POST+source_url+data, not GET query params
 - [Agent-Reach](reference/agent-reach.md) — CLI для доступа AI к веб-платформам, НЕ качает видео (2026-07-06)
 - [PinPilot Sales Phase](project/pinpilot-sales-phase.md) — PinPilot продажи + видео: 2/5 скачано на сервере, YouTube blocked (2026-07-06)
-<<<<<<< HEAD
 - [AI Free Setup](project/ai-free-setup.md) — бесплатный OpenAI-compatible провайдер (DeepSeek/Qwen) через localhost:4318, автозапуск hook (2026-07-07)
-- [PinFlow Unfollow Bug](project/pinflow-unfollow-zero.md) — 3 code-level root causes found 2026-06-23, fix in progress (rawUserId + trim literal + isFollower semantics)
+- [PinFlow Unfollow Bug](project/pinflow-unfollow-zero.md) — 2026-06-23 code-level root causes found for auto-unfollow failure; fix in progress
 - [Stale gradle intermediates](feedback/gradle-stale-intermediates.md) — interrupted builds → NoSuchFileException; fix: clean + assembleDebug (2026-06-12)
-- [Config sync gap](project/config-sync-gap.md) — конфиги через sync.sh + memory-sync.sh; project-dir=path hash — клонировать в правильную папку (2026-06-14)
+- [Config sync gap](project/config-sync-gap.md) — sync.sh синхронизирует только .md память; configs/ в .gitignore, не трекается (2026-06-19)
 - [Verify before contradicting](feedback/verify-before-contradicting.md) — не утверждать "не работает" когда сессионные логи показывают обратное (2026-06-18)
-=======
-- [PinFlow Unfollow Fix v2](project/pinflow-unfollow-zero.md) — isUserObj widened to json.has("username"), APK pinflow-unfollow-fix-v2.apk delivered 2026-06-18
 - [PinFlow Unfollow — API blocked](project/pinflow-unfollow-session-summary.md) — FollowingResource 100% 403, followTime=0 persist (обновлён 2026-06-25)
 - [PinFlow Test 2026-06-21 + Fixes Applied](project/pinflow-test-2026-06-21.md) — 4 бага найдены, 3 исправлены; 2026-06-22 shows 3 persist + username mismatch
 - [PinFlow followTime fix deployed](project/pinflow-followtime-fix-deployed.md) — SUPERSEDED by R7 branch: followTime persisted, CSRF persisted (2026-06-22)
 - [PinFlow R7 bugs plan](project/pinflow-r7-bugs-2026-06-22.md) — 4 bugs: 2 fixed (WebView thread, Username stale), 2 deferred to unfollow branch (2026-06-25)
 - [PinFlow Remote Build Workflow](feedback/pinflow-remote-build-workflow.md) — APK builds on server 45.146.164.144 (Termux aarch64 can't build x86_64)
-- [Stale gradle intermediates](feedback/gradle-stale-intermediates.md) — interrupted builds → NoSuchFileException; fix: clean + assembleDebug (2026-06-12)
-- [Config sync — memory only](project/config-sync-gap.md) — configs/ удалён из tracking, только .md память synced (2026-06-19)
-<<<<<<< HEAD
->>>>>>> origin/main
-=======
 - [ZenMux Provider](project/zenmux-provider-setup.md) — бесплатные модели z-ai/glm-5.2-free, moonshotai/kimi-k2.7-code-free, нужен API key (2026-06-19)
-<<<<<<< HEAD
->>>>>>> origin/main
-=======
 - [PinFlux Landing Analysis](project/pinflux-landing-page-analysis.md) — pinflux.in structure: 20 sections, sales letter style, reference for PinFlow landing (2026-07-07)
 - [PinFlow Local Repo Status 2026-06-28](project/pinflow-local-repo-status-2026-06-28.md) — CSRF fix committed 5be1a33 on server, APK ~/downloads/pinflow-csrf-fix.apk, NOT delivered/tested; local 3 commits behind
 - [PinFlow Hidden Follow/Unfollow UI](feedback/pinflow-hide-broken-ui.md) — hide broken UI via visibility=gone + force false in loadSettings, don't delete code (2026-06-28)
@@ -177,12 +162,10 @@
 - [Termux shared-storage opt-in](feedback/termux-storage-optin-required.md) — /storage/* и /home/storage/* работают только после termux-setup-storage; не sweep'ить (2026-06-28)
 - [Do not promise impossible actions](feedback/do-not-promise-impossible.md) — не обещать «посмотрю позже», если не можешь (2026-06-28)
 - [PinFlow package path](reference/pinflow-package-path.md) — package = com.pinflow (не com.pinterest.automator), актуальный source layout (2026-06-28)
-<<<<<<< HEAD
 - [Explain params concretely](feedback/explain-params-concretely.md) — объяснять параметры через данные пользователя, не абстрактно
 - [OpenCode Zen Provider](project/opencode-zen-provider.md) — новый провайдер, добавлен 2026-07-03, модели gpt-5.4/deepseek-v4-flash-free
 - [Detector404 Wiki Links](project/detector404-wikipedia-links.md) — битые внешние ссылки Википедии → detector404.ru (2026-07-05)
 - [Broken Link Checker Tool](project/broken-link-checker-tool.md) — user wants universal SEO broken link checker app (2026-07-06)
 - [Proxy for blocked vs dead](feedback/proxy-distinguish-blocked-dead.md) — external proxy to distinguish RKN-blocked from truly dead sites (2026-07-05)
-=======
->>>>>>> origin/main
->>>>>>> origin/main
+- [Ruflo Setup Pinterest](project/ruflo-setup-pinterest.md) — claude-flow@github настроен через Gemini, требует перезапуск OpenClaude (2026-07-12)
+- [Gemini proxy setup](reference/gemini-proxy-setup.md) — Gemini геоблок РФ, HTTPS_PROXY+NO_PROXY в settings.json env, per-profile нет (2026-07-14)
