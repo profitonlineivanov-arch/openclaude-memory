@@ -170,3 +170,4 @@
 - [Ruflo Setup Pinterest](project/ruflo-setup-pinterest.md) — claude-flow@github настроен через Gemini, требует перезапуск OpenClaude (2026-07-12)
 - [Gemini proxy setup](reference/gemini-proxy-setup.md) — Gemini геоблок РФ, HTTPS_PROXY+NO_PROXY в settings.json env, per-profile нет (2026-07-14)
 - [Memory sync conflict fix](project/memory-sync-conflict-fix-2026-07-14.md) — MEMORY.md merge-маркеры от sync; чистка + push в origin/main; pre-commit hook сбрасывает staging (2026-07-14)
+- [PinPilot unfollow cycle fixed](project/pinpilot-unfollow-infinite-cycle-fixed-2026-07-14.md) — getFollowing парсил рекомендации→UserFollowingResource/get/ + break + companion guard; 854→794 (2026-07-14)
