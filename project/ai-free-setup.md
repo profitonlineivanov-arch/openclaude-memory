@@ -20,7 +20,9 @@ type: project
 - "AI Free — DeepSeek" (id: provider_ai-free-deepseek) — deepseek-v4-pro
 - "AI Free — Qwen" (id: provider_ai-free-qwen) — qwen3.7-max
 
-**Автозапуск (НАСТРОЕН 2026-07-09):** hook в settings.json → SessionStart проверяет localhost:4318, если не отвечает — запускает `npm run api` через PowerShell (Start-Process -WindowHidden). Путь: `C:\Users\Admin\ai-free\`.
+**Автозапуск (НАСТРОЕН 2026-07-09, ИСПРАВЛЕН 2026-07-12):** hook в settings.json → SessionStart проверяет localhost:4318, если не отвечает — запускает `npm run api` (не `npm run server`!) через PowerShell (Start-Process -WindowHidden). Путь: `C:\Users\Admin\ai-free\`.
+
+**Прокси для ChatGPT (ДОБАВЛЕН 2026-07-12):** env-переменные CHATGPT_PROXY_SERVER/USERNAME/PASSWORD передаются hook-ом при запуске. Прокси: `138.59.207.154:9963` (BbWQkV:qKMUPf). Запасной: `168.81.75.183:9758` (D0FSvw:BgPpss). Патч: `browser-login.mjs` добавляет proxy в launchOptions. DeepSeek/Qwen идут без прокси.
 
 **Cookies:** `~/.deepseek-cli/auth.json`, `~/.qwen-cli/auth.json`. Протухают раз в несколько недель — `npm run login` / `npm run login-qwen` обновляет.
 
