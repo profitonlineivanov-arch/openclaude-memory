@@ -10,9 +10,13 @@ Google Gemini (`gemini-3-flash-preview`, profile `provider_1bb82ec04304`) гео
 - `HTTPS_PROXY` = HTTP-прокси с авторизацией (user:pass@host:port) — прокси-креды лежат в settings.json, не дублировать в memory
 - `NO_PROXY` = `localhost,127.0.0.1,opengateway.gitlawb.com,api.deepseek.com,api.fireworks.ai,api.mistral.ai,integrate.api.nvidia.com,opencode.ai`
 
-**Почему settings.json:** OpenClaude использует undici `EnvHttpProxyAgent` + `setGlobalDispatcher` — читает `HTTPS_PROXY` глобально, per-profile proxy НЕТ. `NO_PROXY` заставляет остальные провайдеры идти напрямую, через прокси идёт ТОЛЬКО `generativelanguage.googleapis.com`. Безопасно для всех остальных.
+**Как работает:** `configureGlobalAgents()` в cli.mjs вызывает `setGlobalDispatcher(getProxyAgent(proxyUrl))` — глобальный undici dispatcher для ВСЕХ запросов (axios + fetch). `generativelanguage.googleapis.com` НЕ в NO_PROXY → идёт через прокси. Прокси протестирован: curl через прокси доходит до Google (404, не geo-block).
 
-**Применяется при старте сессии** — текущая сессия не подхватит, нужен restart OpenClaude.
+**Профили Gemini (2026-07-16):**
+- `provider_gemini_free` — `gemini-2.5-flash`, ключ `AQ.Ab8R...`
+- `provider_gemini_3_flash` — `gemini-3-flash-preview`, тот же ключ, добавлен 2026-07-16
+
+**Важно:** прокси подхватывается ТОЛЬКО при старте сессии. Если settings.json изменился после старта → рестарт OpenClaude.
 
 Бэкап: `C:\Users\Admin\.claude\settings.json.bak.20260714-202238`.
 
