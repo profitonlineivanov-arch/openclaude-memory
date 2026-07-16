@@ -172,3 +172,4 @@
 - [Memory sync conflict fix](project/memory-sync-conflict-fix-2026-07-14.md) — MEMORY.md merge-маркеры от sync; чистка + push в origin/main; pre-commit hook сбрасывает staging (2026-07-14)
 - [PinPilot unfollow cycle fixed](project/pinpilot-unfollow-infinite-cycle-fixed-2026-07-14.md) — getFollowing парсил рекомендации→UserFollowingResource/get/ + break + companion guard; 854→794 (2026-07-14)
 - [Pinterest poster missing images + Gemini](project/pinterest-poster-missing-images-gemini.md) — kwork 63689016, 57 broken pins (generated_images пуст), план: Gemini gemini-3.1-flash-image img2img (2026-07-14)
+- [Barnadom24 SEO Progress](project/barnadom24-seo-progress.md) — алкоголь доставка МСК, Week 1 done: title+schema+robots, кеширование+SearchConsole заблокированы (2026-07-16)
