@@ -6,9 +6,11 @@ type: reference
 
 Google Gemini (`gemini-3-flash-preview`, profile `provider_1bb82ec04304`) геоблокирован из РФ — прямой запрос даёт `HTTP 400 "User location is not supported for the API use"`. Ключ валиден, не слит.
 
-**Решение (2026-07-14):** env-переменные в `C:\Users\Admin\.claude\settings.json`:
-- `HTTPS_PROXY` = HTTP-прокси с авторизацией (user:pass@host:port) — прокси-креды лежат в settings.json, не дублировать в memory
+**Решение (2026-07-16, ИСПРАВЛЕНО):** env-переменные в `C:\Users\Admin\.openclaude\.openclaude.json` (глобальный конфиг):
+- `HTTPS_PROXY` = HTTP-прокси с авторизацией (user:pass@host:port) — прокси-креды лежат в конфиге, не дублировать в memory
 - `NO_PROXY` = `localhost,127.0.0.1,opengateway.gitlawb.com,api.deepseek.com,api.fireworks.ai,api.mistral.ai,integrate.api.nvidia.com,opencode.ai`
+
+**Почему НЕ в settings.json:** `settings.json` env фильтруется `SAFE_ENV_VARS3` (whitelist) — `HTTPS_PROXY`/`NO_PROXY` туда НЕ входят, не попадают в `process.env`. Глобальный конфиг `.openclaude.json` применяет `env` БЕЗ фильтра.
 
 **Как работает:** `configureGlobalAgents()` в cli.mjs вызывает `setGlobalDispatcher(getProxyAgent(proxyUrl))` — глобальный undici dispatcher для ВСЕХ запросов (axios + fetch). `generativelanguage.googleapis.com` НЕ в NO_PROXY → идёт через прокси. Прокси протестирован: curl через прокси доходит до Google (404, не geo-block).
 
