@@ -6,7 +6,7 @@ type: project
 
 ## AI Free — бесплатный провайдер
 
-**Репо:** https://github.com/Staks-sor/ai-free (v0.3.5)
+**Репо:** https://github.com/Staks-sor/ai-free (v0.3.9, обновлён 2026-07-16)
 
 **Что это:** OpenAI/Anthropic-compatible API на localhost:4318 через браузерные сессии DeepSeek/Qwen/ChatGPT. Бесплатно, без API-ключей.
 
