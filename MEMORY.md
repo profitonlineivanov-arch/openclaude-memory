@@ -153,6 +153,7 @@
 - [ZenMux Provider](project/zenmux-provider-setup.md) — бесплатные модели z-ai/glm-5.2-free, moonshotai/kimi-k2.7-code-free, нужен API key (2026-06-19)
 - [PinFlux Landing Analysis](project/pinflux-landing-page-analysis.md) — pinflux.in structure: 20 sections, sales letter style, reference for PinFlow landing (2026-07-07)
 - [PinFlow Local Repo Status 2026-06-28](project/pinflow-local-repo-status-2026-06-28.md) — CSRF fix committed 5be1a33 on server, APK ~/downloads/pinflow-csrf-fix.apk, NOT delivered/tested; local 3 commits behind
+- [Freebuff Not Launching](project/freebuff-not-launching-2026-08-04.md) — CLI Bun 1.3.14 standalone краш на win32-x64; desktop "No internet" = геоблок api.freebuff.com (РФ-блок+502 через US-прокси)
 - [PinFlow Hidden Follow/Unfollow UI](feedback/pinflow-hide-broken-ui.md) — hide broken UI via visibility=gone + force false in loadSettings, don't delete code (2026-06-28)
 - [PinFlow boards broken 2026-06-28](project/pinflow-boards-broken-csrf-2026-06-28.md) — CSRF fix committed 5be1a33, APK built, awaiting user test (login ru.pinterest.com → Загрузить доски)
 - [Retrofit with helper, not rewrite](feedback/retrofit-with-helper-not-rewrite.md) — когда «раньше работало» + один недостающий параметр: singleton helper + 1 строка замены, не переписывать парсер/UI
